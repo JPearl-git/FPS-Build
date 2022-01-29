@@ -35,6 +35,8 @@ public class Destructible : MonoBehaviour
 
                 return HitMarkerType.Normal;
         }
+        else
+            Debug.Log("Can't Hit " + gameObject.name);
         
         return HitMarkerType.None;
     }

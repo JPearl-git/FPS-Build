@@ -42,15 +42,15 @@ public class GunSlot : MonoBehaviour
             else if(context.canceled)
                 gun.bPressed = false;
         }
-        else
-            Debug.Log("Cant Shoot");
+        // else
+        //     Debug.Log("Cant Shoot");
     }
 
     public void Reload(InputAction.CallbackContext context)
     {
         if(gun != null && context.performed)
             gun.Reload();
-        else
-            Debug.Log("Cant Reload");
+        // else
+        //     Debug.Log("Cant Reload");
     }
 }
