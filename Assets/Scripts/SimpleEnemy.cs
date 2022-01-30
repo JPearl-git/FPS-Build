@@ -24,7 +24,11 @@ public class SimpleEnemy : Destructible
     public override void Death()
     {
         slider.gameObject.SetActive(false);
-        StartCoroutine("Die");
+        rb.freezeRotation = false;
+        Vector3 direction = transform.forward.normalized * -1;
+        rb.AddForce(direction * 200);
+
+        Destroy(gameObject, 3f);
     }
 
     public override void GetHit(int damage)
@@ -34,17 +38,6 @@ public class SimpleEnemy : Destructible
             float percent = (float)health / maxHealth;
             slider.value = percent;
         }
-    }
-
-    IEnumerator Die()
-    {
-        rb.freezeRotation = false;
-        //Vector3 direction = Vector3.Normalize(transform.InverseTransformPoint(lastHit.point));
-        Vector3 direction = transform.forward.normalized * -1;
-        rb.AddForce(direction * 200);
-
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
     }
 
     void Update()
