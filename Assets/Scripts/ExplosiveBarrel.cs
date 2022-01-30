@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ExplosiveBarrel : Destructible
 {
+    [SerializeField] GameObject explosion;
     public override void Death()
     {
         StartCoroutine("Explode");
@@ -12,6 +13,8 @@ public class ExplosiveBarrel : Destructible
     IEnumerator Explode()
     {
         yield return new WaitForSeconds(0.1f);
+        var exp = Instantiate(explosion, transform.position, transform.rotation);
+        exp.transform.localScale = new Vector3(3,3,3);
         Destroy(gameObject);
     }
 }
