@@ -70,9 +70,9 @@ public class Gun : MonoBehaviour
             RaycastHit hit;
             if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, range))
             {
-                Debug.Log(hit.transform.name);
                 if(hit.transform.gameObject.TryGetComponent<Destructible>(out Destructible dTarget))
                 {
+                    Debug.Log("Hit " + dTarget.gameObject.name + ". Can Harm = " + dTarget.bCanHit);
                     if(dTarget.bCanHit)
                         hitMarker.HitTarget(dTarget.TakeDamage(damage, hit));
                 }

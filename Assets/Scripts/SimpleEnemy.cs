@@ -66,7 +66,7 @@ public class SimpleEnemy : Destructible
     {
         if(other.gameObject.Equals(player))
         {
-            bCanHit = true;
+            bCanHitPlayer = true;
             StartCoroutine("HitPlayer");
         }
     }
@@ -74,12 +74,12 @@ public class SimpleEnemy : Destructible
     void OnCollisionExit(Collision other)
     {
         if(other.gameObject.Equals(player))
-            bCanHit = false;
+            bCanHitPlayer = false;
     }
 
     IEnumerator HitPlayer()
     {
-        if(bCanHit)
+        if(bCanHitPlayer)
         {
             pStats.TakeDamage(5);
             yield return new WaitForSeconds(hitDelay);

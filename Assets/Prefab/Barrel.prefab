@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6459479237518923519}
   - component: {fileID: 6459479237518923512}
   - component: {fileID: 1956899707}
+  - component: {fileID: 2612757115742412619}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -1177,7 +1178,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
 --- !u!114 &1956899707
@@ -1197,3 +1198,22 @@ MonoBehaviour:
   bCanHit: 1
   bCritical: 0
   explosion: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
+  size: 3
+  radius: 8
+  force: 800
+--- !u!54 &2612757115742412619
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6459479237518923513}
+  serializedVersion: 2
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

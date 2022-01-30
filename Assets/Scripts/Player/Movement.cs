@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
-    [SerializeField] Transform ControllerAnchor;
     [SerializeField] float speed = 11f;
     Vector2 movement;
 
