@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_GreenGlow
+  m_Name: M_BrightFire
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 2
@@ -104,10 +104,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 1, b: 0.032458067, a: 1}
+    - _BaseColor: {r: 1, g: 0.7, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0.07529271, g: 4.793636, b: 0.07529271, a: 1}
-    - _SpecColor: {r: 0.19999987, g: 0.19999987, b: 0.19999987, a: 1}
+    - _EmissionColor: {r: 14.925325, g: 2.0962524, b: 0, a: 1}
+    - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5085243485668820123
 MonoBehaviour:
