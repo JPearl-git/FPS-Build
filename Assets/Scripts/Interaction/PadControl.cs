@@ -62,7 +62,7 @@ public class PadControl : ControlTrigger
     IEnumerator MovePad()
     {
         var fromPos = pad.localPosition;
-        var toPos = new Vector3(fromPos.x, 1.7f, fromPos.z);
+        var toPos = new Vector3(fromPos.x, 1.4f, fromPos.z);
         if(bActive)
             toPos.y = 0.7f;
 

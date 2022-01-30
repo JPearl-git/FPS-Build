@@ -17,7 +17,10 @@ public class Explosion : MonoBehaviour
         GetComponent<ParticleSystem>().Play();
 
         KnockBack(radius, force);
-        Destroy(gameObject,0.25f);
+        if(TryGetComponent<AudioSource>(out AudioSource audio))
+            audio.Play();
+
+        Destroy(gameObject,1f);
     }
 
     void KnockBack(float radius, float force)

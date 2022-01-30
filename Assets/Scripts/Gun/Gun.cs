@@ -72,7 +72,6 @@ public class Gun : MonoBehaviour
             {
                 if(hit.transform.gameObject.TryGetComponent<Destructible>(out Destructible dTarget))
                 {
-                    Debug.Log("Hit " + dTarget.gameObject.name + ". Can Harm = " + dTarget.bCanHit);
                     if(dTarget.bCanHit)
                         hitMarker.HitTarget(dTarget.TakeDamage(damage, hit));
                 }
