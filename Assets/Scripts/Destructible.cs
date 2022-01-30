@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Destructible : MonoBehaviour
 {
-    public int health, maxHealth;
-    public bool bCritical, bCanHit = true;
-
+    [HideInInspector] public int health;
+    public int maxHealth;
+    
+    [HideInInspector] public bool bCanHit = true;
+    public bool bCritical;
+    
     protected RaycastHit lastHit;
 
     void Start()
