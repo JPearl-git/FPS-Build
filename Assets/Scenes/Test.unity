@@ -3594,17 +3594,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &813686710 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 988606331190723677, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
-  m_PrefabInstance: {fileID: 988606330919754731}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ca2af8b83ec1924fafe76ed74934952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &963218042
 GameObject:
   m_ObjectHideFlags: 0
@@ -8875,10 +8864,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 126199787, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 353060191541786747, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -8927,10 +8912,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 353060192565148696, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
-      propertyPath: gunHUD
-      value: 
-      objectReference: {fileID: 813686710}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
 --- !u!1001 &988606330919754731
