@@ -5155,6 +5155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 11
   jumpForce: 20
+  slopeForce: 5
   Feet: {fileID: 126199787}
 --- !u!1 &353060191790485077
 GameObject:
