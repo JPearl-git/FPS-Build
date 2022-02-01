@@ -7,7 +7,7 @@ public class PhysicsMovement : MonoBehaviour
 {
     Rigidbody rb;
     Vector2 movement;
-    [SerializeField] float speed = 11f, jumpForce = 3.5f, slopeForce = 1000f, stepHeight = 2f;
+    [SerializeField] float speed = 11f, jumpForce = 3.5f, slopeForce = 1000f, stepHeight = 0.4f;
     [SerializeField] Transform Feet;
     bool jump, isGrounded, isJumping;
     float playerHeight;
@@ -23,7 +23,7 @@ public class PhysicsMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics.Raycast(Feet.position, Vector3.down, 0.3f);
+        isGrounded = Physics.Raycast(Feet.position + Vector3.up, Vector3.down, 1.3f);
         if(isGrounded && isJumping && rb.velocity.y < 0)
             isJumping = false;
     }
@@ -43,37 +43,26 @@ public class PhysicsMovement : MonoBehaviour
     //WIP step up stairs still not working
     void StepClimb()
     {
-        Vector3 checkPoint = Feet.position + (moveVector.normalized * 1f);
-        Vector3 oldPoint = checkPoint;
-        checkPoint.y += 8f;
-        Debug.DrawLine(Feet.position, checkPoint, Color.blue, 0.1f);
-        Debug.DrawLine(checkPoint, oldPoint, Color.red, 0.1f);
-        
-        if(Physics.Raycast(Feet.position, transform.forward, out RaycastHit hitLower, 0.5f))
+        if(Physics.Raycast(Feet.position, moveVector, out RaycastHit hitLower, 0.5f))
         {
             Vector3 StepUp = new Vector3(Feet.position.x, Feet.position.y + stepHeight, Feet.position.z);
-            if(!Physics.Raycast(Feet.position, moveVector, out RaycastHit hitUpper, 0.6f))
+            //Debug.DrawLine(StepUp, StepUp + (moveVector * 0.6f), Color.red, 0.1f);
+            if(!Physics.Raycast(StepUp, moveVector, out RaycastHit hitUpper, 0.6f))
             {
-                //
-                //Vector3 normal = moveVector.normalized;
-                //rb.position += new Vector3(normal.x, stepHeight, normal.z);
-                
-                
+                Vector3 checkPoint = StepUp + (moveVector.normalized * 0.65f);
                 if(Physics.Raycast(checkPoint, Vector3.down, out RaycastHit hitPos, stepHeight))
                 {
-                    Debug.Log("Step");
-                    Vector3 newPos = hitPos.point;
-                    newPos.y += playerHeight / 2;
-                    rb.position = newPos;
+                    if(hitPos.normal == Vector3.up)
+                    {
+                        Vector3 newPos = hitPos.point;
+                        newPos.y += (transform.position.y - Feet.position.y);
+                        rb.position = newPos;
+                    }
                 }
-                else
-                    Debug.Log("No Steps");
+                //else
+                //    Debug.DrawLine(checkPoint, checkPoint - (Vector3.down * stepHeight), Color.green, 3f);
             }
-            //else
-            //    Debug.Log("No Object");
         }
-        //else
-        //    Debug.Log("No Contact");
     }
 
     public void Move(Vector2 input)
@@ -84,6 +73,7 @@ public class PhysicsMovement : MonoBehaviour
         if(!isGrounded)
             moveVector *= 0.5f;
 
+        // Go up Slope
         if(isGrounded && OnSlope())
         {
             rb.velocity = new Vector3(slopeMoveDir.x, 0, slopeMoveDir.z);
@@ -96,17 +86,18 @@ public class PhysicsMovement : MonoBehaviour
             rb.velocity = velocity;
         }   
         
-        
+        // Climp Stairs
         if(isGrounded && moveVector.magnitude > 0)
             StepClimb();
 
-
+        // Jump
         if(jump && isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             jump = false;
             isJumping = true;
         }
+        // Go down Slope or stairs
         else if(!isJumping && rb.velocity.y > 0)
         {
             Vector3 velocity = rb.velocity;
