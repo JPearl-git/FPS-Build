@@ -47,6 +47,8 @@ public class Weapon_Pickup : MonoBehaviour
 
                 Destroy(oldGun.gameObject);
                 slot.bCanShoot = true;
+
+                Destroy(gameObject);
             }
         }
     }
