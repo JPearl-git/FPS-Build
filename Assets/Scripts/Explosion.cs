@@ -37,7 +37,7 @@ public class Explosion : MonoBehaviour
                 {
                     Vector3 prePos = rb.transform.position;
                     rb.AddExplosionForce(force, transform.position, radius);
-                    Debug.Log("Player moved " + (rb.transform.position - prePos));
+                    //Debug.Log("Player moved " + (rb.transform.position - prePos));
                 }
                     
                     //StartCoroutine(KnockPlayer(rb,force,radius));

@@ -39,7 +39,6 @@ public class Weapon_Pickup : MonoBehaviour
                 var newGun = Instantiate(this.gun, slot.transform);
                 newGun.transform.SetAsFirstSibling();
                 
-                //slot.gun = newGun.GetComponent<Gun>();
                 slot.SetGun();
                 newGun.transform.localPosition = slot.gun.offset;
                 newGun.transform.localRotation = Quaternion.identity;
