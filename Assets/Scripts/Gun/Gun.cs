@@ -7,6 +7,7 @@ public class Gun : MonoBehaviour
     HitMarker hitMarker;
     GunHUD gunHUD;
 
+    [Header("Gun Details")]
     public string Name;
     public GameObject muzzle;
     public float range = float.MaxValue;
@@ -14,9 +15,14 @@ public class Gun : MonoBehaviour
     [Range(.1f,1f)]public float reloadTime = .1f;
     [Range(1,1000)]public int rpm = 100;
     public int damage;
+    
 
     public int currentAmmo, clipSize, ammoReserve;
-    public bool bAutomatic, bPressed;
+    public bool bAutomatic;
+    [HideInInspector]
+    public bool bPressed;
+    [Header("Other Variables")]
+    public Vector3 offset;
 
     [SerializeField] ParticleSystem gunMuzzle, gunShot;
     [SerializeField] AudioSource sound;
