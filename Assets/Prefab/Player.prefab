@@ -503,8 +503,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.371, y: -0.422, z: 0.883}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
-  m_Children:
-  - {fileID: 246830614150476110}
+  m_Children: []
   m_Father: {fileID: 353060192537196973}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -520,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e14643ea27c234592d1649c7aba7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 353060192973556177}
+  gun: {fileID: 0}
   gunHUD: {fileID: 0}
   gunObjects:
   - {fileID: 0}
@@ -528,84 +527,3 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   bCanShoot: 0
---- !u!1001 &3001960259825008756
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 353060192565148699}
-    m_Modifications:
-    - target: {fileID: 2417906874358999936, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_Name
-      value: Cyber_pistol
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264908160555583909, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: offset.y
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3264908160555583909, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-      propertyPath: offset.z
-      value: 5.44
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
---- !u!4 &246830614150476110 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-  m_PrefabInstance: {fileID: 3001960259825008756}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &353060192973556177 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3264908160555583909, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
-  m_PrefabInstance: {fileID: 3001960259825008756}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b904ec41d9b7834187c6997c47f93b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

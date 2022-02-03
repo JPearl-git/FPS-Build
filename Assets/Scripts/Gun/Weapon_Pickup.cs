@@ -35,7 +35,7 @@ public class Weapon_Pickup : MonoBehaviour
             if(slot != null && this.gun.GetComponent<Gun>())
             {
                 slot.bCanShoot = false;
-                var oldGun = slot.transform.GetChild(0);
+                //var oldGun = slot.transform.GetChild(0);
                 slot.Equip(Instantiate(this.gun));
                 //var newGun = Instantiate(this.gun, slot.transform);
                 //newGun.transform.SetAsFirstSibling();

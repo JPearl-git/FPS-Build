@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
     [Header("Other Variables")]
     public Vector3 offset;
 
-    [SerializeField] ParticleSystem gunMuzzle, gunShot;
+    [SerializeField] ParticleSystem gunMuzzle;
     [SerializeField] AudioSource sound;
 
     float delayTime, currentRecoil = 0;
@@ -69,7 +69,6 @@ public class Gun : MonoBehaviour
         if(CanShoot())
         {
             gunMuzzle.Play();
-            gunShot.Play();
             sound.Play();
             currentAmmo--;
 
