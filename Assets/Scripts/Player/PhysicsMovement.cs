@@ -97,12 +97,12 @@ public class PhysicsMovement : MonoBehaviour
             jump = false;
             isJumping = true;
         }
-        // Go down Slope or stairs
+        // Go down Slope or stairs. Conflicts with lift
         else if(!isJumping && rb.velocity.y > 0)
         {
-            Vector3 velocity = rb.velocity;
-            velocity.y = 0;
-            rb.velocity = velocity;
+            //Vector3 velocity = rb.velocity;
+            //velocity.y = 0;
+            //rb.velocity = velocity;
         }
     }
 
