@@ -241,6 +241,70 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 417bf0ad-2ce8-416c-a5aa-1c9b221cb60a
     m_ActionName: Player/Reload[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: EquipGun1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a1a236c2-71c5-423b-9646-59be83269c69
+    m_ActionName: Player/Equip Gun 1[/Keyboard/1]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: EquipGun2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 81e1227b-0426-4682-b43b-4e226ddac5f6
+    m_ActionName: Player/Equip Gun 2[/Keyboard/2]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: EquipGun3
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 17b0a4ce-4d35-4a5b-9666-174ea04b4d37
+    m_ActionName: Player/Equip Gun 3[/Keyboard/3]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: EquipGun4
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f34cfe45-30dc-4c2f-a3c7-f48237de393d
+    m_ActionName: Player/Equip Gun 4[/Keyboard/4]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -351,7 +415,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.25
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -458,6 +522,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 353060192973556177}
   gunHUD: {fileID: 0}
+  gunObjects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  bCanShoot: 0
 --- !u!1001 &3001960259825008756
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -512,6 +582,14 @@ PrefabInstance:
     - target: {fileID: 3082135401038934330, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264908160555583909, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
+      propertyPath: offset.y
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3264908160555583909, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
+      propertyPath: offset.z
+      value: 5.44
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}

@@ -36,15 +36,16 @@ public class Weapon_Pickup : MonoBehaviour
             {
                 slot.bCanShoot = false;
                 var oldGun = slot.transform.GetChild(0);
-                var newGun = Instantiate(this.gun, slot.transform);
-                newGun.transform.SetAsFirstSibling();
-                
-                slot.SetGun();
-                newGun.transform.localPosition = slot.gun.offset;
-                newGun.transform.localRotation = Quaternion.identity;
-                newGun.transform.localScale = Vector3.one;
-
-                Destroy(oldGun.gameObject);
+                slot.Equip(Instantiate(this.gun));
+                //var newGun = Instantiate(this.gun, slot.transform);
+                //newGun.transform.SetAsFirstSibling();
+                //
+                //slot.SetGun();
+                //newGun.transform.localPosition = slot.gun.offset;
+                //newGun.transform.localRotation = Quaternion.identity;
+                //newGun.transform.localScale = Vector3.one;
+                //
+                //Destroy(oldGun.gameObject);
                 slot.bCanShoot = true;
 
                 Destroy(gameObject);

@@ -109,7 +109,7 @@ public class Gun : MonoBehaviour
         if(delayTime > 0)
         {
             yield return new WaitForSeconds(delayTime);
-            delayTime = 0;
+            delayTime = 0f;
         }
         
         if(bPressed && bAutomatic)
@@ -141,5 +141,13 @@ public class Gun : MonoBehaviour
         gunHUD.SetReserve(ammoReserve);
 
         bReloading = false;
+    }
+
+    public void CancelActions()
+    {
+        StopAllCoroutines();
+        bReloading = false;
+        transform.parent.localRotation = Quaternion.Euler(0,0,0);
+        delayTime = 0f;
     }
 }
