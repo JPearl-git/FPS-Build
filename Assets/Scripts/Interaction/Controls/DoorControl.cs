@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorControl : MonoBehaviour
+public class DoorControl : ISwitchable
 {
-    bool bOpen;
-
     Transform pivot;
 
     void Start()
@@ -13,24 +11,16 @@ public class DoorControl : MonoBehaviour
         pivot = transform.GetChild(0);
     }
 
-    public void OpenDoor()
+    public override void Activate()
     {
-        if(!bOpen)
-        {
-            bOpen = true;
             StopAllCoroutines();
             StartCoroutine(MoveDoor(110));
-        }
     }
 
-    public void CloseDoor()
+    public override void Deactivate()
     {
-        if(bOpen)
-        {
-            bOpen = false;
             StopAllCoroutines();
             StartCoroutine(MoveDoor(0));
-        }
     }
 
     IEnumerator MoveDoor(float rot)

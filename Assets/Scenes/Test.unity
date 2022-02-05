@@ -173,7 +173,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44104
+  m_Name: pb_Mesh-1442
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -391,7 +391,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-43940
+  m_Name: pb_Mesh-1262
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1710,7 +1710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1107520730052738898, guid: 164aa085ae2544c48827eea6d61924c7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.2391386
+      value: -3.95
       objectReference: {fileID: 0}
     - target: {fileID: 1107520730052738898, guid: 164aa085ae2544c48827eea6d61924c7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1807,7 +1807,7 @@ MonoBehaviour:
   - {fileID: 84467280}
   - {fileID: 259745180}
   - {fileID: 569930337}
-  doorTarget: {fileID: 1821036252}
+  toggleTarget: {fileID: 1821036252}
 --- !u!1001 &84467278
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2088,7 +2088,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh38048
+  m_Name: pb_Mesh22052
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2373,14 +2373,14 @@ MonoBehaviour:
   - {fileID: 490555070}
   - {fileID: 463002124}
   - {fileID: 1592584927}
-  doorTarget: {fileID: 1622081591}
+  toggleTarget: {fileID: 1622081591}
 --- !u!43 &197583751
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-43954
+  m_Name: pb_Mesh-1276
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2712,7 +2712,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44440
+  m_Name: pb_Mesh-1708
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3344,7 +3344,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-60622
+  m_Name: pb_Mesh22002
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3859,7 +3859,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44036
+  m_Name: pb_Mesh-1366
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4106,7 +4106,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44078
+  m_Name: pb_Mesh-1416
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4572,7 +4572,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-43896
+  m_Name: pb_Mesh-1218
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4979,7 +4979,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44468
+  m_Name: pb_Mesh-1736
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5364,7 +5364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controls:
   - {fileID: 1915918310}
-  doorTarget: {fileID: 2086181902}
+  toggleTarget: {fileID: 2086181902}
 --- !u!4 &1127594784
 Transform:
   m_ObjectHideFlags: 0
@@ -6982,7 +6982,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44064
+  m_Name: pb_Mesh-1402
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7703,24 +7703,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 1766808893807616529, guid: b914db7d41a23334f9a30873d473e96a, type: 3}
---- !u!1 &1671259965 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 642201837428293530, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-  m_PrefabInstance: {fileID: 642201837958158503}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1671259974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1671259965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff962bd704628094590edfc01f2d8216, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bActive: 0
 --- !u!1 &1702478913
 GameObject:
   m_ObjectHideFlags: 0
@@ -7770,7 +7752,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44092
+  m_Name: pb_Mesh-1430
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8164,7 +8146,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37908
+  m_Name: pb_Mesh21914
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10051,7 +10033,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44132
+  m_Name: pb_Mesh-1470
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10635,7 +10617,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44454
+  m_Name: pb_Mesh-1722
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10859,7 +10841,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37646
+  m_Name: pb_Mesh21648
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -11085,54 +11067,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: SubModule.enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.ctime1
-      value: 20046
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.ctime2
-      value: 40670
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.ctime3
-      value: 48380
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.g
-      value: 0.52598506
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key1.r
-      value: 0.990566
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key2.g
-      value: 0.018288683
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key2.r
-      value: 0.6226415
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key3.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key3.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.key3.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 642201837428293528, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
-      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 642201837428293530, guid: a92df118d8774f848b52dcc43ee745f4, type: 3}
       propertyPath: m_Name
       value: Fire Hose

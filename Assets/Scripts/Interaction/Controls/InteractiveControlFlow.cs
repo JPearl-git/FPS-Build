@@ -5,13 +5,13 @@ using UnityEngine;
 public class InteractiveControlFlow : MonoBehaviour
 {
     public List<ControlTrigger> controls = new List<ControlTrigger>();
-    public DoorControl doorTarget;
+    public ISwitchable toggleTarget;
     bool bOperational, bActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(controls.Count > 0 && doorTarget != null)
+        if(controls.Count > 0 && toggleTarget != null)
         {
             bOperational = true;
             for(int i = 0; i < controls.Count; i++)
@@ -24,10 +24,7 @@ public class InteractiveControlFlow : MonoBehaviour
         if(bOperational)
         {
             bActive = CheckControls();
-            if(bActive)
-                doorTarget.OpenDoor();
-            else
-                doorTarget.CloseDoor();
+            toggleTarget.bActive = bActive;
         }
     }
 
