@@ -21,7 +21,7 @@ public class SimpleEnemy : Destructible
         pStats = player.GetComponent<PlayerStats>();
     }
 
-    public override void Death()
+    protected override void Death()
     {
         slider.gameObject.SetActive(false);
         rb.freezeRotation = false;
@@ -31,7 +31,7 @@ public class SimpleEnemy : Destructible
         Destroy(gameObject, 3f);
     }
 
-    public override void GetHit(int damage)
+    public override void TakeDamage(int damage)
     {
         if(slider != null)
         {

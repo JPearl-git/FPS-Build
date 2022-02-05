@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destructible : MonoBehaviour
+public class Destructible : EntityStats
 {
-    [HideInInspector] public int health;
-    public int maxHealth;
-    
     [HideInInspector] public bool bCanHit = true;
     public bool bCritical;
     
@@ -18,13 +15,13 @@ public class Destructible : MonoBehaviour
         Initialize();
     }
 
-    public HitMarkerType TakeDamage(int damage, RaycastHit hit)
+    public HitMarkerType GetHit(int damage, RaycastHit hit)
     {
         if(bCanHit)
         {
             lastHit = hit;
             health -= damage;
-            GetHit(damage);
+            TakeDamage(damage);
 
             if(health <= 0)
             {
@@ -44,17 +41,7 @@ public class Destructible : MonoBehaviour
         return HitMarkerType.None;
     }
 
-    public virtual void Death()
-    {
-        // Original
-    }
-
     public virtual void Initialize()
-    {
-        // Original
-    }
-
-    public virtual void GetHit(int damage)
     {
         // Original
     }

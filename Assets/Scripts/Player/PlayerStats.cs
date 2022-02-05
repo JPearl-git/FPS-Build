@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InputManager))]
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : EntityStats
 {
     HUD_UI hud;
     InputManager inputManager;
-
-    public int health, maxHealth = 100;
-    [HideInInspector] public bool bAlive = true;
 
     void Awake()
     {
@@ -20,7 +17,7 @@ public class PlayerStats : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public override void TakeDamage(int damage)
     {
         if(bAlive)
         {
@@ -38,19 +35,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    public void RestoreHealth(int heal)
+    public override void RestoreHealth(int heal)
     {
-        if(bAlive)
-        {
-            health += heal;
-            if(health > maxHealth)
-                health = maxHealth;
-                
-            hud.SetHealth((float)health / maxHealth);
-        }
+        base.RestoreHealth(heal);
+        hud.SetHealth((float)health / maxHealth);
     }
 
-    private void Death()
+    protected override void Death()
     {
         inputManager.bCanControl = false;
         hud.PlayDeathFade();
