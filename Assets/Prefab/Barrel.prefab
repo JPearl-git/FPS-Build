@@ -1195,11 +1195,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 20
+  bAlive: 1
+  bCanTakeStatusEffect: 1
   bCanHit: 1
   bCritical: 0
   explosion: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
   size: 3
-  radius: 8
+  radius: 20
   force: 800
 --- !u!54 &2612757115742412619
 Rigidbody:

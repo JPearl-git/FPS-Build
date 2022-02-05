@@ -325,6 +325,7 @@ MonoBehaviour:
   health: 0
   maxHealth: 100
   bAlive: 1
+  bCanTakeStatusEffect: 1
 --- !u!54 &931710648
 Rigidbody:
   m_ObjectHideFlags: 0

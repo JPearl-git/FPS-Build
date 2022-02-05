@@ -716,8 +716,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   maxHealth: 20
-  bCritical: 0
+  bAlive: 1
+  bCanTakeStatusEffect: 1
   bCanHit: 1
+  bCritical: 0
   slider: {fileID: 1766808892795094245}
   speed: 3
 --- !u!54 &1766808893807616535

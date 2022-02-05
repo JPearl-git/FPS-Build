@@ -8,6 +8,8 @@ public class FireHose : ISwitchable
 {
     ParticleSystem ps;
 
+    List<EntityStats> entities = new List<EntityStats>();
+
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -26,11 +28,33 @@ public class FireHose : ISwitchable
         ps.Stop();
     }
 
+    IEnumerator ApplyBurn(EntityStats entity)
+    {
+        if(entities.Contains(entity))
+        {
+            entity.InflictStatus(StatusEffect.BURN);
+            yield return new WaitForSeconds(3f);
+            yield return ApplyBurn(entity);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
-        if(bActive && other.tag.Equals("Player"))
+        if(bActive && other.TryGetComponent<EntityStats>(out EntityStats entity))
         {
-            Debug.Log("You're on Fire!");
+            if(entity.bCanTakeStatusEffect)
+            {
+                entities.Add(entity);
+                StartCoroutine(ApplyBurn(entity));
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(bActive && other.TryGetComponent<EntityStats>(out EntityStats entity))
+        {
+            entities.Remove(entity);
         }
     }
 }
