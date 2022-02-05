@@ -30,7 +30,7 @@ public class FireHose : ISwitchable
 
     IEnumerator ApplyBurn(EntityStats entity)
     {
-        if(entities.Contains(entity))
+        if(entities.Contains(entity) && entity.gameObject != null)
         {
             entity.InflictStatus(StatusEffect.BURN);
             yield return new WaitForSeconds(3f);

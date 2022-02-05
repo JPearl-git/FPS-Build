@@ -32,28 +32,16 @@ public class Explosion : MonoBehaviour
             Rigidbody rb = nearby.GetComponent<Rigidbody>();
             if(rb != null)
             {
-                //Debug.Log("Explosion Hit " + rb.gameObject.name);
-                if(rb.gameObject.tag.Equals("Player"))
+                if(rb.TryGetComponent<PhysicsMovement>(out PhysicsMovement pm))
                 {
-                    Vector3 prePos = rb.transform.position;
-                    rb.AddExplosionForce(force, transform.position, radius);
-                    //Debug.Log("Player moved " + (rb.transform.position - prePos));
+                    if(pm.CheckGrounded())
+                    {
+                        rb.transform.position += (Vector3.up * 0.5f);
+                        pm.ForcedLaunch();
+                    }
                 }
-                    
-                    //StartCoroutine(KnockPlayer(rb,force,radius));
-                else
                     rb.AddExplosionForce(force, transform.position, radius);
             }
         }
-    }
-
-    IEnumerator KnockPlayer(Rigidbody rb, float force, float radius)
-    {
-        rb.AddForce(Vector3.up * 4, ForceMode.Impulse);
-        yield return new WaitForSeconds(0.1f);
-        //Vector3 direction = rb.transform.position - transform.position;
-        //direction.y = 0;
-        //rb.AddForce(direction.normalized * 6, ForceMode.Impulse);
-        rb.AddExplosionForce(10000, transform.position, radius);
     }
 }
