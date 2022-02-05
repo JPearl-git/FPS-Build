@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum StatusEffect
 {
-    BURN
+    BURN,
+    NONE
 }
 
 public class EntityStats : MonoBehaviour

@@ -7,7 +7,7 @@ public class PhysicsMovement : MonoBehaviour
 {
     Rigidbody rb;
     Vector2 movement;
-    [SerializeField] float speed = 25f, jumpForce = 3.5f, slopeForce = 0f, stepHeight = 0.4f;
+    [SerializeField] float speed = 25f, jumpForce = 3.5f, slopeForce = 0f;
     [SerializeField] Transform Feet;
     bool jump, isGrounded, isJumping;
     float playerHeight;
