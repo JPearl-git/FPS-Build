@@ -11,26 +11,19 @@ public class FireHose : ISwitchable
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
-
-        //Activate();
+        base.Start();
     }
 
     public override void Activate()
     {
-        //if(!bActive)
-        //{
-            bActive = true;
-            ps.Play();
-        //}
+        bActive = true;
+        ps.Play();
     }
 
     public override void Deactivate()
     {
-        //if(bActive)
-        //{
-            bActive = false;
-            ps.Stop();
-        //}
+        bActive = false;
+        ps.Stop();
     }
 
     void OnTriggerEnter(Collider other)

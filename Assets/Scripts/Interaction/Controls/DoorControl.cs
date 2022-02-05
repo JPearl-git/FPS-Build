@@ -9,6 +9,7 @@ public class DoorControl : ISwitchable
     void Start()
     {
         pivot = transform.GetChild(0);
+        base.Start();
     }
 
     public override void Activate()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107520728412295625}
   - component: {fileID: 1107520728412295623}
-  - component: {fileID: 1107520728412295622}
+  - component: {fileID: 550756243}
   m_Layer: 0
   m_Name: Lift
   m_TagString: Untagged
@@ -45,7 +45,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.6, y: 0.1, z: 3.6}
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &1107520728412295622
+--- !u!114 &550756243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631bcabc048cbb14a9df1d816ac95143, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bActive: 0
   force: 20
 --- !u!1 &1107520730052738907
 GameObject:
@@ -73,6 +74,7 @@ GameObject:
   - component: {fileID: 1107520730052738902}
   - component: {fileID: 1107520730052738905}
   - component: {fileID: 1107520730052738904}
+  - component: {fileID: 2008811276}
   m_Layer: 0
   m_Name: Lift Pad
   m_TagString: Untagged
@@ -571,7 +573,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
+  - {fileID: 2100000, guid: 11757a56d70e1da4292e271429b46992, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -631,7 +633,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -5388,3 +5390,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &2008811276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107520730052738907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e66ae03d5e48424ba5880e30be321bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bStartState: 0
+  m_off: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
+  m_on: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
+  lift: {fileID: 550756243}

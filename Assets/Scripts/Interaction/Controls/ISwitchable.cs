@@ -7,6 +7,9 @@ public abstract class ISwitchable : MonoBehaviour, INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler PropertyChanged;
     
+    [SerializeField]
+    private bool bStartState;
+
     private bool _bActive;
     public bool bActive
     {
@@ -22,6 +25,11 @@ public abstract class ISwitchable : MonoBehaviour, INotifyPropertyChanged
                     Deactivate();
             }
         }
+    }
+
+    protected void Start()
+    {
+        bActive = bStartState;
     }
 
     public abstract void Activate();
