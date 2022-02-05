@@ -354,10 +354,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 187f7995b203c3644af7f49f59de1f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 11
+  speed: 25
   jumpForce: 20
-  slopeForce: 5
-  stepHeight: 0.45
+  slopeForce: 10
   Feet: {fileID: 126199787}
 --- !u!1 &353060192537196944
 GameObject:

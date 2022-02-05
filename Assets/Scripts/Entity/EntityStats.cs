@@ -10,6 +10,7 @@ public enum StatusEffect
 
 public class EntityStats : MonoBehaviour
 {
+    [HideInInspector] public Dictionary<StatusEffect, IStatusEffect> activeStatus = new Dictionary<StatusEffect, IStatusEffect>();
     [HideInInspector] public int health;
     public int maxHealth = 100;
     [HideInInspector] public bool bAlive = true;
@@ -46,21 +47,39 @@ public class EntityStats : MonoBehaviour
 
     public void InflictStatus(StatusEffect status, float duration = 3, int modifier = 2)
     {
-        GameObject statusObj = null;
-
-        switch(status)
+        if(status != StatusEffect.NONE)
         {
-            case StatusEffect.BURN:
-                statusObj = Instantiate(Resources.Load<GameObject>("Prefab/BurningEffect"), transform.position + Vector3.down, Quaternion.identity, transform);
-                break;
-            default:
-                break;
-        }
+            if(activeStatus.TryGetValue(status, out IStatusEffect current))
+            {
+                modifier = Mathf.Max(modifier, current.modifier);
+                duration += Time.timeSinceLevelLoad - current.startTime;
+                activeStatus.Remove(status);
+                
+                current.type = StatusEffect.NONE;
+                Destroy(current.gameObject);
+            }
 
-        if(statusObj != null)
-        {
-            if(statusObj.TryGetComponent<IStatusEffect>(out IStatusEffect effect))
-                effect.Initialize(this, duration, modifier);
+            GameObject statusObj = null;
+
+            switch(status)
+            {
+                case StatusEffect.BURN:
+                    statusObj = Instantiate(Resources.Load<GameObject>("Prefab/BurningEffect"), transform.position + Vector3.down, Quaternion.identity, transform);
+                    break;
+                default:
+                    break;
+            }
+
+            if(statusObj != null)
+            {
+                if(statusObj.TryGetComponent<IStatusEffect>(out IStatusEffect effect))
+                {
+                    activeStatus.Add(status, effect);
+                    effect.Initialize(this, duration, modifier);
+                }
+                else
+                    Destroy(statusObj);
+            }
         }
     }
 }
