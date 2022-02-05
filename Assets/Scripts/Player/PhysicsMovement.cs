@@ -40,7 +40,7 @@ public class PhysicsMovement : MonoBehaviour
         return false;
     }
 
-    //WIP step up stairs still not working
+    //WIP step up stairs still not working. Go for Individual steps
     void StepClimb()
     {
         if(Physics.Raycast(Feet.position, moveVector, out RaycastHit hitLower, 0.5f))
@@ -86,7 +86,7 @@ public class PhysicsMovement : MonoBehaviour
             rb.velocity = velocity;
         }   
         
-        // Climp Stairs
+        // Climp Steps
         if(isGrounded && moveVector.magnitude > 0)
             StepClimb();
 
@@ -100,10 +100,19 @@ public class PhysicsMovement : MonoBehaviour
         // Go down Slope or stairs. Conflicts with lift
         else if(!isJumping && rb.velocity.y > 0)
         {
-            //Vector3 velocity = rb.velocity;
-            //velocity.y = 0;
-            //rb.velocity = velocity;
+            if(Physics.Raycast(Feet.position + Vector3.up, Vector3.down, 3f))
+            {
+                Debug.Log("Pull Down");
+                Vector3 velocity = rb.velocity;
+                velocity.y = 0;
+                rb.velocity = velocity;
+            }
         }
+    }
+
+    public void ForcedLaunch()
+    {
+        isJumping = true;
     }
 
     public void OnJumpPressed()

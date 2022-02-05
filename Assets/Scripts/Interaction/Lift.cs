@@ -11,6 +11,9 @@ public class Lift : MonoBehaviour
     {
         if(bActive && other.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
+            if(other.TryGetComponent<PhysicsMovement>(out PhysicsMovement pm))
+                pm.ForcedLaunch();
+                
             //rb.AddForce(transform.up * force, ForceMode.Acceleration);
             rb.velocity += (Vector3.up * force);
         }
