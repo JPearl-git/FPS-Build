@@ -31,13 +31,19 @@ public class SimpleEnemy : Destructible
         Destroy(gameObject, 3f);
     }
 
-    public override void TakeDamage(int damage)
+    public void UpdateHealth()
     {
         if(slider != null)
         {
             float percent = (float)health / maxHealth;
             slider.value = percent;
         }
+    }
+
+    public override void TakeDamage(int damage, bool bHasSource = false)
+    {
+        base.TakeDamage(damage, bHasSource);
+        UpdateHealth();
     }
 
     void Update()

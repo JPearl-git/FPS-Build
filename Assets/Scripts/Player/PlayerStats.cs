@@ -17,7 +17,7 @@ public class PlayerStats : EntityStats
         health = maxHealth;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool bHasSource = false)
     {
         if(bAlive)
         {

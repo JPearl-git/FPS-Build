@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BurningEffect : MonoBehaviour
+public class BurningEffect : IStatusEffect
 {
-    public Transform target;
-
     int damage;
 
-    public void Initialize(float duration = 3f, int damage = 2)
+    public override void Initialize(Transform target, float duration = 3f, int modifier = 2)
     {
-        this.damage = damage;
-        StartCoroutine("Tick");
-        Destroy(gameObject, duration);
+        damage = modifier;
+        base.Initialize(target, duration);
     }
     
     void Update()
@@ -20,17 +17,8 @@ public class BurningEffect : MonoBehaviour
         transform.position = target.position + Vector3.down;
     }
 
-    void Effect()
+    protected override void Effect()
     {
-        
-    }
-
-    IEnumerator Tick()
-    {
-        while(true)
-        {
-            Effect();
-            yield return new WaitForSeconds(1);
-        }
+        entity.TakeDamage(damage);
     }
 }

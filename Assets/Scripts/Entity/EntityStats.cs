@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StatusEffect
+{
+    BURN
+}
+
 public class EntityStats : MonoBehaviour
 {
     [HideInInspector] public int health;
     public int maxHealth = 100;
     [HideInInspector] public bool bAlive = true;
 
-    public virtual void TakeDamage(int damage)
+    public bool bCanTakeStatusEffect;
+
+    public virtual void TakeDamage(int damage, bool bHasSource = false)
     {
         if(bAlive)
         {
@@ -16,7 +23,7 @@ public class EntityStats : MonoBehaviour
             if(health < 0)
                 health = 0;
 
-            if(health <= 0 && bAlive)
+            if(health <= 0 && bAlive && !bHasSource)
             {
                 bAlive = false;
                 Death();
@@ -35,4 +42,9 @@ public class EntityStats : MonoBehaviour
     }
 
     protected virtual void Death(){}
+
+    public void InflictStatus(StatusEffect status, float duration, int modifier = 2)
+    {
+
+    }
 }

@@ -20,8 +20,7 @@ public class Destructible : EntityStats
         if(bCanHit)
         {
             lastHit = hit;
-            health -= damage;
-            TakeDamage(damage);
+            TakeDamage(damage, true);
 
             if(health <= 0)
             {
