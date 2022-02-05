@@ -1,37 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class FireHose : MonoBehaviour
+public class FireHose : ISwitchable
 {
-    public bool bActive;
-
     ParticleSystem ps;
 
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
 
-        Activate();
+        //Activate();
     }
 
-    public void Activate()
+    public override void Activate()
     {
-        if(!bActive)
-        {
+        //if(!bActive)
+        //{
             bActive = true;
             ps.Play();
-        }
+        //}
     }
 
-    public void Deactivate()
+    public override void Deactivate()
     {
-        if(bActive)
-        {
+        //if(bActive)
+        //{
             bActive = false;
             ps.Stop();
-        }
+        //}
     }
 
     void OnTriggerEnter(Collider other)
