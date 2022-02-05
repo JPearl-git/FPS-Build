@@ -6,15 +6,10 @@ public class BurningEffect : IStatusEffect
 {
     int damage;
 
-    public override void Initialize(Transform target, float duration = 3f, int modifier = 2)
+    public override void Initialize(EntityStats entity, float duration = 3f, int modifier = 2)
     {
         damage = modifier;
-        base.Initialize(target, duration);
-    }
-    
-    void Update()
-    {
-        transform.position = target.position + Vector3.down;
+        base.Initialize(entity, duration);
     }
 
     protected override void Effect()

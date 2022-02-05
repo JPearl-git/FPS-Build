@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class IStatusEffect : MonoBehaviour
 {
-    public Transform target;
-
     protected EntityStats entity;
 
-    void Update()
+    public virtual void Initialize(EntityStats entity, float duration = 3f, int modifier = 2)
     {
-        transform.position = target.position + Vector3.down;
-    }
-
-    public virtual void Initialize(Transform target, float duration = 3f, int modifier = 2)
-    {
-        if(target.gameObject.TryGetComponent<EntityStats>(out entity))
+        if(entity != null)
         {
-            this.target = transform;
+            this.entity = entity;
             StartCoroutine("Tick");
             Destroy(gameObject, duration);
         }
@@ -25,10 +18,7 @@ public class IStatusEffect : MonoBehaviour
             Destroy(gameObject);
     }
 
-    protected virtual void Effect()
-    {
-
-    }
+    protected virtual void Effect(){}
 
     protected virtual IEnumerator Tick()
     {

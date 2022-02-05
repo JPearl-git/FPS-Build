@@ -14,6 +14,12 @@ public class SimpleEnemy : Destructible
     bool bCanHitPlayer;
     float hitDelay = 3f;
 
+    void Update()
+    {
+        if(health > 0)
+            MoveToTarget();
+    }
+
     public override void Initialize()
     {
         rb = gameObject.GetComponent<Rigidbody>();
@@ -44,12 +50,6 @@ public class SimpleEnemy : Destructible
     {
         base.TakeDamage(damage, bHasSource);
         UpdateHealth();
-    }
-
-    void Update()
-    {
-        if(health > 0)
-            MoveToTarget();
     }
 
     void MoveToTarget()

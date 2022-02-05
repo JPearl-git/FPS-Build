@@ -43,8 +43,23 @@ public class EntityStats : MonoBehaviour
 
     protected virtual void Death(){}
 
-    public void InflictStatus(StatusEffect status, float duration, int modifier = 2)
+    public void InflictStatus(StatusEffect status, float duration = 3, int modifier = 2)
     {
+        GameObject statusObj = null;
 
+        switch(status)
+        {
+            case StatusEffect.BURN:
+                statusObj = Instantiate(Resources.Load<GameObject>("Prefab/BurningEffect"), transform.position + Vector3.down, Quaternion.identity, transform);
+                break;
+            default:
+                break;
+        }
+
+        if(statusObj != null)
+        {
+            if(statusObj.TryGetComponent<IStatusEffect>(out IStatusEffect effect))
+                effect.Initialize(this, duration, modifier);
+        }
     }
 }
