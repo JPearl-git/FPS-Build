@@ -21,7 +21,7 @@ public class PhysicsMovement : MonoBehaviour
         playerHeight = GetComponent<CapsuleCollider>().height * 2;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         isGrounded = Physics.Raycast(Feet.position + Vector3.up, Vector3.down, 1.3f);
         if(isGrounded && isJumping && rb.velocity.y < 0)
@@ -44,9 +44,18 @@ public class PhysicsMovement : MonoBehaviour
         return hit;
     }
 
+    // Solves Collision issues with rb.MovePosition()
+    bool HitWall()
+    {
+        return Physics.Raycast(transform.position, moveVector.normalized * 0.8f, 1f);
+    }
+
     Vector3 GetMoveDirection(Vector2 input)
     {
         moveVector = transform.TransformDirection(input.x,0,input.y) * speed;
+
+        if(HitWall())
+            return Vector3.zero;
 
         if(!isGrounded)
             return moveVector *= 0.5f;

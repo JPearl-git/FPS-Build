@@ -1112,3 +1112,35 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 7377.629144 seconds.
+  path: Assets/Sprites/circle.png
+  artifactKey: Guid(9b3afbbf7a3a3454c8e94b4383fb9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/circle.png using Guid(9b3afbbf7a3a3454c8e94b4383fb9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '96e4d6b5df67d146b384ed8d49bf3548') in 0.086072 seconds 
+  Import took 0.093308 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 5.861981 seconds.
+  path: Assets/Sprites/circle.png
+  artifactKey: Guid(9b3afbbf7a3a3454c8e94b4383fb9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/circle.png using Guid(9b3afbbf7a3a3454c8e94b4383fb9297) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a3618b9a7b29a746f9d5d461ea600e0b') in 0.038518 seconds 
+  Import took 0.044564 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 254.017857 seconds.
+  path: Assets/Sprites/circlecropped.png
+  artifactKey: Guid(a2cdd993a42468b4e9077a4c8309ec74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/circlecropped.png using Guid(a2cdd993a42468b4e9077a4c8309ec74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6f782ce318384d759976fa1e0d05ecc1') in 0.041195 seconds 
+  Import took 0.062944 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.840253 seconds.
+  path: Assets/Sprites/circlecropped.png
+  artifactKey: Guid(a2cdd993a42468b4e9077a4c8309ec74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Sprites/circlecropped.png using Guid(a2cdd993a42468b4e9077a4c8309ec74) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3aa3e2f7aca187992b10820f50fdee2a') in 0.040030 seconds 
+  Import took 0.045966 seconds .
+
