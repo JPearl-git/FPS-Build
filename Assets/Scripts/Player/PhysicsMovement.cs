@@ -47,7 +47,7 @@ public class PhysicsMovement : MonoBehaviour
     // Solves Collision issues with rb.MovePosition()
     bool HitWall()
     {
-        return Physics.Raycast(transform.position, moveVector.normalized * 0.8f, 1f);
+        return Physics.Raycast(transform.position, moveVector.normalized * 0.6f, 1f);
     }
 
     Vector3 GetMoveDirection(Vector2 input)

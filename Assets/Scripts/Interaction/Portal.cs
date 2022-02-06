@@ -8,6 +8,8 @@ public class Portal : ISwitchable
     [SerializeField] Portal otherSide;
     ParticleSystem ps;
 
+    [HideInInspector] public List<Rigidbody> active;
+
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -26,10 +28,31 @@ public class Portal : ISwitchable
 
     void OnTriggerEnter(Collider other)
     {
+        if(bActive && otherSide != null)
+        {
+            if(other.TryGetComponent<Rigidbody>(out Rigidbody rb) && otherSide.bActive)
+            {
+                if(!active.Contains(rb) && !otherSide.active.Contains(rb))
+                {
+                    Debug.Log("Teleported");
+                    otherSide.active.Add(rb);
+
+                    float yOffset = other.transform.position.y - transform.position.y;
+                    Vector3 position = otherSide.transform.position;
+                    position.y += yOffset;
+
+                    other.transform.position = position;
+                    other.transform.rotation = otherSide.transform.rotation;
+                }
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
         if(other.TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
-            Debug.Log("Teleported");
-            rb.position += transform.forward * 5f;
+            active.Remove(rb);
         }
     }
 }
