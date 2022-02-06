@@ -18,11 +18,15 @@ public class Portal : ISwitchable
 
     public override void Activate()
     {
+        if(otherSide != null)
+            otherSide.bActive = true;
         ps.Play();
     }
 
     public override void Deactivate()
     {
+        if(otherSide != null)
+            otherSide.bActive = false;
         ps.Stop();
     }
 
