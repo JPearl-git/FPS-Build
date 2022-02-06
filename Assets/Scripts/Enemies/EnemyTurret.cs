@@ -19,12 +19,11 @@ public class EnemyTurret : EntityStats
     }
     void Update()
     {
-        //if(Target != null)
-        //    Aim();
         if(!bTargetInRange)
             return;
 
         Aim();
+        //TestAim();
     }
 
     void UpdateTarget()
@@ -42,44 +41,35 @@ public class EnemyTurret : EntityStats
     void Aim()
     {
         Vector3 dir = Target.position - BarrelPivot.position;
+        Vector3 TurretBaseDir = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
+
         Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Quaternion TurretLookRotation = Quaternion.LookRotation(TurretBaseDir, Turret.up);
 
         Vector3 rotation = lookRotation.eulerAngles;
-        Vector3 SmoothRotation = Quaternion.Lerp(Turret.rotation, lookRotation, Time.deltaTime).eulerAngles;
-
-        Turret.localRotation = Quaternion.Euler(0, rotation.y, 0);
-        BarrelPivot.rotation = Quaternion.Euler(rotation.x, SmoothRotation.y, initalEulerRotation.z);
+        Vector3 SmoothRotation = Quaternion.Lerp(Turret.rotation, TurretLookRotation, Time.deltaTime).eulerAngles;
+        
+        Turret.rotation = Quaternion.Euler(SmoothRotation);
+        BarrelPivot.rotation = Quaternion.Euler(rotation.x, SmoothRotation.y, SmoothRotation.z);
     }
 
+    // Testing
     void TestAim()
     {
-        // Working
         Vector3 dir = Target.position - BarrelPivot.position;
-        //Quaternion lookRotation = Quaternion.LookRotation(dir);
-
-        // Testing
         Vector3 TurretBaseDir = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
-        //Vector3 dir = Vector3.ProjectOnPlane(Target.position - BarrelPivot.position, Turret.up);
+
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        //Quaternion lookRotation = Quaternion.LookRotation(TurretBaseDir);
+        Quaternion TurretLookRotation = Quaternion.LookRotation(TurretBaseDir, Turret.up);
 
         Vector3 rotation = lookRotation.eulerAngles;
+        Vector3 SmoothRotation = Quaternion.Lerp(Turret.rotation, TurretLookRotation, Time.deltaTime).eulerAngles;
+        
+        Turret.rotation = Quaternion.Euler(SmoothRotation);
+        BarrelPivot.rotation = Quaternion.Euler(rotation.x, SmoothRotation.y, SmoothRotation.z);
 
-        // Working
-        Vector3 SmoothRotation = Quaternion.Lerp(Turret.rotation, lookRotation, Time.deltaTime).eulerAngles;
-        //Turret.rotation = Quaternion.Euler(0, rotation.y, 0);
-
-        // Testing
-        //Turret.rotation = Quaternion.Euler(0, SmoothRotation.y, 0);
-        Turret.localRotation = Quaternion.Euler(0, rotation.y, 0);
-        //Turret.rotation = Quaternion.Euler(initalEulerRotation + new Vector3(0, SmoothRotation.y, 0));
-
-        // Working
-        BarrelPivot.rotation = Quaternion.Euler(rotation.x, SmoothRotation.y, initalEulerRotation.z);
-
-        //Vector3 Test = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
-        //Debug.DrawLine(Turret.position, Turret.position + Test, Color.green, 0.1f);
-        //Debug.DrawLine(Turret.position, Turret.position + Turret.up, Color.blue, 0.1f);
+        Vector3 Test = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
+        Debug.DrawLine(Turret.position, Turret.position + dir, Color.magenta, 0.1f);
     }
 
     void OnDrawGizmosSelected()
