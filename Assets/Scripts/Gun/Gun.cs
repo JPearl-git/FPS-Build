@@ -85,11 +85,8 @@ public class Gun : MonoBehaviour
                         if(dTarget.bCanHit)
                             hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
                     }
-                    else
-                    {
-                        if(entity.bAlive)
-                            entity.TakeDamage(damage, hit.normal);
-                    }
+                    else if(entity.bAlive)
+                        entity.TakeDamage(damage, hit.normal);
                 }
 
                 // Hit non-entity Targets

@@ -9,7 +9,6 @@ public class Destructible : EntityStats
 
     protected void Start()
     {
-        health = maxHealth;
         Initialize();
     }
 
@@ -39,6 +38,12 @@ public class Destructible : EntityStats
 
     public virtual void Initialize()
     {
-        // Original
+        health = maxHealth;
+    }
+
+    public virtual void Initialize(int maxHealth)
+    {
+        this.maxHealth = maxHealth;
+        health = maxHealth;
     }
 }

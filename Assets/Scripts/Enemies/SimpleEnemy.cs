@@ -31,13 +31,7 @@ public class SimpleEnemy : Destructible
         if(GunPrefab == null)
             return;
         
-        Gun = Instantiate(GunPrefab, WeaponHand);
-        if(Gun.TryGetComponent<Gun>(out gunScript))
-        {
-            gunScript.bPressed = true;
-            gunScript.bAutomatic = false;
-            InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
-        }
+        InstantiateGun(GunPrefab);
         //CancelInvoke("")
     }
 
@@ -47,11 +41,26 @@ public class SimpleEnemy : Destructible
             MoveToTarget();
     }
 
+    public void InstantiateGun(GameObject prefab)
+    {
+        if(Gun != null)
+            Destroy(Gun);
+
+        Gun = Instantiate(prefab, WeaponHand);
+        if(Gun.TryGetComponent<Gun>(out gunScript))
+        {
+            gunScript.bPressed = true;
+            gunScript.bAutomatic = false;
+            InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
+        }
+    }
+
     public override void Initialize()
     {
         rb = gameObject.GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
         pStats = player.GetComponent<PlayerStats>();
+        base.Initialize();
     }
 
     protected override void Death()
