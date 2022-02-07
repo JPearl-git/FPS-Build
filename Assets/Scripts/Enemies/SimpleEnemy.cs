@@ -6,21 +6,26 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class SimpleEnemy : Destructible
 {
+
+#region Components
     Rigidbody rb;
     GameObject player;
     PlayerStats pStats;
+    GameObject Gun;
+    Gun gunScript;
+#endregion
+
     public float speed = 5f;
 
+#region Attached Parts
     [Header("Attached Parts")]
     [SerializeField] Transform Head;
     [SerializeField] Transform WeaponHand;
     [SerializeField] Slider slider;
+#endregion
+ 
+    [Header("Optional")][SerializeField] GameObject GunPrefab;
 
-    [SerializeField] GameObject GunPrefab;
-
-    GameObject Gun;
-    Gun gunScript;
-    
     bool bCanHitPlayer, bCanFire;
     float hitDelay = 3f;
 
@@ -63,19 +68,7 @@ public class SimpleEnemy : Destructible
         base.Initialize();
     }
 
-    protected override void Death()
-    {
-        CancelInvoke();
-
-        slider.gameObject.SetActive(false);
-        rb.freezeRotation = false;
-        Vector3 direction = transform.forward.normalized * -1;
-        rb.AddForce(direction * 200);
-
-        Destroy(gameObject, 3f);
-    }
-
-    public void UpdateHealth()
+   public void UpdateHealth()
     {
         if(slider != null)
         {
@@ -84,6 +77,7 @@ public class SimpleEnemy : Destructible
         }
     }
 
+#region AI Behavior
     public override void TakeDamage(int damage, Vector3 hitDirection)
     {
         base.TakeDamage(damage, hitDirection);
@@ -150,7 +144,21 @@ public class SimpleEnemy : Destructible
         gunScript.Reload();
         InvokeRepeating("Fire", gunScript.reloadTime, (float)60 / gunScript.rpm);
     }
+    
+    protected override void Death()
+    {
+        CancelInvoke();
 
+        slider.gameObject.SetActive(false);
+        rb.freezeRotation = false;
+        Vector3 direction = transform.forward.normalized * -1;
+        rb.AddForce(direction * 200);
+
+        Destroy(gameObject, 3f);
+    }
+#endregion
+
+#region Collision Detection
     void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.Equals(player))
@@ -165,7 +173,7 @@ public class SimpleEnemy : Destructible
         if(other.gameObject.Equals(player))
             bCanHitPlayer = false;
     }
-
+#endregion
     IEnumerator HitPlayer()
     {
         if(bCanHitPlayer)
