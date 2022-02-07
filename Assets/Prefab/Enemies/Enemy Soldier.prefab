@@ -185,7 +185,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5558659911778772413}
   - component: {fileID: 5558659911778772412}
-  - component: {fileID: 5558659911778772415}
+  - component: {fileID: 1993038181}
+  - component: {fileID: 1993038182}
   m_Layer: 0
   m_Name: Enemy Soldier
   m_TagString: Untagged
@@ -225,7 +226,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &5558659911778772415
+--- !u!114 &1993038181
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,20 +235,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 5558659911778772414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 895de70eed5c6fe4abfffc2f84d05cff, type: 3}
+  m_Script: {fileID: 11500000, guid: e547a3a5ef8e0204d9a6089e0cbe4ce3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  maxHealth: 30
+  maxHealth: 100
   bAlive: 1
-  bCanTakeStatusEffect: 1
+  bCanTakeStatusEffect: 0
   bCanHit: 1
   bCritical: 0
-  speed: 0.5
   Head: {fileID: 5558659912644768232}
   WeaponHand: {fileID: 5558659911882116918}
   slider: {fileID: 5558659912575281993}
-  Gun: {fileID: 0}
+  GunPrefab: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 8
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointRange: 0
+  timeBtwnAttack: 0
+  sightRange: 5.28
+  attackRange: 3.67
+  bPlayerInSightRange: 0
+  bPlayerInAttackRange: 0
+--- !u!195 &1993038182
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5558659911778772414}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1.66
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &5558659911882116913
 GameObject:
   m_ObjectHideFlags: 0

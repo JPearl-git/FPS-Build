@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class EnemyAI : BotStats
+public class AgentTest : MonoBehaviour
 {
+    [SerializeField] Transform Target;
     NavMeshAgent agent;
 
     public LayerMask whatIsGround, whatIsPlayer;
@@ -28,17 +28,17 @@ public class EnemyAI : BotStats
 
     protected void Awake()
     {
-        base.Awake();
+        //base.Awake();
         agent = GetComponent<NavMeshAgent>();
     }
 
 //
 // AI State behavior credit to yt/"Dave / GameDevelopment"
 //
-    void Update()
+    protected void Update()
     {
-        if(!bAlive)
-            return;
+        //if(!bAlive)
+        //    return;
 
         bPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         bPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -82,7 +82,7 @@ public class EnemyAI : BotStats
 #region Chase State
     protected void ChasePlayer()
     {
-        agent.SetDestination(player.transform.position);
+        agent.SetDestination(Target.position);
     }
 #endregion
 
@@ -91,7 +91,8 @@ public class EnemyAI : BotStats
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-        LookAtTarget(player.transform.position);
+        //LookAtTarget(Target.position);
+        transform.LookAt(Target.position);
 
         if(!bHasAttacked)
         {
