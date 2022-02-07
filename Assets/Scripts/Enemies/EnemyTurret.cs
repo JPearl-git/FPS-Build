@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTurret : EntityStats
+public class EnemyTurret : Destructible
 {
     Transform Target;
     public float range = 15f;
@@ -12,6 +12,7 @@ public class EnemyTurret : EntityStats
 
     void Start()
     {
+        base.Start();
         Target = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
@@ -65,6 +66,11 @@ public class EnemyTurret : EntityStats
         
         Turret.rotation = Quaternion.Euler(SmoothTurretRotation);
         BarrelPivot.rotation = Quaternion.Euler(BarrelRotation);
+    }
+
+    protected override void Death()
+    {
+        Destroy(gameObject);
     }
 
     void OnDrawGizmosSelected()

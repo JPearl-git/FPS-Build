@@ -6,8 +6,6 @@ public class Destructible : EntityStats
 {
     [HideInInspector] public bool bCanHit = true;
     public bool bCritical;
-    
-    protected Vector3 lastHit;
 
     protected void Start()
     {
@@ -19,7 +17,6 @@ public class Destructible : EntityStats
     {
         if(bCanHit)
         {
-            lastHit = hitDirection;
             TakeDamage(damage, hitDirection);
 
             if(health <= 0)
