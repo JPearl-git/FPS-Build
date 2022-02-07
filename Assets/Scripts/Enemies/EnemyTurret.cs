@@ -10,10 +10,16 @@ public class EnemyTurret : Destructible
 
     [SerializeField] Transform Turret, BarrelPivot;
 
+
+    void Awake()
+    {
+        Target = GameObject.Find("Player").transform;
+    }
+    
     void Start()
     {
         base.Start();
-        Target = GameObject.FindGameObjectWithTag("Player").transform;
+        //Target = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
     void Update()

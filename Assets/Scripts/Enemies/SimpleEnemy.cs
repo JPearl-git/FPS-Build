@@ -8,28 +8,34 @@ public class SimpleEnemy : Destructible
 {
 
 #region Components
-    Rigidbody rb;
-    GameObject player;
-    PlayerStats pStats;
-    GameObject Gun;
-    Gun gunScript;
+    protected Rigidbody rb;
+    protected GameObject player;
+    protected PlayerStats pStats;
+    protected GameObject Gun;
+    protected Gun gunScript;
 #endregion
 
     public float speed = 5f;
 
 #region Attached Parts
     [Header("Attached Parts")]
-    [SerializeField] Transform Head;
-    [SerializeField] Transform WeaponHand;
-    [SerializeField] Slider slider;
+    [SerializeField] protected Transform Head;
+    [SerializeField] protected Transform WeaponHand;
+    [SerializeField] protected Slider slider;
 #endregion
  
     [Header("Optional")][SerializeField] GameObject GunPrefab;
 
-    bool bCanHitPlayer, bCanFire;
-    float hitDelay = 3f;
+    protected bool bCanHitPlayer, bCanFire;
+    protected float hitDelay = 3f;
 
-    void Start()
+#region Unity Basics
+    protected void Awake()
+    {
+        player = GameObject.Find("Player");
+    }
+
+    protected void Start()
     {
         base.Start();
 
@@ -40,11 +46,12 @@ public class SimpleEnemy : Destructible
         //CancelInvoke("")
     }
 
-    void Update()
+    protected void Update()
     {
         if(health > 0)
             MoveToTarget();
     }
+#endregion
 
     public void InstantiateGun(GameObject prefab)
     {
@@ -63,7 +70,7 @@ public class SimpleEnemy : Destructible
     public override void Initialize()
     {
         rb = gameObject.GetComponent<Rigidbody>();
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
         pStats = player.GetComponent<PlayerStats>();
         base.Initialize();
     }
@@ -94,13 +101,18 @@ public class SimpleEnemy : Destructible
 
         var target = player.transform.position;
 
-        var bodyTarget = target;
-        bodyTarget.y = transform.position.y;
-        transform.LookAt(bodyTarget);
-
         float distance = Vector3.Distance(target, transform.position);
         float change = Time.deltaTime * speed;
         transform.position += transform.forward * change;
+
+        LookAtTarget(target);
+    }
+
+    protected void LookAtTarget(Vector3 target)
+    {
+        var bodyTarget = target;
+        bodyTarget.y = transform.position.y;
+        transform.LookAt(bodyTarget);
 
         if(Head != null)
         {
@@ -159,7 +171,7 @@ public class SimpleEnemy : Destructible
 #endregion
 
 #region Collision Detection
-    void OnCollisionEnter(Collision other)
+    protected void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.Equals(player))
         {
@@ -168,7 +180,7 @@ public class SimpleEnemy : Destructible
         }
     }
 
-    void OnCollisionExit(Collision other)
+    protected void OnCollisionExit(Collision other)
     {
         if(other.gameObject.Equals(player))
             bCanHitPlayer = false;
