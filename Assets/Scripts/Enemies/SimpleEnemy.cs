@@ -9,8 +9,15 @@ public class SimpleEnemy : Destructible
     Rigidbody rb;
     GameObject player;
     PlayerStats pStats;
-    public Slider slider;
     public float speed = 5f;
+
+    [Header("Attached Parts")]
+    [SerializeField] Transform Head;
+    [SerializeField] Transform WeaponHand;
+    [SerializeField] Slider slider;
+
+    [SerializeField] GameObject Gun;
+    
     bool bCanHitPlayer;
     float hitDelay = 3f;
 
@@ -59,11 +66,26 @@ public class SimpleEnemy : Destructible
             if(pStats.bAlive)
             {
                 var target = player.transform.position;
-                float change = Time.deltaTime * speed;
 
-                transform.LookAt(target);
+                var bodyTarget = target;
+                bodyTarget.y = transform.position.y;
+                transform.LookAt(bodyTarget);
+
                 float distance = Vector3.Distance(target, transform.position);
+                float change = Time.deltaTime * speed;
                 transform.position += transform.forward * change;
+
+                if(Head != null)
+                {
+                    var headTarget = target;
+                    headTarget.y += 0.8f;
+                    Head.LookAt(headTarget);
+                }
+
+                if(Gun != null)
+                {
+                    WeaponHand.LookAt(target);
+                }
             }
         }
     }
