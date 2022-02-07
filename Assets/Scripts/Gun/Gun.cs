@@ -87,7 +87,9 @@ public class Gun : MonoBehaviour
                 }
             }
 
-            gunHUD.SetCount(currentAmmo,clipSize);
+            if(gunHUD != null)
+                gunHUD.SetCount(currentAmmo,clipSize);
+
             StartCoroutine("Fire");
         }
     }
@@ -136,8 +138,11 @@ public class Gun : MonoBehaviour
         ammoReserve -= ammoAdd;
         currentAmmo += ammoAdd;
 
-        gunHUD.SetCount(currentAmmo, clipSize);
-        gunHUD.SetReserve(ammoReserve);
+        if(gunHUD != null)
+        {
+            gunHUD.SetCount(currentAmmo, clipSize);
+            gunHUD.SetReserve(ammoReserve);
+        }
 
         bReloading = false;
     }
