@@ -9,7 +9,7 @@ public class Destructible : EntityStats
     
     protected RaycastHit lastHit;
 
-    void Start()
+    protected void Start()
     {
         health = maxHealth;
         Initialize();

@@ -16,10 +16,19 @@ public class SimpleEnemy : Destructible
     [SerializeField] Transform WeaponHand;
     [SerializeField] Slider slider;
 
-    [SerializeField] GameObject Gun;
+    [SerializeField] GameObject GunPrefab;
+
+    GameObject Gun;
     
     bool bCanHitPlayer;
     float hitDelay = 3f;
+
+    void Start()
+    {
+        base.Start();
+        if(GunPrefab != null)
+            Gun = Instantiate(GunPrefab, WeaponHand);
+    }
 
     void Update()
     {
@@ -82,7 +91,7 @@ public class SimpleEnemy : Destructible
                     Head.LookAt(headTarget);
                 }
 
-                if(Gun != null)
+                if(Gun != null && Gun.TryGetComponent<Gun>(out Gun gunScript))
                 {
                     WeaponHand.LookAt(target);
                 }
