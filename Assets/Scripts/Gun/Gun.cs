@@ -76,20 +76,27 @@ public class Gun : MonoBehaviour
             if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, range))
             {
                 GameObject HitTarget = hit.transform.gameObject;
-                if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
+
+                // Damage Entity Types
+                if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
                 {
-                    if(dTarget.bCanHit)
-                        hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
+                    if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
+                    {
+                        if(dTarget.bCanHit)
+                            hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
+                    }
+                    else
+                    {
+                        if(entity.bAlive)
+                            entity.TakeDamage(damage, hit.normal);
+                    }
                 }
+
+                // Hit non-entity Targets
                 else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
                 {
                     if(!cTarget.bActive)
                         hitMarker.HitTarget(cTarget.Hit());
-                }
-                else if(HitTarget.TryGetComponent<PlayerStats>(out PlayerStats pStats))
-                {
-                    if(pStats.bAlive)
-                        pStats.TakeDamage(damage, hit.normal);
                 }
             }
 
