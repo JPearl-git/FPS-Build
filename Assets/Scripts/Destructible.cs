@@ -7,7 +7,7 @@ public class Destructible : EntityStats
     [HideInInspector] public bool bCanHit = true;
     public bool bCritical;
     
-    protected RaycastHit lastHit;
+    protected Vector3 lastHit;
 
     protected void Start()
     {
@@ -15,12 +15,12 @@ public class Destructible : EntityStats
         Initialize();
     }
 
-    public HitMarkerType GetHit(int damage, RaycastHit hit)
+    public HitMarkerType GetHit(int damage, Vector3 hitDirection)
     {
         if(bCanHit)
         {
-            lastHit = hit;
-            TakeDamage(damage, true);
+            lastHit = hitDirection;
+            TakeDamage(damage, hitDirection);
 
             if(health <= 0)
             {

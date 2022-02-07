@@ -17,7 +17,9 @@ public class EntityStats : MonoBehaviour
 
     public bool bCanTakeStatusEffect;
 
-    public virtual void TakeDamage(int damage, bool bHasSource = false)
+    protected Vector3 lastHitDirection;
+
+    public virtual void TakeDamage(int damage)
     {
         if(bAlive)
         {
@@ -25,12 +27,18 @@ public class EntityStats : MonoBehaviour
             if(health < 0)
                 health = 0;
 
-            if(health <= 0 && bAlive && !bHasSource)
+            if(health <= 0 && bAlive)
             {
                 bAlive = false;
                 Death();
             }
         }
+    }
+
+    public virtual void TakeDamage(int damage, Vector3 hitDirection)
+    {
+        lastHitDirection = hitDirection;
+        TakeDamage(damage);
     }
 
     public virtual void RestoreHealth(int heal)

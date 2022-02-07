@@ -17,8 +17,10 @@ public class PlayerStats : EntityStats
         health = maxHealth;
     }
 
-    public override void TakeDamage(int damage, bool bHasSource = false)
+    public override void TakeDamage(int damage, Vector3 hitDirection)
     {
+        lastHitDirection = hitDirection;
+        
         if(bAlive)
         {
             health -= damage;

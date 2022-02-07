@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour
                 if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
                 {
                     if(dTarget.bCanHit)
-                        hitMarker.HitTarget(dTarget.GetHit(damage, hit));
+                        hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
                 }
                 else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
                 {
@@ -89,7 +89,7 @@ public class Gun : MonoBehaviour
                 else if(HitTarget.TryGetComponent<PlayerStats>(out PlayerStats pStats))
                 {
                     if(pStats.bAlive)
-                        pStats.TakeDamage(damage, true);
+                        pStats.TakeDamage(damage, hit.normal);
                 }
             }
 

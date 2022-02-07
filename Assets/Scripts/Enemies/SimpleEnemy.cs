@@ -56,6 +56,8 @@ public class SimpleEnemy : Destructible
 
     protected override void Death()
     {
+        CancelInvoke();
+
         slider.gameObject.SetActive(false);
         rb.freezeRotation = false;
         Vector3 direction = transform.forward.normalized * -1;
@@ -73,9 +75,9 @@ public class SimpleEnemy : Destructible
         }
     }
 
-    public override void TakeDamage(int damage, bool bHasSource = false)
+    public override void TakeDamage(int damage, Vector3 hitDirection)
     {
-        base.TakeDamage(damage, bHasSource);
+        base.TakeDamage(damage, hitDirection);
         UpdateHealth();
     }
 
@@ -116,7 +118,7 @@ public class SimpleEnemy : Destructible
 
     protected void Fire()
     {
-        if(!bCanFire || !pStats.bAlive)
+        if(!bCanFire || !pStats.bAlive || !bAlive)
             return;
 
         if(gunScript.currentAmmo < 1)
