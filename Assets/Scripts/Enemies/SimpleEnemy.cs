@@ -116,10 +116,9 @@ public class SimpleEnemy : Destructible
 
     protected void Fire()
     {
-        if(!bCanFire)
+        if(!bCanFire || !pStats.bAlive)
             return;
 
-        Debug.Log("Check ammo");
         if(gunScript.currentAmmo < 1)
         {
             Reload();
@@ -129,7 +128,6 @@ public class SimpleEnemy : Destructible
         if(!gunScript.CanShoot())
             return;
 
-        Debug.Log("Fire!");
         gunScript.Shoot();
     }
 
