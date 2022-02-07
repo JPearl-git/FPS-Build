@@ -4597,6 +4597,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87119eaf95bbfc247a5cec9eaa814191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &699507833 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5558659911751114886, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+  m_PrefabInstance: {fileID: 1993038176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &728480116
 GameObject:
   m_ObjectHideFlags: 0
@@ -5133,7 +5138,7 @@ GameObject:
   - component: {fileID: 1049063418}
   - component: {fileID: 1049063417}
   - component: {fileID: 1049063416}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7324,7 +7329,7 @@ GameObject:
   - component: {fileID: 1452884026}
   - component: {fileID: 1452884025}
   - component: {fileID: 1452884024}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10713,7 +10718,7 @@ GameObject:
   - component: {fileID: 1568099542}
   - component: {fileID: 1568099541}
   - component: {fileID: 1568099540}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14307,6 +14312,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+      propertyPath: Canvas
+      value: 
+      objectReference: {fileID: 699507833}
+    - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
       propertyPath: sightRange
       value: 15
       objectReference: {fileID: 0}
@@ -14315,12 +14324,20 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+      propertyPath: maxIdleTime
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
       propertyPath: timeBtwnAttack
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
       propertyPath: walkPointRange
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993038181, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+      propertyPath: whatIsGround.m_Bits
+      value: 65
       objectReference: {fileID: 0}
     - target: {fileID: 1993038182, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
       propertyPath: m_AngularSpeed

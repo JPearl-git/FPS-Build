@@ -6,30 +6,38 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : BotStats
 {
+    [Header("Canvas")]
+    [SerializeField] Transform Canvas;
     NavMeshAgent agent;
 
-    public LayerMask whatIsGround, whatIsPlayer;
+    [Header("Layer Masks")]
+    public LayerMask whatIsGround;
+    public LayerMask whatIsPlayer;
 
-#region Patroling
-    public Vector3 walkPoint;
+    
+    #region Patroling
+    Vector3 walkPoint;
     bool bSetWalkPoint;
+    [Header("Behavior Controls")]
     public float walkPointRange;
-#endregion
+    #endregion
 
-#region Attacking
+    #region Attacking
     public float timeBtwnAttack;
     bool bHasAttacked;
-#endregion
+    #endregion
 
-#region States
-    public float sightRange, attackRange;
-    public bool bPlayerInSightRange, bPlayerInAttackRange;
-#endregion
+    #region States
+    public float sightRange, attackRange, maxIdleTime;
+    bool bPlayerInSightRange, bPlayerInAttackRange;
+    bool bIdle, bCanSee = true;
+    #endregion
 
     protected void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
+        maxIdleTime = Mathf.Max(1f, maxIdleTime);
     }
 
 //
@@ -39,6 +47,9 @@ public class EnemyAI : BotStats
     {
         if(!bAlive)
             return;
+
+        if(Canvas != null)
+            Canvas.LookAt(player.transform);
 
         bPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         bPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -55,6 +66,9 @@ public class EnemyAI : BotStats
 #region Patroling State
     protected void Patroling()
     {
+        if(bIdle)
+            return;
+
         if(!bSetWalkPoint)
             SearchWalkPoint();
 
@@ -65,7 +79,10 @@ public class EnemyAI : BotStats
 
         // Walkpoint reached
         if(distanceToWalkPoint.magnitude < 1f)
+        {
             bSetWalkPoint = false;
+            Idle();
+        }
     }
 
     protected void SearchWalkPoint()
@@ -76,6 +93,19 @@ public class EnemyAI : BotStats
         walkPoint = transform.position + new Vector3(randomX,0, randomZ);
 
         bSetWalkPoint = Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround);
+    }
+#endregion
+
+#region Idle State
+    protected void Idle()
+    {
+        bIdle = true;
+        Invoke("EndIdle", Random.Range(1f, maxIdleTime));
+    }
+
+    protected void EndIdle()
+    {
+        bIdle = false;
     }
 #endregion
 
