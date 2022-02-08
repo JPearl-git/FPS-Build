@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class FireHose : ISwitchable
+public class IFireTrap : ISwitchable
 {
-    ParticleSystem ps;
+    protected ParticleSystem ps;
 
-    List<EntityStats> entities = new List<EntityStats>();
+    protected List<EntityStats> entities = new List<EntityStats>();
 
     void Start()
     {
@@ -28,7 +27,7 @@ public class FireHose : ISwitchable
         ps.Stop();
     }
 
-    IEnumerator ApplyBurn(EntityStats entity)
+    protected IEnumerator ApplyBurn(EntityStats entity)
     {
         if(entities.Contains(entity) && entity.gameObject != null)
         {
@@ -38,7 +37,7 @@ public class FireHose : ISwitchable
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    protected void AddCollider(Collider other)
     {
         if(bActive && other.TryGetComponent<EntityStats>(out EntityStats entity))
         {
@@ -50,7 +49,7 @@ public class FireHose : ISwitchable
         }
     }
 
-    void OnTriggerExit(Collider other)
+    protected void RemoveCollider(Collider other)
     {
         if(bActive && other.TryGetComponent<EntityStats>(out EntityStats entity))
         {
