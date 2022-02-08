@@ -1168,6 +1168,8 @@ MonoBehaviour:
   Turret: {fileID: 4115619249890497701}
   BarrelPivot: {fileID: 3892133070504193604}
   explosion: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
+  smoke: {fileID: 8352457243908673100, guid: 47d73c4dd05884443a29478ccd5a5072, type: 3}
+  sparks: {fileID: 3937302187286564266, guid: 4e0195f334a57f14dbf4796d5a1fdc67, type: 3}
 --- !u!1 &3627171531841064479
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,15 +5,17 @@ using UnityEngine;
 public class EnemyTurret : Destructible
 {
     Transform Target;
+    HealthStatus healthStatus;
     public float range = 15f;
     bool bTargetInRange;
 
     [SerializeField] Transform Turret, BarrelPivot;
-    [SerializeField] GameObject explosion;
+    [SerializeField] GameObject explosion, smoke, sparks;
 
     void Awake()
     {
         Target = GameObject.Find("Player").transform;
+        healthStatus = HealthStatus.FULL;
     }
     
     void Start()
@@ -72,6 +74,44 @@ public class EnemyTurret : Destructible
         
         Turret.rotation = Quaternion.Euler(SmoothTurretRotation);
         BarrelPivot.rotation = Quaternion.Euler(BarrelRotation);
+    }
+
+    public override void TakeDamage(int damage)
+    {
+        base.TakeDamage(damage);
+
+        if(healthStatus.Equals(HealthStatus.VERY_LOW))
+            return;
+
+        float healthFraction = (float)health / maxHealth;
+        if(healthStatus.Equals(HealthStatus.LOW))
+        {
+            if(healthFraction < 0.3f)
+            {
+                VeryDamagedState();
+                return;
+            }
+        }
+        else if(healthFraction < 0.6f)
+            DamagedState();
+    }
+
+    void DamagedState()
+    {
+        Debug.Log("Health is low");
+        healthStatus = HealthStatus.LOW;
+
+        //Spawn sparks
+    }
+
+    void VeryDamagedState()
+    {
+        Debug.Log("Health is very low");
+        healthStatus = HealthStatus.VERY_LOW;
+
+        var pSmoke = Instantiate(smoke, transform.position + transform.up * 0.5f, transform.rotation, transform);
+        if(pSmoke.TryGetComponent<ParticleSystem>(out ParticleSystem ps))
+            ps.Play();
     }
 
     protected override void Death()

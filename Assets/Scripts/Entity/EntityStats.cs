@@ -8,6 +8,14 @@ public enum StatusEffect
     NONE
 }
 
+public enum HealthStatus
+{
+    NORMAL,
+    FULL,
+    LOW,
+    VERY_LOW
+}
+
 public class EntityStats : MonoBehaviour
 {
     [HideInInspector] public Dictionary<StatusEffect, IStatusEffect> activeStatus = new Dictionary<StatusEffect, IStatusEffect>();
