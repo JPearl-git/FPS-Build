@@ -9,7 +9,7 @@ public class EnemyTurret : Destructible
     bool bTargetInRange;
 
     [SerializeField] Transform Turret, BarrelPivot;
-
+    [SerializeField] GameObject explosion;
 
     void Awake()
     {
@@ -19,9 +19,9 @@ public class EnemyTurret : Destructible
     void Start()
     {
         base.Start();
-        //Target = GameObject.FindGameObjectWithTag("Player").transform;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
+
     void Update()
     {
         if(!bTargetInRange)
@@ -76,7 +76,10 @@ public class EnemyTurret : Destructible
 
     protected override void Death()
     {
-        Destroy(gameObject);
+        var exp = Instantiate(explosion, transform.position, transform.rotation);
+        exp.transform.localScale = new Vector3(1f,1f,1f);
+        exp.GetComponent<Explosion>().Init(2, 2, 2, StatusEffect.BURN, 2f);
+        Destroy(gameObject,0.1f);
     }
 
     void OnDrawGizmosSelected()

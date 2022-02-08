@@ -57,16 +57,8 @@ public void InstantiateGun(GameObject prefab)
         {
             gunScript.bPressed = true;
             gunScript.bAutomatic = false;
-            InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
+            //InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
         }
-    }
-
-    public override void Initialize()
-    {
-        //rb = gameObject.GetComponent<Rigidbody>();
-        //player = GameObject.Find("Player");
-        //pStats = player.GetComponent<PlayerStats>();
-        base.Initialize();
     }
 
    public void UpdateHealth()
@@ -86,7 +78,7 @@ public void InstantiateGun(GameObject prefab)
         UpdateHealth();
     }
 
-    protected void LookAtTarget(Vector3 target)
+    protected virtual void LookAtTarget(Vector3 target)
     {
         var bodyTarget = target;
         bodyTarget.y = transform.position.y;
@@ -103,13 +95,13 @@ public void InstantiateGun(GameObject prefab)
             MoveHand(target);
     }
 
-    protected void MoveHand(Vector3 target)
+    protected virtual void MoveHand(Vector3 target)
     {
         WeaponHand.LookAt(target);
         bCanFire = true;
     }
 
-    protected void Fire()
+    protected virtual void Fire()
     {
         if(!bCanFire || !pStats.bAlive || !bAlive)
             return;
@@ -126,7 +118,7 @@ public void InstantiateGun(GameObject prefab)
         gunScript.Shoot();
     }
 
-    protected void Reload()
+    protected virtual void Reload()
     {
         Debug.Log("Reloading");
         CancelInvoke("Fire");
@@ -141,7 +133,7 @@ public void InstantiateGun(GameObject prefab)
 
         if(slider != null)
             slider.gameObject.SetActive(false);
-            
+
         rb.freezeRotation = false;
         Vector3 direction = transform.forward.normalized * -1;
         rb.AddForce(direction * 200);

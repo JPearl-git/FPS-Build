@@ -6,12 +6,13 @@ public class SimpleEnemy : BotStats
 {
     public float speed = 5f;
 
-    void Update()
+    void Start()
     {
-        EnemyUpdate();
+        base.Start();
+        if(gunScript != null)
+            InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
     }
-
-    protected virtual void EnemyUpdate()
+    void Update()
     {
         if(bAlive)
             MoveToTarget();

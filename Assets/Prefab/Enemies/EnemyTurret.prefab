@@ -1147,9 +1147,12 @@ MonoBehaviour:
   maxHealth: 100
   bAlive: 1
   bCanTakeStatusEffect: 1
-  range: 10
+  bCanHit: 1
+  bCritical: 0
+  range: 20
   Turret: {fileID: 4115619249890497701}
   BarrelPivot: {fileID: 3892133070504193604}
+  explosion: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
 --- !u!1 &3627171531841064479
 GameObject:
   m_ObjectHideFlags: 0

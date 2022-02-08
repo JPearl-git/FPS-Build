@@ -8,13 +8,11 @@ public class EnemyAI : BotStats
 {
     [Header("Canvas")]
     [SerializeField] Transform Canvas;
-    NavMeshAgent agent;
 
     [Header("Layer Masks")]
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
 
-    
     #region Patroling
     Vector3 walkPoint;
     bool bSetWalkPoint;
@@ -23,11 +21,14 @@ public class EnemyAI : BotStats
     #endregion
 
     #region Attacking
+    Transform muzzle;
     public float timeBtwnAttack;
-    bool bHasAttacked;
+    [Range(1f,90f)] public float shootAngle;
+    bool bHasAttacked, bReloading;
     #endregion
 
     #region States
+    NavMeshAgent agent;
     public float sightRange, attackRange, maxIdleTime;
     bool bPlayerInSightRange, bPlayerInAttackRange;
     bool bIdle, bCanSee = true;
@@ -40,11 +41,21 @@ public class EnemyAI : BotStats
         maxIdleTime = Mathf.Max(1f, maxIdleTime);
     }
 
+    protected void Start()
+    {
+        base.Start();
+        muzzle = gunScript.muzzle.transform;
+    }
+
 //
 // AI State behavior credit to yt/"Dave / GameDevelopment"
 //
     void Update()
     {
+        //Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward, Color.magenta);
+        //Debug.DrawLine(muzzle.position, muzzle.position + (player.transform.position - transform.position).normalized, Color.gray);
+        //Debug.Log("Angle = " + Vector3.Angle(muzzle.forward, (player.transform.position - transform.position).normalized));
+
         if(!bAlive)
             return;
 
@@ -117,20 +128,93 @@ public class EnemyAI : BotStats
 #endregion
 
 #region Attack State
+    protected override void LookAtTarget(Vector3 target)
+    {
+        var bodyTarget = target;
+        bodyTarget.y = transform.position.y;
+        //transform.LookAt(bodyTarget);
+        //transform.LookAt(Vector3.Lerp(transform.position, bodyTarget, Time.deltaTime / 10000));
+        transform.rotation = SmoothRotation(bodyTarget, transform, 1);
+
+        if(Head != null)
+        {
+            var headTarget = target;
+            headTarget.y += 0.8f;
+            //Head.LookAt(headTarget);
+            Head.rotation = SmoothRotation(headTarget, Head, 1);
+        }
+
+        if(Gun != null)
+            MoveHand(target);
+    }
+
+    protected override void MoveHand(Vector3 target)
+    {
+        //WeaponHand.LookAt(target);
+        //WeaponHand.LookAt(Vector3.Lerp(WeaponHand.forward, target, 1));
+        WeaponHand.rotation = SmoothRotation(target, WeaponHand, 3f);
+        bCanFire = true;
+    }
+
+    Quaternion SmoothRotation(Vector3 target, Transform current, float smoothing)
+    {
+        Vector3 dir = target - current.position;
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 smoothRotation = Quaternion.Lerp(current.rotation, lookRotation, Time.deltaTime).eulerAngles;
+        return Quaternion.Euler(smoothRotation);
+    }
+
     protected void AttackPlayer()
     {
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
         LookAtTarget(player.transform.position);
 
-        if(!bHasAttacked)
-        {
-            //Attack code here
-            Debug.Log("Attack!");
+        if(bHasAttacked || gunScript == null)
+            return;
 
-            bHasAttacked = true;
+        TargetInRange();
+
+        if(gunScript.currentAmmo > 0)
+        {
+            timeBtwnAttack = (float)60 / gunScript.rpm;
             Invoke(nameof(ResetAttack), timeBtwnAttack);
         }
+        else if(!bReloading)
+        {
+            bReloading = true;
+            gunScript.Reload();
+            Invoke("Reload", gunScript.reloadTime);
+        }
+    }
+
+    protected void TargetInRange()
+    {
+        float angle = Vector3.Angle(WeaponHand.forward, (player.transform.position - transform.position).normalized);
+        if(angle < shootAngle)
+            Fire();
+        else if(Physics.Raycast(WeaponHand.position, WeaponHand.forward, out RaycastHit hit))
+        {
+            if(hit.collider.gameObject.tag.Equals("Player"))
+                Fire();
+        }
+    }
+
+    protected override void Fire()
+    {
+        if(!bCanFire || !pStats.bAlive || !bAlive)
+            return;
+
+        if(!gunScript.CanShoot() || bReloading)
+            return;
+
+        gunScript.Shoot();
+        bHasAttacked = true;
+    }
+
+    protected override void Reload()
+    {
+        bReloading = false;
     }
 
     protected void ResetAttack()
@@ -147,6 +231,10 @@ public class EnemyAI : BotStats
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3f);
+
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawRay(new Ray(WeaponHand.position, Quaternion.Euler(0, shootAngle, 0).eulerAngles));
     }
 #endregion
 }

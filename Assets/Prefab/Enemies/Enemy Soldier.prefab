@@ -218,13 +218,13 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5558659911778772414}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 2.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1993038181
 MonoBehaviour:
@@ -247,20 +247,20 @@ MonoBehaviour:
   Head: {fileID: 5558659912644768232}
   WeaponHand: {fileID: 5558659911882116918}
   slider: {fileID: 5558659912575281993}
-  GunPrefab: {fileID: 0}
+  GunPrefab: {fileID: 2417906874358999936, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
+  Canvas: {fileID: 5558659911751114886}
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 65
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 0
-  timeBtwnAttack: 0
-  sightRange: 5.28
-  attackRange: 3.67
-  bPlayerInSightRange: 0
-  bPlayerInAttackRange: 0
+  walkPointRange: 10
+  timeBtwnAttack: 5
+  shootAngle: 5
+  sightRange: 15
+  attackRange: 10
+  maxIdleTime: 3.5
 --- !u!195 &1993038182
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -274,7 +274,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
