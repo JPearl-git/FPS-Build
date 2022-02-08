@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EnemyTurret : Destructible
 {
-    Transform Target, sparkDirection;
+    Transform Target;
     HealthStatus healthStatus;
-    ParticleSystem pSparks;
     public float range = 15f;
     bool bTargetInRange;
 
     [SerializeField] Transform Turret, BarrelPivot;
-    [SerializeField] GameObject explosion, smoke, sparks;
+    [SerializeField] GameObject explosion, smoke, electricity;
 
     void Awake()
     {
@@ -100,13 +99,10 @@ public class EnemyTurret : Destructible
     void DamagedState()
     {
         healthStatus = HealthStatus.LOW;
-
-        sparkDirection = (new GameObject("Spark Direction")).transform;
-        sparkDirection.parent = transform;
         
-        var sparkObj = Instantiate(sparks, transform.position, transform.rotation, transform);
-        if(sparkObj.TryGetComponent<ParticleSystem>(out pSparks))
-            InvokeRepeating("PlaySparks",0, 1.8f);
+        var arcObj = Instantiate(electricity, transform.position, transform.rotation, transform);
+        if(arcObj.TryGetComponent<ParticleSystem>(out ParticleSystem pArc))
+            pArc.Play();
     }
 
     void VeryDamagedState()
@@ -116,17 +112,6 @@ public class EnemyTurret : Destructible
         var pSmoke = Instantiate(smoke, transform.position + transform.up * 0.5f, transform.rotation, transform);
         if(pSmoke.TryGetComponent<ParticleSystem>(out ParticleSystem ps))
             ps.Play();
-    }
-
-    void PlaySparks()
-    {
-        Vector3 point = Random.onUnitSphere;
-        point.y = Mathf.Abs(point.y);
-        sparkDirection.localPosition = point;
-        
-        pSparks.transform.LookAt(sparkDirection);
-        pSparks.Play();
-        //Debug.DrawLine(pSparks.transform.position, pSparks.transform.position + pSparks.transform.forward, Color.blue, 3f);
     }
 
     protected override void Death()
