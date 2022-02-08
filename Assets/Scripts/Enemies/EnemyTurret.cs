@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyTurret : Destructible
 {
-    Transform Target;
+    Transform Target, sparkDirection;
     HealthStatus healthStatus;
+    ParticleSystem pSparks;
     public float range = 15f;
     bool bTargetInRange;
 
@@ -98,20 +99,34 @@ public class EnemyTurret : Destructible
 
     void DamagedState()
     {
-        Debug.Log("Health is low");
         healthStatus = HealthStatus.LOW;
 
-        //Spawn sparks
+        sparkDirection = (new GameObject("Spark Direction")).transform;
+        sparkDirection.parent = transform;
+        
+        var sparkObj = Instantiate(sparks, transform.position, transform.rotation, transform);
+        if(sparkObj.TryGetComponent<ParticleSystem>(out pSparks))
+            InvokeRepeating("PlaySparks",0, 1.8f);
     }
 
     void VeryDamagedState()
     {
-        Debug.Log("Health is very low");
         healthStatus = HealthStatus.VERY_LOW;
 
         var pSmoke = Instantiate(smoke, transform.position + transform.up * 0.5f, transform.rotation, transform);
         if(pSmoke.TryGetComponent<ParticleSystem>(out ParticleSystem ps))
             ps.Play();
+    }
+
+    void PlaySparks()
+    {
+        Vector3 point = Random.onUnitSphere;
+        point.y = Mathf.Abs(point.y);
+        sparkDirection.localPosition = point;
+        
+        pSparks.transform.LookAt(sparkDirection);
+        pSparks.Play();
+        //Debug.DrawLine(pSparks.transform.position, pSparks.transform.position + pSparks.transform.forward, Color.blue, 3f);
     }
 
     protected override void Death()
