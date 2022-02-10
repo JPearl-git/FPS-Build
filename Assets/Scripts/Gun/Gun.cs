@@ -76,8 +76,8 @@ public class Gun : MonoBehaviour
             if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, range))
             {
                 GameObject HitTarget = hit.transform.gameObject;
-                if(hit.transform.parent != null)
-                    HitTarget = hit.transform.root.gameObject;
+                if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
+                    HitTarget = sub.ParentObject;
 
                 // Damage Entity Types
                 if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))

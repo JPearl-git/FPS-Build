@@ -5225,8 +5225,8 @@ MonoBehaviour:
   muzzle: {fileID: 1223251078446478112}
   range: 3.4028235e+38
   recoil: 0.3
-  reloadTime: 0.4
-  rpm: 650
+  reloadTime: 0.5
+  rpm: 450
   damage: 6
   currentAmmo: 30
   clipSize: 30
