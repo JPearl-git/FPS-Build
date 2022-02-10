@@ -17,10 +17,13 @@ public class PlayerStats : EntityStats
         health = maxHealth;
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool bCritHit = false)
     {
         if(bAlive)
         {
+            if(bCritHit)
+                damage = Mathf.CeilToInt(damage * CriticalMultplier);
+
             health -= damage;
             if(health < 0)
                 health = 0;

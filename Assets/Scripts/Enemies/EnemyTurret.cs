@@ -137,9 +137,9 @@ public class EnemyTurret : Destructible
 
     #region Damage Methods
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, bool bCritHit = false)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, bCritHit);
 
         if(healthStatus.Equals(HealthStatus.VERY_LOW))
             return;

@@ -72,9 +72,9 @@ public void InstantiateGun(GameObject prefab)
 #endregion
 
 #region AI Behavior
-    public override void TakeDamage(int damage, Vector3 hitDirection)
+    public override void TakeDamage(int damage, Vector3 hitDirection, bool bCritHit = false)
     {
-        base.TakeDamage(damage, hitDirection);
+        base.TakeDamage(damage, hitDirection, bCritHit);
         UpdateHealth();
     }
 

@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     [Header("Gun Details")]
     public string Name;
     public GameObject muzzle;
-    public float range = float.MaxValue;
+    //public float range = float.MaxValue;
     [Range(0f,1f)] public float recoil;
     [Range(.1f,1f)]public float reloadTime = .1f;
     [Range(1,1000)]public int rpm = 100;
@@ -73,11 +73,16 @@ public class Gun : MonoBehaviour
             currentAmmo--;
 
             RaycastHit hit;
-            if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit, range))
+            if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
             {
                 GameObject HitTarget = hit.transform.gameObject;
+                bool bCritHit = false;
+
                 if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
+                {
                     HitTarget = sub.ParentObject;
+                    bCritHit = sub.bCritical;
+                }
 
                 // Damage Entity Types
                 if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
@@ -88,7 +93,7 @@ public class Gun : MonoBehaviour
                             hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
                     }
                     else if(entity.bAlive)
-                        entity.TakeDamage(damage, hit.normal);
+                        entity.TakeDamage(damage, hit.normal, bCritHit);
                 }
 
                 // Hit non-entity Targets

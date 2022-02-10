@@ -5,18 +5,17 @@ using UnityEngine;
 public class Destructible : EntityStats
 {
     [HideInInspector] public bool bCanHit = true;
-    public bool bCritical;
 
     protected void Start()
     {
         Initialize();
     }
 
-    public HitMarkerType GetHit(int damage, Vector3 hitDirection)
+    public HitMarkerType GetHit(int damage, Vector3 hitDirection, bool bCritHit = false)
     {
         if(bCanHit)
         {
-            TakeDamage(damage, hitDirection);
+            TakeDamage(damage, hitDirection, bCritHit);
 
             if(health <= 0)
             {
@@ -25,7 +24,7 @@ public class Destructible : EntityStats
                 return HitMarkerType.Kill;
             }
             
-            if(bCritical)
+            if(bCritHit)
                 return HitMarkerType.Critical;
 
                 return HitMarkerType.Normal;

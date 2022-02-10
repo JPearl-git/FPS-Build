@@ -5,5 +5,5 @@ using UnityEngine;
 public class SubCollider : MonoBehaviour
 {
     public GameObject ParentObject;
-    public bool bCritical
+    public bool bCritical;
 }

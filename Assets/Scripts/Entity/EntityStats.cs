@@ -19,18 +19,23 @@ public enum HealthStatus
 public class EntityStats : MonoBehaviour
 {
     [HideInInspector] public Dictionary<StatusEffect, IStatusEffect> activeStatus = new Dictionary<StatusEffect, IStatusEffect>();
-    [HideInInspector] public int health;
-    public int maxHealth = 100;
     [HideInInspector] public bool bAlive = true;
+    [HideInInspector] public int health;
 
+    [Header("Basic Entity Variables")]
+    public int maxHealth = 100;
+    [Range(1f,5f)] public float CriticalMultplier = 1f;
     public bool bCanTakeStatusEffect;
 
     protected Vector3 lastHitDirection;
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, bool bCritHit = false)
     {
         if(bAlive)
         {
+            if(bCritHit)
+                damage = Mathf.CeilToInt(damage * CriticalMultplier);
+
             health -= damage;
             if(health < 0)
                 health = 0;
@@ -43,10 +48,10 @@ public class EntityStats : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector3 hitDirection)
+    public virtual void TakeDamage(int damage, Vector3 hitDirection, bool bCritHit = false)
     {
         lastHitDirection = hitDirection;
-        TakeDamage(damage);
+        TakeDamage(damage, bCritHit);
     }
 
     public virtual void RestoreHealth(int heal)
