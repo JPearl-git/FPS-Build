@@ -73,7 +73,9 @@ public class Gun : MonoBehaviour
             currentAmmo--;
 
             RaycastHit hit;
-            if(Physics.Raycast(muzzle.transform.position, muzzle.transform.forward, out hit))
+            Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
+
+            if(Physics.Raycast(ray, out hit))
             {
                 GameObject HitTarget = hit.transform.gameObject;
                 bool bCritHit = false;
@@ -82,11 +84,13 @@ public class Gun : MonoBehaviour
                 {
                     HitTarget = sub.ParentObject;
                     bCritHit = sub.bCritical;
+                    Debug.Log("Critical " + bCritHit);
                 }
 
                 // Damage Entity Types
                 if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
                 {
+                    Debug.Log("Hit " + hit.transform.gameObject.name);
                     if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
                     {
                         if(dTarget.bCanHit)

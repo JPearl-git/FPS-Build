@@ -5223,7 +5223,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Rifle
   muzzle: {fileID: 1223251078446478112}
-  range: 3.4028235e+38
   recoil: 0.3
   reloadTime: 0.5
   rpm: 450

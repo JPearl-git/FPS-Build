@@ -37,14 +37,19 @@ public class EnemyAI : BotStats
     protected void Awake()
     {
         base.Awake();
+
         agent = GetComponent<NavMeshAgent>();
+        agent.updatePosition = false;
+
         maxIdleTime = Mathf.Max(1f, maxIdleTime);
     }
 
     protected void Start()
     {
         base.Start();
-        muzzle = gunScript.muzzle.transform;
+
+        if(gunScript != null)
+            muzzle = gunScript.muzzle.transform;
     }
 
 //
@@ -52,10 +57,6 @@ public class EnemyAI : BotStats
 //
     void Update()
     {
-        //Debug.DrawLine(muzzle.position, muzzle.position + muzzle.forward, Color.magenta);
-        //Debug.DrawLine(muzzle.position, muzzle.position + (player.transform.position - transform.position).normalized, Color.gray);
-        //Debug.Log("Angle = " + Vector3.Angle(muzzle.forward, (player.transform.position - transform.position).normalized));
-
         if(!bAlive)
             return;
 
@@ -132,15 +133,12 @@ public class EnemyAI : BotStats
     {
         var bodyTarget = target;
         bodyTarget.y = transform.position.y;
-        //transform.LookAt(bodyTarget);
-        //transform.LookAt(Vector3.Lerp(transform.position, bodyTarget, Time.deltaTime / 10000));
         transform.rotation = SmoothRotation(bodyTarget, transform, 1);
 
         if(Head != null)
         {
             var headTarget = target;
             headTarget.y += 0.8f;
-            //Head.LookAt(headTarget);
             Head.rotation = SmoothRotation(headTarget, Head, 1);
         }
 
@@ -150,8 +148,6 @@ public class EnemyAI : BotStats
 
     protected override void MoveHand(Vector3 target)
     {
-        //WeaponHand.LookAt(target);
-        //WeaponHand.LookAt(Vector3.Lerp(WeaponHand.forward, target, 1));
         WeaponHand.rotation = SmoothRotation(target, WeaponHand, 3f);
         bCanFire = true;
     }
@@ -222,6 +218,12 @@ public class EnemyAI : BotStats
         bHasAttacked = false;
     }
 #endregion
+
+    void Death()
+    {
+        agent.updateRotation = false;
+        base.Death();
+    }
 
 #region Gizmos
     void OnDrawGizmosSelected()

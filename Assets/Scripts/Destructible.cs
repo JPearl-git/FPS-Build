@@ -27,7 +27,7 @@ public class Destructible : EntityStats
             if(bCritHit)
                 return HitMarkerType.Critical;
 
-                return HitMarkerType.Normal;
+            return HitMarkerType.Normal;
         }
         else
             Debug.Log("Can't Hit " + gameObject.name);

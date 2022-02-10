@@ -131,6 +131,8 @@ public void InstantiateGun(GameObject prefab)
     {
         CancelInvoke();
 
+        rb.freezeRotation = false;
+
         if(slider != null)
             slider.gameObject.SetActive(false);
 
