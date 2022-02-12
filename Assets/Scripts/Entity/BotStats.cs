@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class BotStats : Destructible
+public class BotStats : Detection
 {
     #region Components
     protected Rigidbody rb;
@@ -85,7 +85,7 @@ public void InstantiateGun(GameObject prefab)
         UpdateHealth();
     }
 
-    protected virtual void LookAtTarget(Vector3 target)
+    public virtual void LookAtTarget(Vector3 target, bool moveHead = true)
     {
         var bodyTarget = target;
         bodyTarget.y = transform.position.y;

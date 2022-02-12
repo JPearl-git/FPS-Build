@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public enum AI_STATE
 {
-    PATROL, IDLE, CHASE, ATTACK, FORCED
+    PATROL, IDLE, CHASE, ATTACK, FORCED, DEAD
 }
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -34,7 +34,8 @@ public class EnemyNavAgent : MonoBehaviour
 
     AI_STATE aiState = AI_STATE.IDLE;
     public float maxIdleTime;
-    bool bPlayerInSightRange, bPlayerInAttackRange, bForceApplied;
+    //bool bPlayerInSightRange, bPlayerInAttackRange;
+    bool bForceApplied;
     bool bIdle, bCanSee = true;
     #endregion
 
@@ -63,19 +64,25 @@ public class EnemyNavAgent : MonoBehaviour
     //
     void Update()
     {
-        if(AI == null || !AI.bAlive || aiState == AI_STATE.FORCED)
+        if(!AI.bAlive && aiState != AI_STATE.DEAD)
+        {
+            aiState = AI_STATE.DEAD;
+            Destroy(transform.parent.gameObject, 0.5f);
+        }
+
+        if(AI == null || aiState == AI_STATE.DEAD || aiState == AI_STATE.FORCED)
             return;
 
-        bPlayerInSightRange = Physics.CheckSphere(transform.position, AI.sightRange, whatIsPlayer);
-        bPlayerInAttackRange = Physics.CheckSphere(transform.position, AI.attackRange, whatIsPlayer);
-
         // Simple State Machine
-        if(!bPlayerInSightRange && !bPlayerInAttackRange)
+        if(!AI.bPlayerInSightRange && !AI.bPlayerInAttackRange)
             Patroling();
-        else if(bPlayerInSightRange && !bPlayerInAttackRange)
+        else if(AI.bPlayerInSightRange && !AI.bPlayerInAttackRange)
             ChasePlayer();
-        else if(bPlayerInSightRange && bPlayerInAttackRange)
+        else if(AI.bPlayerInSightRange && AI.bPlayerInAttackRange)
             AttackPlayer();
+
+        if(aiState != AI_STATE.IDLE)
+            bIdle = false;
 
         if(rb != null && AI != null)
         {
@@ -87,9 +94,9 @@ public class EnemyNavAgent : MonoBehaviour
             //if(aiState == AI_STATE.ATTACK  || aiState == AI_STATE.FORCED)
                 return;
 
-            Vector3 direction = LookDirection.position;
-            direction.y = rb.position.y;
-            rb.transform.LookAt(direction);
+            //Vector3 direction = LookDirection.position;
+            //direction.y = rb.position.y;
+            //rb.transform.LookAt(direction);
         }
     }
 
@@ -101,6 +108,33 @@ public class EnemyNavAgent : MonoBehaviour
 
         aiState = AI_STATE.PATROL;
 
+        if(AI.detectState == AWARENESS.NO_DETECTION)
+            FreePatrol();
+        
+        if(AI.detectState == AWARENESS.CAUTIOUS)
+            CautiousPatrol();
+    }
+
+    protected void CautiousPatrol()
+    {
+        Vector3 distanceToDestination = transform.position - AI.detectTarget;
+
+        if(distanceToDestination.magnitude < 1f)
+        {
+            bSetWalkPoint = false;
+            
+            aiState = AI_STATE.IDLE;
+            bIdle = true;
+            Invoke("EndIdle", Random.Range(maxIdleTime, maxIdleTime + 1f));
+        }
+
+        agent.SetDestination(AI.detectTarget);
+
+
+    }
+
+    protected void FreePatrol()
+    {
         if(!bSetWalkPoint)
             SearchWalkPoint();
 
@@ -108,6 +142,9 @@ public class EnemyNavAgent : MonoBehaviour
             agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        if(distanceToWalkPoint.magnitude > 0)
+            AI.LookAtTarget(walkPoint, false);
 
         // Walkpoint reached
         if(distanceToWalkPoint.magnitude < 1f)
@@ -138,7 +175,11 @@ public class EnemyNavAgent : MonoBehaviour
 
     protected void EndIdle()
     {
-        bIdle = false;
+        if(AI.detectState == AWARENESS.CAUTIOUS && AI.bAtDetectTarget)
+            AI.detectState = AWARENESS.NO_DETECTION;
+
+        if(aiState == AI_STATE.IDLE)
+            bIdle = false;
     }
 #endregion
 
@@ -147,6 +188,7 @@ public class EnemyNavAgent : MonoBehaviour
     {
         aiState = AI_STATE.CHASE;
         agent.SetDestination(player.transform.position);
+        AI.LookAtTarget(transform.position + transform.forward, false);
     }
 #endregion
 
@@ -156,6 +198,7 @@ public class EnemyNavAgent : MonoBehaviour
         aiState = AI_STATE.ATTACK;
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
+        //AI.LookAtTarget(player.transform.position);
         AI.TryToAttack();
     }
 #endregion

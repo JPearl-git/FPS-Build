@@ -14,8 +14,10 @@ public class EnemyAI : BotStats
 
     #region Attacking
     Transform muzzle;
+
+    [Header("AI Variables")]
     public float timeBtwnAttack;
-    public float sightRange, attackRange;
+    //public float detectionRange, sightRange, attackRange;
     [Range(1f,90f)] public float shootAngle;
     bool bHasAttacked, bReloading;
     #endregion
@@ -35,22 +37,34 @@ public class EnemyAI : BotStats
         if(!bAlive)
             return;
 
+        CheckRanges();
+
         if(Canvas != null)
             Canvas.LookAt(player.transform);
     }
 
-#region Attack State
-    protected override void LookAtTarget(Vector3 target)
+    #region Attack State
+    public override void LookAtTarget(Vector3 target, bool moveHead = true)
     {
-        //var bodyTarget = target;
-        //bodyTarget.y = transform.position.y;
-        //transform.rotation = SmoothRotation(bodyTarget, transform, 1);
+        var bodyTarget = target;
+        bodyTarget.y = transform.position.y;
+        transform.rotation = SmoothRotation(bodyTarget, transform, 5);
 
-        if(Head != null)
+        if(Head != null && moveHead)
         {
-            var headTarget = target;
-            headTarget.y += 0.8f;
-            Head.rotation = SmoothRotation(headTarget, Head, 1);
+            if(moveHead)
+            {
+                var headTarget = target;
+                headTarget.y += 0.8f;
+                Head.rotation = SmoothRotation(headTarget, Head, 5);
+            }
+            else
+            {
+                var headTarget = target;
+                headTarget.y = Head.position.y;
+                Head.rotation = SmoothRotation(headTarget, Head, 5);
+            }
+            
         }
 
         if(Gun != null)
@@ -67,7 +81,7 @@ public class EnemyAI : BotStats
     {
         Vector3 dir = target - current.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 smoothRotation = Quaternion.Lerp(current.rotation, lookRotation, Time.deltaTime).eulerAngles;
+        Vector3 smoothRotation = Quaternion.Lerp(current.rotation, lookRotation, Time.deltaTime * smoothing).eulerAngles;
         return Quaternion.Euler(smoothRotation);
     }
 
@@ -126,8 +140,9 @@ public class EnemyAI : BotStats
     {
         bHasAttacked = false;
     }
-#endregion
+    #endregion
 
+    #region Damage Methods
     public override HitMarkerType GetHit(int damage, RaycastHit hit, bool bCritHit = false)
     {
         if(!bCritHit)
@@ -154,19 +169,5 @@ public class EnemyAI : BotStats
     {
         base.Death();
     }
-
-#region Gizmos
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, sightRange);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3f);
-
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawRay(new Ray(WeaponHand.position, Quaternion.Euler(0, shootAngle, 0).eulerAngles));
-    }
-#endregion
+    #endregion
 }

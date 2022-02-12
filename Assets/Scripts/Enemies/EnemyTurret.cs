@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class EnemyTurret : Destructible
+public class EnemyTurret : Detection
 {
     public float range = 15f, fireDelay = 2.5f;
     bool bTargetInRange, bFire;
