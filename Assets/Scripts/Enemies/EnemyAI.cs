@@ -8,8 +8,9 @@ public class EnemyAI : BotStats
     [Header("Canvas")]
     [SerializeField] Transform Canvas;
 
-    [HideInInspector]
-    public EnemyNavAgent enemyAgent;
+    [HideInInspector] public EnemyNavAgent enemyAgent;
+
+    SubCollider[] subColliders;
 
     #region Attacking
     Transform muzzle;
@@ -25,6 +26,8 @@ public class EnemyAI : BotStats
 
         if(gunScript != null)
             muzzle = gunScript.muzzle.transform;
+
+        subColliders = transform.GetComponentsInChildren<SubCollider>();
     }
 
     void Update()
@@ -124,6 +127,28 @@ public class EnemyAI : BotStats
         bHasAttacked = false;
     }
 #endregion
+
+    public override HitMarkerType GetHit(int damage, RaycastHit hit, bool bCritHit = false)
+    {
+        if(!bCritHit)
+            bCritHit = CheckForCrit(hit.point);
+        return base.GetHit(damage, hit, bCritHit);
+    }
+
+    protected bool CheckForCrit(Vector3 hitPoint)
+    {
+        for (int i = 0; i < subColliders.Length; i++)
+        {
+            SubCollider sub = subColliders[i];
+            if(sub.TryGetComponent<Collider>(out Collider collider))
+            {
+                if(collider.bounds.Contains(hitPoint) && sub.bCritical)
+                    return true;
+            }
+        }
+
+        return false;
+    }
 
     void Death()
     {

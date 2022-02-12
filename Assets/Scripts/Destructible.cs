@@ -11,11 +11,11 @@ public class Destructible : EntityStats
         Initialize();
     }
 
-    public HitMarkerType GetHit(int damage, Vector3 hitDirection, bool bCritHit = false)
+    public virtual HitMarkerType GetHit(int damage, RaycastHit hit, bool bCritHit = false)
     {
         if(bCanHit)
         {
-            TakeDamage(damage, hitDirection, bCritHit);
+            TakeDamage(damage, hit.normal, bCritHit);
 
             if(health <= 0)
             {

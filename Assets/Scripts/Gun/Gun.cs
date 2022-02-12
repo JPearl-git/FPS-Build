@@ -94,7 +94,7 @@ public class Gun : MonoBehaviour
                     if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
                     {
                         if(dTarget.bCanHit)
-                            hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal));
+                            hitMarker.HitTarget(dTarget.GetHit(damage, hit));
                     }
                     else if(entity.bAlive)
                         entity.TakeDamage(damage, hit.normal, bCritHit);
