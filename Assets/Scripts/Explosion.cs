@@ -48,7 +48,13 @@ public class Explosion : MonoBehaviour
                         pm.ForcedLaunch();
                     }
                 }
-                    rb.AddExplosionForce(force, transform.position, radius);
+                else if(rb.TryGetComponent<EnemyAI>(out EnemyAI ai))
+                {
+                    if(ai.enemyAgent != null)
+                        ai.enemyAgent.ForceApplied();
+                }
+
+                rb.AddExplosionForce(force, transform.position, radius);
             }
             if(nearby.TryGetComponent<EntityStats>(out EntityStats entity))
             {

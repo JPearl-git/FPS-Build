@@ -8,7 +8,8 @@ public class BotStats : Destructible
 {
     #region Components
     protected Rigidbody rb;
-    protected GameObject player;
+    [HideInInspector]
+    public GameObject player;
     protected PlayerStats pStats;
     protected GameObject Gun;
     protected Gun gunScript;
@@ -75,6 +76,12 @@ public void InstantiateGun(GameObject prefab)
     public override void TakeDamage(int damage, Vector3 hitDirection, bool bCritHit = false)
     {
         base.TakeDamage(damage, hitDirection, bCritHit);
+        UpdateHealth();
+    }
+
+    public override void TakeDamage(int damage, bool bCritHit = false)
+    {
+        base.TakeDamage(damage, bCritHit);
         UpdateHealth();
     }
 

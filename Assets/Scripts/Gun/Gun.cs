@@ -90,7 +90,7 @@ public class Gun : MonoBehaviour
                 // Damage Entity Types
                 if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
                 {
-                    Debug.Log("Hit " + hit.transform.gameObject.name);
+                    //Debug.Log("Hit " + hit.transform.gameObject.name);
                     if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
                     {
                         if(dTarget.bCanHit)

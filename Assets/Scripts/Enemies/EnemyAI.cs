@@ -3,46 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyAI : BotStats
 {
     [Header("Canvas")]
     [SerializeField] Transform Canvas;
 
-    [Header("Layer Masks")]
-    public LayerMask whatIsGround;
-    public LayerMask whatIsPlayer;
-
-    #region Patroling
-    Vector3 walkPoint;
-    bool bSetWalkPoint;
-    [Header("Behavior Controls")]
-    public float walkPointRange;
-    #endregion
+    [HideInInspector]
+    public EnemyNavAgent enemyAgent;
 
     #region Attacking
     Transform muzzle;
     public float timeBtwnAttack;
+    public float sightRange, attackRange;
     [Range(1f,90f)] public float shootAngle;
     bool bHasAttacked, bReloading;
     #endregion
-
-    #region States
-    NavMeshAgent agent;
-    public float sightRange, attackRange, maxIdleTime;
-    bool bPlayerInSightRange, bPlayerInAttackRange;
-    bool bIdle, bCanSee = true;
-    #endregion
-
-    protected void Awake()
-    {
-        base.Awake();
-
-        agent = GetComponent<NavMeshAgent>();
-        agent.updatePosition = false;
-
-        maxIdleTime = Mathf.Max(1f, maxIdleTime);
-    }
 
     protected void Start()
     {
@@ -52,9 +27,6 @@ public class EnemyAI : BotStats
             muzzle = gunScript.muzzle.transform;
     }
 
-//
-// AI State behavior credit to yt/"Dave / GameDevelopment"
-//
     void Update()
     {
         if(!bAlive)
@@ -62,78 +34,14 @@ public class EnemyAI : BotStats
 
         if(Canvas != null)
             Canvas.LookAt(player.transform);
-
-        bPlayerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        bPlayerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        // Simple State Machine
-        if(!bPlayerInSightRange && !bPlayerInAttackRange)
-            Patroling();
-        else if(bPlayerInSightRange && !bPlayerInAttackRange)
-            ChasePlayer();
-        else if(bPlayerInSightRange && bPlayerInAttackRange)
-            AttackPlayer();
     }
-
-#region Patroling State
-    protected void Patroling()
-    {
-        if(bIdle)
-            return;
-
-        if(!bSetWalkPoint)
-            SearchWalkPoint();
-
-        if(bSetWalkPoint)
-            agent.SetDestination(walkPoint);
-
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        // Walkpoint reached
-        if(distanceToWalkPoint.magnitude < 1f)
-        {
-            bSetWalkPoint = false;
-            Idle();
-        }
-    }
-
-    protected void SearchWalkPoint()
-    {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = transform.position + new Vector3(randomX,0, randomZ);
-
-        bSetWalkPoint = Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround);
-    }
-#endregion
-
-#region Idle State
-    protected void Idle()
-    {
-        bIdle = true;
-        Invoke("EndIdle", Random.Range(1f, maxIdleTime));
-    }
-
-    protected void EndIdle()
-    {
-        bIdle = false;
-    }
-#endregion
-
-#region Chase State
-    protected void ChasePlayer()
-    {
-        agent.SetDestination(player.transform.position);
-    }
-#endregion
 
 #region Attack State
     protected override void LookAtTarget(Vector3 target)
     {
-        var bodyTarget = target;
-        bodyTarget.y = transform.position.y;
-        transform.rotation = SmoothRotation(bodyTarget, transform, 1);
+        //var bodyTarget = target;
+        //bodyTarget.y = transform.position.y;
+        //transform.rotation = SmoothRotation(bodyTarget, transform, 1);
 
         if(Head != null)
         {
@@ -148,7 +56,7 @@ public class EnemyAI : BotStats
 
     protected override void MoveHand(Vector3 target)
     {
-        WeaponHand.rotation = SmoothRotation(target, WeaponHand, 3f);
+        WeaponHand.rotation = SmoothRotation(target, WeaponHand, 1f);
         bCanFire = true;
     }
 
@@ -160,10 +68,8 @@ public class EnemyAI : BotStats
         return Quaternion.Euler(smoothRotation);
     }
 
-    protected void AttackPlayer()
+    public void TryToAttack()
     {
-        //Make sure enemy doesn't move
-        agent.SetDestination(transform.position);
         LookAtTarget(player.transform.position);
 
         if(bHasAttacked || gunScript == null)
@@ -221,7 +127,6 @@ public class EnemyAI : BotStats
 
     void Death()
     {
-        agent.updateRotation = false;
         base.Death();
     }
 
