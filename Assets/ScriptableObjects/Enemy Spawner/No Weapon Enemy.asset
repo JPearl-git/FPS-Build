@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff48ede487206148bf2368221d30e52, type: 3}
   m_Name: No Weapon Enemy
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 5558659911778772414, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+  EnemyPrefab: {fileID: 5806151074800569795, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
   Weapon: {fileID: 0}
   maxHealth: 30

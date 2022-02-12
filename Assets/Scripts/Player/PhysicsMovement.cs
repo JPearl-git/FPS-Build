@@ -73,7 +73,8 @@ public class PhysicsMovement : MonoBehaviour
 
     public void Move(Vector2 input)
     {
-        rb.MovePosition(transform.position + GetMoveDirection(input) * Time.deltaTime);
+        rb.MovePosition(transform.position + GetMoveDirection(input) * Time.fixedDeltaTime);
+        Debug.Log(GetMoveDirection(input).magnitude * Time.fixedDeltaTime);
 
         // Jump
         if(jump && isGrounded)

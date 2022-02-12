@@ -65,12 +65,16 @@ public class InputManager : MonoBehaviour
     {
         if(bCanControl)
         {
-            if(bPhysics)
-                pMovementScript.Move(movement);
-            else
+            if(!bPhysics)
                 movementScript.Move(movement);
 
             playerLook.Look(lookInput);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if(bPhysics)
+            pMovementScript.Move(movement);
     }
 }

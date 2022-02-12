@@ -45,7 +45,11 @@ public class EnemyNavAgent : MonoBehaviour
         if(AI != null)
         {
             rb = AI.gameObject.GetComponent<Rigidbody>();
-            player = AI.player;
+
+            if(AI.player == null)
+                player = GameObject.Find("Player");
+            else
+                player = AI.player;
 
             AI.enemyAgent = this;
             offsetFromRB = rb.position - transform.position;

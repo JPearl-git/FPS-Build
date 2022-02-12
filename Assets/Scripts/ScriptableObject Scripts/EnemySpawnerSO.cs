@@ -15,8 +15,13 @@ public class EnemySpawnerSO : ScriptableObject
     {
         if(EnemyPrefab != null)
         {
-            if(!EnemyPrefab.GetComponent<SimpleEnemy>())
-                EnemyPrefab = null;
+            if(EnemyPrefab.GetComponent<BotStats>())
+                return;
+            
+            if(EnemyPrefab.transform.GetComponentInChildren<BotStats>())
+                return;
+
+            EnemyPrefab = null;
         }
 
         if(Weapon != null)

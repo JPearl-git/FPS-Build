@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff48ede487206148bf2368221d30e52, type: 3}
   m_Name: Basic Enemy Spawner
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 5558659911778772414, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
+  EnemyPrefab: {fileID: 5806151074800569795, guid: eb2f521611eb31448a33f87b4025ebaa, type: 3}
   Weapon: {fileID: 2417906874358999936, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
+  maxHealth: 30
