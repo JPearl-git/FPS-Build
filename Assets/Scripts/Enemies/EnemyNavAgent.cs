@@ -130,7 +130,7 @@ public class EnemyNavAgent : MonoBehaviour
 
         agent.SetDestination(AI.detectTarget);
 
-
+        AI.LookAtTarget(AI.detectTarget, false);
     }
 
     protected void FreePatrol()

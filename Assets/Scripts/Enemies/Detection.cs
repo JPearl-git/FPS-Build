@@ -24,6 +24,7 @@ public class Detection : Destructible
     protected void Awake()
     {
         player = GameObject.Find("Player");
+        detectState = AWARENESS.NO_DETECTION;
 
         var control = GameObject.Find("Level Control");
         if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
@@ -66,6 +67,7 @@ public class Detection : Destructible
         if(detectState == AWARENESS.DETECTED)
             return;
 
+        detectState = AWARENESS.CAUTIOUS;
         detectTarget = position;
     }
 
