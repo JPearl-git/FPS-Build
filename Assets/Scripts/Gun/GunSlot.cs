@@ -8,6 +8,7 @@ public class GunSlot : MonoBehaviour
     public const int MaxSlots = 4;
     public Gun gun;
     public GunHUD gunHUD;
+    DetectionNotice detectionNotice;
 
     public GameObject[] gunObjects = new GameObject[MaxSlots];
 
@@ -22,6 +23,10 @@ public class GunSlot : MonoBehaviour
             gunObjects[0] = gun.gameObject;
             SetGun(0);
         }
+
+        var control = GameObject.Find("Level Control");
+        if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
+            detectionNotice = notice;
     }
 
     public void SetGun(int slot)
@@ -36,7 +41,7 @@ public class GunSlot : MonoBehaviour
         if(transform.GetChild(slot).TryGetComponent<Gun>(out Gun gun))
         {
             this.gun = gun;
-            gun.Initialize(gunHUD);
+            gun.Initialize(gunHUD, detectionNotice);
             bCanShoot = true;
 
             gunObjects[slot] = gun.gameObject;

@@ -12,7 +12,6 @@ public class EnemyTurret : Detection
     [Header("Componenets")]
     [SerializeField] ParticleSystem[] Blasters;
     [SerializeField] Transform Turret, BarrelPivot;
-    Transform Target;
     HealthStatus healthStatus;
     AudioSource audioSource;
     #endregion
@@ -26,7 +25,7 @@ public class EnemyTurret : Detection
 
     void Awake()
     {
-        Target = GameObject.Find("Player").transform;
+        base.Awake();
         audioSource = GetComponent<AudioSource>();
         healthStatus = HealthStatus.FULL;
     }
@@ -50,17 +49,17 @@ public class EnemyTurret : Detection
 
     void UpdateTarget()
     {
-        if(Target == null)
+        if(player == null)
         {
             bTargetInRange = false;
             bFire = false;
             return;
         }
 
-        float distanceToTarget = Vector3.Distance(transform.position, Target.position);
+        float distanceToTarget = Vector3.Distance(transform.position, player.transform.position);
         bTargetInRange = distanceToTarget <= range;
 
-        Vector3 targetDirection = (Target.position - BarrelPivot.position);
+        Vector3 targetDirection = (player.transform.position - BarrelPivot.position);
         float angle = Vector3.Angle(targetDirection, BarrelPivot.forward);
         
         if(angle < 10)
@@ -72,8 +71,8 @@ public class EnemyTurret : Detection
     // Works with Grounded Turret
     void Aim()
     {
-        Vector3 dir = Target.position - BarrelPivot.position;
-        Vector3 TurretBaseDir = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
+        Vector3 dir = player.transform.position - BarrelPivot.position;
+        Vector3 TurretBaseDir = Vector3.ProjectOnPlane(player.transform.position - Turret.position, Turret.up);
         
         Quaternion TurretLookRotation = Quaternion.LookRotation(TurretBaseDir, Turret.up);
         Quaternion BarrelLookRotation = Quaternion.LookRotation(dir, Turret.up);
@@ -88,8 +87,8 @@ public class EnemyTurret : Detection
     // Testing
     void TestAim()
     {
-        Vector3 dir = Target.position - BarrelPivot.position;
-        Vector3 TurretBaseDir = Vector3.ProjectOnPlane(Target.position - Turret.position, Turret.up);
+        Vector3 dir = player.transform.position - BarrelPivot.position;
+        Vector3 TurretBaseDir = Vector3.ProjectOnPlane(player.transform.position - Turret.position, Turret.up);
         
         Quaternion TurretLookRotation = Quaternion.LookRotation(TurretBaseDir, Turret.up);
         Quaternion BarrelLookRotation = Quaternion.LookRotation(dir, Turret.up);
@@ -177,6 +176,8 @@ public class EnemyTurret : Detection
 
     protected override void Death()
     {
+        base.Death();
+        
         var exp = Instantiate(explosion, transform.position, transform.rotation);
         exp.transform.localScale = new Vector3(1f,1f,1f);
         exp.GetComponent<Explosion>().Init(2, 2, 2, StatusEffect.BURN, 2f);

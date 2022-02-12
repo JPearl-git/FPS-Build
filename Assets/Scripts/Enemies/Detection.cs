@@ -12,6 +12,7 @@ public class Detection : Destructible
     [HideInInspector] public AWARENESS detectState;
     [HideInInspector] public Vector3 detectTarget, currentTarget;
     [HideInInspector] public bool bPlayerInDetectRange, bPlayerInSightRange, bPlayerInAttackRange, bAtDetectTarget;
+    [HideInInspector] public GameObject player;
 
     public LayerMask whatIsPlayer;
 
@@ -19,6 +20,15 @@ public class Detection : Destructible
     public float detectionRange = 25;
     public float sightRange = 15;
     public float attackRange = 5;
+
+    protected void Awake()
+    {
+        player = GameObject.Find("Player");
+
+        var control = GameObject.Find("Level Control");
+        if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
+            notice.AddDetector(this);
+    }
 
     void OnValidate()
     {
@@ -50,12 +60,20 @@ public class Detection : Destructible
 
     public void SetDetectTarget(Vector3 position)
     {
+        Debug.Log("Set Target");
         bAtDetectTarget = false;
-        
+
         if(detectState == AWARENESS.DETECTED)
             return;
 
         detectTarget = position;
+    }
+
+    protected virtual void Death()
+    {
+        var control = GameObject.Find("Level Control");
+        if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
+            notice.RemoveDetector(this);
     }
 
     #region Gizmos

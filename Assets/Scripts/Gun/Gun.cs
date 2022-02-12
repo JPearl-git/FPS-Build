@@ -6,6 +6,7 @@ public class Gun : MonoBehaviour
 {
     HitMarker hitMarker;
     GunHUD gunHUD;
+    DetectionNotice detectionNotice;
 
     [Header("Gun Details")]
     public string Name;
@@ -30,18 +31,26 @@ public class Gun : MonoBehaviour
     float delayTime, currentRecoil = 0;
     bool bReloading;
 
-    void Start()
-    {
-        hitMarker = GameObject.Find("HUD").GetComponent<HitMarker>();
-    }
+    //void Start()
+    //{
+    //    hitMarker = GameObject.Find("HUD").GetComponent<HitMarker>();
+    //
+    //    var control = GameObject.Find("Level Control");
+    //    if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
+    //        detectionNotice = notice;
+    //}
 
-    public void Initialize(GunHUD gHUD)
+    public void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
     {
         bPressed = false;
         gunHUD = gHUD;
         gunHUD.SetName(Name);
         gunHUD.SetCount(currentAmmo, clipSize);
         gunHUD.SetReserve(ammoReserve);
+
+        hitMarker = gHUD.GetComponent<HitMarker>();
+
+        this.detectionNotice = detectionNotice;
     }
 
     public bool CanShoot()
@@ -66,53 +75,56 @@ public class Gun : MonoBehaviour
     }
     public void Shoot()
     {
-        if(CanShoot())
+        if(!CanShoot())
+            return;
+
+        gunMuzzle.Play();
+        sound.Play();
+        currentAmmo--;
+
+        RaycastHit hit;
+        Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
+
+        if(Physics.Raycast(ray, out hit))
         {
-            gunMuzzle.Play();
-            sound.Play();
-            currentAmmo--;
+            GameObject HitTarget = hit.transform.gameObject;
+            bool bCritHit = false;
 
-            RaycastHit hit;
-            Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
-
-            if(Physics.Raycast(ray, out hit))
+            if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
             {
-                GameObject HitTarget = hit.transform.gameObject;
-                bool bCritHit = false;
-
-                if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
-                {
-                    HitTarget = sub.ParentObject;
-                    bCritHit = sub.bCritical;
-                    Debug.Log("Critical " + bCritHit);
-                }
-
-                // Damage Entity Types
-                if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
-                {
-                    //Debug.Log("Hit " + hit.transform.gameObject.name);
-                    if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
-                    {
-                        if(dTarget.bCanHit)
-                            hitMarker.HitTarget(dTarget.GetHit(damage, hit));
-                    }
-                    else if(entity.bAlive)
-                        entity.TakeDamage(damage, hit.normal, bCritHit);
-                }
-
-                // Hit non-entity Targets
-                else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
-                {
-                    if(!cTarget.bActive)
-                        hitMarker.HitTarget(cTarget.Hit());
-                }
+                HitTarget = sub.ParentObject;
+                bCritHit = sub.bCritical;
+                Debug.Log("Critical " + bCritHit);
             }
 
-            if(gunHUD != null)
-                gunHUD.SetCount(currentAmmo,clipSize);
+            // Damage Entity Types
+            if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
+            {
+                //Debug.Log("Hit " + hit.transform.gameObject.name);
+                if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
+                {
+                    if(dTarget.bCanHit)
+                        hitMarker.HitTarget(dTarget.GetHit(damage, hit));
+                }
+                else if(entity.bAlive)
+                    entity.TakeDamage(damage, hit.normal, bCritHit);
+            }
 
-            StartCoroutine("Fire");
+            // Hit non-entity Targets
+            else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
+            {
+                if(!cTarget.bActive)
+                    hitMarker.HitTarget(cTarget.Hit());
+            }
         }
+
+        if(gunHUD != null)
+            gunHUD.SetCount(currentAmmo,clipSize);
+
+        StartCoroutine("Fire");
+
+        if(detectionNotice != null)
+            detectionNotice.CallDetectors(this.transform.position);
     }
 
     public void Reload()

@@ -8,8 +8,7 @@ public class BotStats : Detection
 {
     #region Components
     protected Rigidbody rb;
-    [HideInInspector]
-    public GameObject player;
+    
     protected PlayerStats pStats;
     protected GameObject Gun;
     protected Gun gunScript;
@@ -30,7 +29,7 @@ public class BotStats : Detection
 #region Unity Basics
     protected void Awake()
     {
-        player = GameObject.Find("Player");
+        base.Awake();
         rb = gameObject.GetComponent<Rigidbody>();
         pStats = player.GetComponent<PlayerStats>();
     }
@@ -137,6 +136,7 @@ public void InstantiateGun(GameObject prefab)
     protected override void Death()
     {
         CancelInvoke();
+        base.Death();
 
         rb.freezeRotation = false;
 
