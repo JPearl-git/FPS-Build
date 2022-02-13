@@ -7,16 +7,27 @@ public class Spawner : Event
     public EnemySpawnerSO spawnSO;
     public override void Activate()
     {
-        //Instantiate(spawnObject, transform.position, transform.rotation);
         GameObject entity = Instantiate(spawnSO.EnemyPrefab, transform.position, transform.rotation);
+
+        BotStats data;
         
-        if(entity.TryGetComponent<SimpleEnemy>(out SimpleEnemy data))
+        if(entity.TryGetComponent<BotStats>(out data))
         {
-            data.Initialize(spawnSO.maxHealth);
+            InitializeEntity(data);
+            return;
+        }
+
+        data = entity.GetComponentInChildren<BotStats>();
+        if(data != null)
+            InitializeEntity(data);
+    }
+
+    public void InitializeEntity(BotStats data)
+    {
+        data.Initialize(spawnSO.maxHealth);
             data.UpdateHealth();
 
             if(spawnSO.Weapon != null)
                 data.InstantiateGun(spawnSO.Weapon);
-        }
     }
 }

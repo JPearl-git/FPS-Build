@@ -42,7 +42,6 @@ public class BotStats : Detection
             return;
         
         InstantiateGun(GunPrefab);
-        //CancelInvoke("")
     }
 #endregion
 
@@ -57,7 +56,6 @@ public void InstantiateGun(GameObject prefab)
         {
             gunScript.bPressed = true;
             gunScript.bAutomatic = false;
-            //InvokeRepeating("Fire", 0, (float)60 / gunScript.rpm);
         }
     }
 
@@ -80,8 +78,23 @@ public void InstantiateGun(GameObject prefab)
 
     public override void TakeDamage(int damage, bool bCritHit = false)
     {
-        base.TakeDamage(damage, bCritHit);
-        UpdateHealth();
+        if(bAlive)
+        {
+            if(bCritHit)
+                damage = Mathf.CeilToInt(damage * CriticalMultplier);
+
+            health -= damage;
+            if(health < 0)
+                health = 0;
+
+            UpdateHealth();
+
+            if(health <= 0 && bAlive)
+            {
+                bAlive = false;
+                Death();
+            }
+        }
     }
 
     public virtual void LookAtTarget(Vector3 target, bool moveHead = true)

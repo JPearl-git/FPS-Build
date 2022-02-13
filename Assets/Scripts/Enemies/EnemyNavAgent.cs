@@ -67,7 +67,7 @@ public class EnemyNavAgent : MonoBehaviour
         if(!AI.bAlive && aiState != AI_STATE.DEAD)
         {
             aiState = AI_STATE.DEAD;
-            Destroy(transform.parent.gameObject, 0.5f);
+            //Destroy(transform.parent.gameObject, 0.5f);
         }
 
         if(AI == null || aiState == AI_STATE.DEAD || aiState == AI_STATE.FORCED)
@@ -176,7 +176,10 @@ public class EnemyNavAgent : MonoBehaviour
     protected void EndIdle()
     {
         if(AI.detectState == AWARENESS.CAUTIOUS && AI.bAtDetectTarget)
+        {
             AI.detectState = AWARENESS.NO_DETECTION;
+            AI.SetIcon();
+        }
 
         if(aiState == AI_STATE.IDLE)
             bIdle = false;

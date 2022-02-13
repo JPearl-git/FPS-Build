@@ -80,6 +80,9 @@ public class EnemyAI : BotStats
     Quaternion SmoothRotation(Vector3 target, Transform current, float smoothing)
     {
         Vector3 dir = target - current.position;
+        if(dir.magnitude == 0)
+            return Quaternion.identity;
+        
         Quaternion lookRotation = Quaternion.LookRotation(dir);
         Vector3 smoothRotation = Quaternion.Lerp(current.rotation, lookRotation, Time.deltaTime * smoothing).eulerAngles;
         return Quaternion.Euler(smoothRotation);
@@ -165,8 +168,9 @@ public class EnemyAI : BotStats
         return false;
     }
 
-    void Death()
+    protected override void Death()
     {
+        Destroy(detectIcon.gameObject);
         base.Death();
     }
     #endregion
