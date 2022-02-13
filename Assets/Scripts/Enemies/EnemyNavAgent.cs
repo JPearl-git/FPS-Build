@@ -118,15 +118,19 @@ public class EnemyNavAgent : MonoBehaviour
     protected void CautiousPatrol()
     {
         Vector3 distanceToDestination = transform.position - AI.detectTarget;
-
-        if(distanceToDestination.magnitude < 1f)
+        if(distanceToDestination.magnitude < 2.5f)
         {
             bSetWalkPoint = false;
             
             aiState = AI_STATE.IDLE;
             bIdle = true;
+            AI.bAtDetectTarget = true;
+
             Invoke("EndIdle", Random.Range(maxIdleTime, maxIdleTime + 1f));
+            return;
         }
+
+        AI.bAtDetectTarget = false;
 
         agent.SetDestination(AI.detectTarget);
 

@@ -80,7 +80,7 @@ public class EnemyAI : BotStats
     Quaternion SmoothRotation(Vector3 target, Transform current, float smoothing)
     {
         Vector3 dir = target - current.position;
-        if(dir.magnitude == 0)
+        if(dir.Equals(Vector3.zero))
             return Quaternion.identity;
         
         Quaternion lookRotation = Quaternion.LookRotation(dir);
