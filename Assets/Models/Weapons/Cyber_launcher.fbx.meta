@@ -1,16 +1,18 @@
 fileFormatVersion: 2
-guid: 6e5b1f4de1bc58c419ed5b809e260dcb
+guid: 065dcb3b19f185a4fa535a1a626a0b16
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: -3680112837006942883
-    second: Armature|rootAction.001
+  internalIDToNameTable: []
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Glow
+    second: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mag Exo
     second: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
   materials:
     materialImportMode: 2

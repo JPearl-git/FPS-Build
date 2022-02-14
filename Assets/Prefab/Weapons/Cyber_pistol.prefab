@@ -207,11 +207,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pistol
   muzzle: {fileID: 3264908158563684641}
-  range: 3.4028235e+38
   recoil: 1
   reloadTime: 0.2
   rpm: 300
-  damage: 5
+  damage: 7
   currentAmmo: 10
   clipSize: 10
   ammoReserve: 120
@@ -10306,9 +10305,9 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -239302050275881172, guid: 6e5b1f4de1bc58c419ed5b809e260dcb, type: 3}
+  - {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
   - {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
-  - {fileID: -5597769686544433422, guid: 6e5b1f4de1bc58c419ed5b809e260dcb, type: 3}
+  - {fileID: 2100000, guid: 437a4cc02d42dd548978383c6074057b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
