@@ -13,11 +13,17 @@ public class GunHUD : MonoBehaviour
 
     public void SetCount(int current, int clip)
     {
-        gAmmoCount.text = current + "/" + clip;
+        if(clip < 0)
+            gAmmoCount.text = "---/---";
+        else
+            gAmmoCount.text = current + "/" + clip;
     }
 
     public void SetReserve(int reserve)
     {
-        gReserves.text = reserve.ToString();
+        if(reserve < 0)
+            gReserves.text = "---";
+        else
+            gReserves.text = reserve.ToString();
     }
 }

@@ -12,13 +12,15 @@ public class IWeapon : MonoBehaviour
     public string Name;
     public int damage;
     [Range(.1f,1f)]public float reloadTime = .1f;
-    [Range(1,1000)]public int rpm = 100;
+    
     public bool bAutomatic;
 
     [HideInInspector] public bool bPressed;
 
-    [Header("Other Variables")]
-    public Vector3 offsetPos, offsetRot;
+    [Header("Dimensions")]
+    public Vector3 offsetPos;
+    public Vector3 offsetRot;
+    public float scale = 1f;
 
     protected float delayTime;
 

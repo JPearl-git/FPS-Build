@@ -5,6 +5,7 @@ using UnityEngine;
 public class Gun : IWeapon
 {
     [Header("Gun Details")]
+    [Range(1,1000)]public int rpm = 100;
     [Range(0f,1f)] public float recoil;
     public int currentAmmo, clipSize, ammoReserve;
     public ParticleSystem gunMuzzle;

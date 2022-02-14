@@ -132,6 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6827838727148392507}
+  - component: {fileID: 5994926252273001715}
+  - component: {fileID: 8047376940410046829}
   m_Layer: 0
   m_Name: Cyber_Sword
   m_TagString: Untagged
@@ -155,6 +157,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5994926252273001715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163892460568545921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d343b6dddc1fbd34d83d212978e4cea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Sword
+  damage: 10
+  reloadTime: 0.3
+  bAutomatic: 1
+  bPressed: 0
+  offsetPos: {x: 5, y: -4, z: 5}
+  offsetRot: {x: 45, y: 0, z: 5}
+  scale: 1
+  sound: {fileID: 0}
+  attackTrail: {fileID: 0}
+--- !u!65 &8047376940410046829
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6163892460568545921}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 50, z: 4.5}
+  m_Center: {x: 0, y: 26, z: 0}
 --- !u!1 &7778501339736422864
 GameObject:
   m_ObjectHideFlags: 0

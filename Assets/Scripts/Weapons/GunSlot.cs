@@ -38,19 +38,19 @@ public class GunSlot : MonoBehaviour
             Debug.Log("No gun");
 
         // Set up the Gun Data from the current slot
-        if(transform.GetChild(slot).TryGetComponent<Gun>(out Gun gun))
+        if(transform.GetChild(slot).TryGetComponent<IWeapon>(out IWeapon weapon))
         {
-            this.Weapon = gun;
-            gun.Initialize(gunHUD, detectionNotice);
+            this.Weapon = weapon;
+            weapon.Initialize(gunHUD, detectionNotice);
             bCanAttack = true;
 
-            gunObjects[slot] = gun.gameObject;
+            gunObjects[slot] = weapon.gameObject;
             currentEquippedGun = slot;
         }
         // If there is no gun, don't do anything
         else
         {
-            gun = null;
+            weapon = null;
             bCanAttack = false;
             Debug.Log("No Gun Equipped");
         }
@@ -69,29 +69,30 @@ public class GunSlot : MonoBehaviour
     }
 
     // Equip a new gun
-    public void Equip(GameObject newGun)
+    public void Equip(GameObject newWeapon)
     {
         // New gun takes up a free slot
         if(transform.childCount < MaxSlots)
         {
-            newGun.transform.SetParent(transform);
+            newWeapon.transform.SetParent(transform);
             int currentSlot = transform.childCount - 1;
             SetWeapon(currentSlot);
         }
         // New gun replaces the current gun
         else
         {
-            GameObject oldGun = Weapon.gameObject;
-            newGun.transform.SetParent(transform);
-            newGun.transform.SetSiblingIndex(currentEquippedGun);
+            GameObject oldWeapon = Weapon.gameObject;
+            newWeapon.transform.SetParent(transform);
+            newWeapon.transform.SetSiblingIndex(currentEquippedGun);
             SetWeapon(currentEquippedGun);
 
-            Destroy(oldGun);
+            Destroy(oldWeapon);
         }
 
-        newGun.transform.localPosition = newGun.GetComponent<Gun>().offsetPos;
-        newGun.transform.localRotation = Quaternion.identity;
-        newGun.transform.localScale = Vector3.one;
+        IWeapon iWeapon = newWeapon.GetComponent<IWeapon>();
+        newWeapon.transform.localPosition = iWeapon.offsetPos;
+        newWeapon.transform.localRotation = Quaternion.Euler(iWeapon.offsetRot);
+        newWeapon.transform.localScale = new Vector3(iWeapon.scale, iWeapon.scale, iWeapon.scale);
 
         bCanAttack = true;
     }
