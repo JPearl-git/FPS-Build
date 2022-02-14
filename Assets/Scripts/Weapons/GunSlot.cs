@@ -12,8 +12,7 @@ public class GunSlot : MonoBehaviour
 
     public GameObject[] gunObjects = new GameObject[MaxSlots];
 
-    [HideInInspector]
-    public bool bCanAttack;
+    [HideInInspector] public bool bCanAttack, bAttackAction;
     int currentEquippedGun;
 
     void Start()
@@ -114,15 +113,19 @@ public class GunSlot : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        if(Weapon != null && bCanAttack)
+        if(Weapon == null || !bCanAttack)
+            return;
+
+        if(context.performed)
         {
-            if(context.performed)
-            {
-                Weapon.bPressed = true;
-                Weapon.Attack();
-            }
-            else if(context.canceled)
-                Weapon.bPressed = false;
+            bAttackAction = true;
+            Weapon.bPressed = true;
+            Weapon.Attack();
+        }
+        else if(context.canceled)
+        {
+            Weapon.bPressed = false;
+            bAttackAction = false;
         }
         // else
         //     Debug.Log("Cant Shoot");

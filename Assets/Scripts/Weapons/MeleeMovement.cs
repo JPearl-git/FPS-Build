@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(GunSlot))]
 public class MeleeMovement : MonoBehaviour
 {
     [SerializeField] Transform initalPoint;
@@ -10,24 +11,33 @@ public class MeleeMovement : MonoBehaviour
     [SerializeField] Transform[] StrikePoints;
 
     Transform targetPoint;
+    Animator animator;
+
+    GunSlot slot;
 
     int targetPosition, currentPosition = -1;
     float speed;
     bool bCanChange = true;
 
+    void Awake()
+    {
+        slot = GetComponent<GunSlot>();
+        animator = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        if(bCanChange)
-            return;
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, speed * Time.deltaTime);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetPoint.rotation, speed * Time.deltaTime);
-
-        if(transform.position.Equals(targetPoint.position))
-        {
-            currentPosition = targetPosition;
-            bCanChange = true;
-        }
+        //if(bCanChange)
+        //    return;
+//
+        //transform.position = Vector3.MoveTowards(transform.position, targetPoint.position, speed * Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, targetPoint.rotation, speed * Time.deltaTime);
+//
+        //if(transform.position.Equals(targetPoint.position))
+        //{
+        //    currentPosition = targetPosition;
+        //    bCanChange = true;
+        //}
     }
 
     public void Reset(bool isInstant)
@@ -74,6 +84,23 @@ public class MeleeMovement : MonoBehaviour
             bCanChange = true;
             CancelInvoke("MoveWeapon");
         }
+    }
+
+    public void AnimateAttack()
+    {
+        animator.SetBool("isSwinging", true);
+    }
+
+    void EndMeleeAttack()
+    {
+        Debug.Log("Check Anim, " + slot.bAttackAction);
+        if(slot.bAttackAction)
+            return;
+
+        animator.SetBool("isSwinging", false);
+        var melee = slot.Weapon as MeleeWeapon;
+        if(melee != null)
+            melee.attackTrail.Stop();
     }
 
     void OnDrawGizmos()

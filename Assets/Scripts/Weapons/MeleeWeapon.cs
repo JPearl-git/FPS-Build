@@ -23,6 +23,8 @@ public class MeleeWeapon : IWeapon
         if(meleeMovement == null)
             return;
 
-       meleeMovement.ChangePosition(5f);
+       //meleeMovement.ChangePosition(5f);
+       meleeMovement.AnimateAttack();
+       attackTrail.Play();
     }
 }
