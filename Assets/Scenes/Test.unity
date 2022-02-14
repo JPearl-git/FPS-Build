@@ -1649,6 +1649,10 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 2293260762465132507, guid: d5391b0e0f5c71247a5b07096ddafd57, type: 3}
+    - target: {fileID: 3142285399502364934, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
+      propertyPath: Weapon
+      value: 
+      objectReference: {fileID: 2293260762465132507, guid: d5391b0e0f5c71247a5b07096ddafd57, type: 3}
     - target: {fileID: 3142285399502364935, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -2525,6 +2529,10 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 2417906874358999936, guid: 9055f8ffa1e084148a0500736f16953b, type: 3}
+    - target: {fileID: 3142285399502364934, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
+      propertyPath: Weapon
+      value: 
+      objectReference: {fileID: 7755300303953307883, guid: 2963d6d773fc3094cb125f412e88d899, type: 3}
     - target: {fileID: 3142285399502364935, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -15711,6 +15719,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 353060191541786743, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 353060191541786747, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
       propertyPath: m_RootOrder
       value: 3

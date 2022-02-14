@@ -17,7 +17,6 @@ public class EnemyAI : BotStats
 
     [Header("AI Variables")]
     public float timeBtwnAttack;
-    //public float detectionRange, sightRange, attackRange;
     [Range(1f,90f)] public float shootAngle;
     bool bHasAttacked, bReloading;
     #endregion
@@ -27,7 +26,7 @@ public class EnemyAI : BotStats
         base.Start();
 
         if(gunScript != null)
-            muzzle = gunScript.muzzle.transform;
+            muzzle = gunScript.gunMuzzle.transform;
 
         subColliders = transform.GetComponentsInChildren<SubCollider>();
     }
@@ -130,7 +129,7 @@ public class EnemyAI : BotStats
         if(!gunScript.CanShoot() || bReloading)
             return;
 
-        gunScript.Shoot();
+        gunScript.Attack();
         bHasAttacked = true;
     }
 

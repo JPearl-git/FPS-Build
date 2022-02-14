@@ -2,33 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class Gun : IWeapon
 {
-    HitMarker hitMarker;
-    GunHUD gunHUD;
-    DetectionNotice detectionNotice;
-
     [Header("Gun Details")]
-    public string Name;
-    public GameObject muzzle;
-    //public float range = float.MaxValue;
     [Range(0f,1f)] public float recoil;
-    [Range(.1f,1f)]public float reloadTime = .1f;
-    [Range(1,1000)]public int rpm = 100;
-    public int damage;
-    
-
     public int currentAmmo, clipSize, ammoReserve;
-    public bool bAutomatic;
-    [HideInInspector]
-    public bool bPressed;
-    [Header("Other Variables")]
-    public Vector3 offset;
+    public ParticleSystem gunMuzzle;
 
-    [SerializeField] ParticleSystem gunMuzzle;
-    [SerializeField] AudioSource sound;
-
-    float delayTime, currentRecoil = 0;
+    float currentRecoil = 0;
     bool bReloading;
 
     //void Start()
@@ -40,17 +21,11 @@ public class Gun : MonoBehaviour
     //        detectionNotice = notice;
     //}
 
-    public void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
+    public override void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
     {
-        bPressed = false;
-        gunHUD = gHUD;
-        gunHUD.SetName(Name);
+        base.Initialize(gHUD, detectionNotice);
         gunHUD.SetCount(currentAmmo, clipSize);
         gunHUD.SetReserve(ammoReserve);
-
-        hitMarker = gHUD.GetComponent<HitMarker>();
-
-        this.detectionNotice = detectionNotice;
     }
 
     public bool CanShoot()
@@ -73,7 +48,7 @@ public class Gun : MonoBehaviour
             transform.parent.localRotation = Quaternion.Euler(-currentRecoil,0,0);
         }
     }
-    public void Shoot()
+    public override void Attack()
     {
         if(!CanShoot())
             return;
@@ -83,7 +58,7 @@ public class Gun : MonoBehaviour
         currentAmmo--;
 
         RaycastHit hit;
-        Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
+        Ray ray = new Ray(gunMuzzle.transform.position, gunMuzzle.transform.forward);
 
         if(Physics.Raycast(ray, out hit))
         {
@@ -147,7 +122,7 @@ public class Gun : MonoBehaviour
         }
         
         if(bPressed && bAutomatic)
-            Shoot();
+            Attack();
     }
 
     public IEnumerator Reloading()

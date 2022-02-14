@@ -6,22 +6,22 @@ using UnityEngine.InputSystem;
 public class GunSlot : MonoBehaviour
 {
     public const int MaxSlots = 4;
-    public Gun gun;
+    public IWeapon Weapon;
     public GunHUD gunHUD;
     DetectionNotice detectionNotice;
 
     public GameObject[] gunObjects = new GameObject[MaxSlots];
 
     [HideInInspector]
-    public bool bCanShoot;
+    public bool bCanAttack;
     int currentEquippedGun;
 
     void Start()
     {
         if(transform.childCount > 0)
         {
-            gunObjects[0] = gun.gameObject;
-            SetGun(0);
+            gunObjects[0] = Weapon.gameObject;
+            SetWeapon(0);
         }
 
         var control = GameObject.Find("Level Control");
@@ -29,20 +29,20 @@ public class GunSlot : MonoBehaviour
             detectionNotice = notice;
     }
 
-    public void SetGun(int slot)
+    public void SetWeapon(int slot)
     {
         // Check if there is currently a Gun Script in use
-        if(this.gun != null)
-            this.gun.bPressed = false;
+        if(this.Weapon != null)
+            this.Weapon.bPressed = false;
         else
             Debug.Log("No gun");
 
         // Set up the Gun Data from the current slot
         if(transform.GetChild(slot).TryGetComponent<Gun>(out Gun gun))
         {
-            this.gun = gun;
+            this.Weapon = gun;
             gun.Initialize(gunHUD, detectionNotice);
-            bCanShoot = true;
+            bCanAttack = true;
 
             gunObjects[slot] = gun.gameObject;
             currentEquippedGun = slot;
@@ -51,7 +51,7 @@ public class GunSlot : MonoBehaviour
         else
         {
             gun = null;
-            bCanShoot = false;
+            bCanAttack = false;
             Debug.Log("No Gun Equipped");
         }
 
@@ -76,24 +76,24 @@ public class GunSlot : MonoBehaviour
         {
             newGun.transform.SetParent(transform);
             int currentSlot = transform.childCount - 1;
-            SetGun(currentSlot);
+            SetWeapon(currentSlot);
         }
         // New gun replaces the current gun
         else
         {
-            GameObject oldGun = gun.gameObject;
+            GameObject oldGun = Weapon.gameObject;
             newGun.transform.SetParent(transform);
             newGun.transform.SetSiblingIndex(currentEquippedGun);
-            SetGun(currentEquippedGun);
+            SetWeapon(currentEquippedGun);
 
             Destroy(oldGun);
         }
 
-        newGun.transform.localPosition = newGun.GetComponent<Gun>().offset;
+        newGun.transform.localPosition = newGun.GetComponent<Gun>().offsetPos;
         newGun.transform.localRotation = Quaternion.identity;
         newGun.transform.localScale = Vector3.one;
 
-        bCanShoot = true;
+        bCanAttack = true;
     }
 
     //Swap to a different weapon
@@ -101,26 +101,27 @@ public class GunSlot : MonoBehaviour
     {
         if(slot != currentEquippedGun && gunObjects[slot] != null)
         {
-            bCanShoot = false;
-            gun.CancelActions();
+            bCanAttack = false;
+            if(Weapon.gameObject.TryGetComponent<Gun>(out Gun gun))
+                gun.CancelActions();
 
             gunObjects[slot].SetActive(true);
-            SetGun(slot);
-            bCanShoot = true;
+            SetWeapon(slot);
+            bCanAttack = true;
         }
     }
 
-    public void Shoot(InputAction.CallbackContext context)
+    public void Attack(InputAction.CallbackContext context)
     {
-        if(gun != null && bCanShoot)
+        if(Weapon != null && bCanAttack)
         {
             if(context.performed)
             {
-                gun.bPressed = true;
-                gun.Shoot();
+                Weapon.bPressed = true;
+                Weapon.Attack();
             }
             else if(context.canceled)
-                gun.bPressed = false;
+                Weapon.bPressed = false;
         }
         // else
         //     Debug.Log("Cant Shoot");
@@ -128,7 +129,7 @@ public class GunSlot : MonoBehaviour
 
     public void Reload(InputAction.CallbackContext context)
     {
-        if(gun != null && context.performed)
+        if(Weapon != null && context.performed && Weapon.gameObject.TryGetComponent<Gun>(out Gun gun))
             gun.Reload();
         // else
         //     Debug.Log("Cant Reload");

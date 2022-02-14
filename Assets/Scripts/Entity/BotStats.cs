@@ -134,7 +134,7 @@ public void InstantiateGun(GameObject prefab)
         if(!gunScript.CanShoot())
             return;
 
-        gunScript.Shoot();
+        gunScript.Attack();
     }
 
     protected virtual void Reload()

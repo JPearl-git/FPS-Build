@@ -5222,19 +5222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Rifle
-  muzzle: {fileID: 1223251078446478112}
-  recoil: 0.3
+  damage: 6
   reloadTime: 0.5
   rpm: 450
-  damage: 6
+  bAutomatic: 1
+  bPressed: 0
+  offsetPos: {x: 0, y: 2.5, z: 5.44}
+  offsetRot: {x: 0, y: 0, z: 0}
+  sound: {fileID: 706128178402011262}
+  recoil: 0.3
   currentAmmo: 30
   clipSize: 30
   ammoReserve: 250
-  bAutomatic: 1
-  bPressed: 0
-  offset: {x: 0, y: 2.5, z: 5.44}
   gunMuzzle: {fileID: 4676495878275946614}
-  sound: {fileID: 706128178402011262}
 --- !u!1 &7866200462669540711
 GameObject:
   m_ObjectHideFlags: 0
