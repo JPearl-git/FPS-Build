@@ -143,7 +143,7 @@ public void InstantiateGun(GameObject prefab)
         CancelInvoke("Fire");
 
         gunScript.Reload();
-        InvokeRepeating("Fire", gunScript.reloadTime, (float)60 / gunScript.rpm);
+        InvokeRepeating("Fire", gunScript.reloadSpeed, (float)60 / gunScript.rpm);
     }
     
     protected override void Death()

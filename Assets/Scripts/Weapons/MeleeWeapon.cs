@@ -7,24 +7,24 @@ public class MeleeWeapon : IWeapon
     [Header("Melee Details")]
     public ParticleSystem attackTrail;
 
-    protected MeleeMovement meleeMovement;
+    protected WeaponAnimation wAnim;
 
-    public override void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
+    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
     {
-        base.Initialize(gHUD, detectionNotice);
+        base.Equip(gHUD, detectionNotice, weaponAnimation);
         gunHUD.SetCount(-1, -1);
         gunHUD.SetReserve(-1);
 
-        meleeMovement = GetComponentInParent<MeleeMovement>();
+        wAnim = GetComponentInParent<WeaponAnimation>();
     }
 
     public override void Attack()
     {
-        if(meleeMovement == null)
+        if(wAnim == null)
             return;
 
        //meleeMovement.ChangePosition(5f);
-       meleeMovement.AnimateAttack();
+       wAnim.AnimateAttack();
        attackTrail.Play();
     }
 }

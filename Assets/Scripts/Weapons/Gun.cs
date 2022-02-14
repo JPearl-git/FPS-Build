@@ -22,11 +22,15 @@ public class Gun : IWeapon
     //        detectionNotice = notice;
     //}
 
-    public override void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
+    #region Core Functions
+    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
     {
-        base.Initialize(gHUD, detectionNotice);
+        base.Equip(gHUD, detectionNotice, weaponAnimation);
         gunHUD.SetCount(currentAmmo, clipSize);
         gunHUD.SetReserve(ammoReserve);
+
+        if(weaponAnimation != null)
+            weaponAnimation.animator.SetFloat("reloadSpeed", reloadSpeed);
     }
 
     public bool CanShoot()
@@ -49,6 +53,9 @@ public class Gun : IWeapon
             transform.parent.localRotation = Quaternion.Euler(-currentRecoil,0,0);
         }
     }
+    #endregion
+    
+    #region Fire Gun Functions
     public override void Attack()
     {
         if(!CanShoot())
@@ -103,12 +110,6 @@ public class Gun : IWeapon
             detectionNotice.CallDetectors(this.transform.position);
     }
 
-    public void Reload()
-    {
-        if(!bReloading && ammoReserve > 0 && (currentAmmo < clipSize))
-            StartCoroutine("Reloading");
-    }
-
     IEnumerator Fire()
     {
         yield return new WaitForSeconds(0.01f);
@@ -125,21 +126,27 @@ public class Gun : IWeapon
         if(bPressed && bAutomatic)
             Attack();
     }
+    #endregion
 
-    public IEnumerator Reloading()
+    #region Reload Gun Functions
+    public void Reload()
     {
-        bReloading = true;
-        
-        transform.parent.localRotation = Quaternion.Euler(0,0,0);
-        float endRotation = 360.0f;
-        float t = 0.0f;
-        while ( t  < reloadTime )
+        if(weaponAnimation == null)
+            return;
+
+        if(!bReloading && ammoReserve > 0 && (currentAmmo < clipSize))
         {
-            t += Time.deltaTime;
-            float xRotation = Mathf.Lerp(0, endRotation, t / reloadTime) % 360.0f;
-            transform.parent.localRotation = Quaternion.Euler(xRotation,0,0);
-            yield return null;
+            bReloading = true;
+            weaponAnimation.animator.SetBool("isReloading", true);
         }
+    }
+
+    public void EndReload(bool bComplete)
+    {
+        bReloading = false;
+
+        if(!bComplete)
+            return;
 
         int ammoAdd = clipSize - currentAmmo;
         if(ammoAdd > ammoReserve)
@@ -152,15 +159,53 @@ public class Gun : IWeapon
             gunHUD.SetCount(currentAmmo, clipSize);
             gunHUD.SetReserve(ammoReserve);
         }
-
-        bReloading = false;
     }
 
-    public void CancelActions()
+    //public IEnumerator Reloading()
+    //{
+    //    bReloading = true;
+    //    
+    //    transform.parent.localRotation = Quaternion.Euler(0,0,0);
+    //    float endRotation = 360.0f;
+    //    float t = 0.0f;
+    //    while ( t  < reloadSpeed )
+    //    {
+    //        t += Time.deltaTime;
+    //        float xRotation = Mathf.Lerp(0, endRotation, t / reloadSpeed) % 360.0f;
+    //        transform.parent.localRotation = Quaternion.Euler(xRotation,0,0);
+    //        yield return null;
+    //    }
+//
+    //    int ammoAdd = clipSize - currentAmmo;
+    //    if(ammoAdd > ammoReserve)
+    //        ammoAdd = ammoReserve;
+    //    ammoReserve -= ammoAdd;
+    //    currentAmmo += ammoAdd;
+//
+    //    if(gunHUD != null)
+    //    {
+    //        gunHUD.SetCount(currentAmmo, clipSize);
+    //        gunHUD.SetReserve(ammoReserve);
+    //    }
+//
+    //    bReloading = false;
+    //}
+    #endregion
+
+    #region Unequip Gun Functions
+    public override void Unequip()
     {
-        StopAllCoroutines();
+        base.Unequip();
         bReloading = false;
-        transform.parent.localRotation = Quaternion.Euler(0,0,0);
         delayTime = 0f;
     }
+
+    //public void CancelActions()
+    //{
+    //    StopAllCoroutines();
+    //    bReloading = false;
+    //    transform.parent.localRotation = Quaternion.Euler(0,0,0);
+    //    delayTime = 0f;
+    //}
+    #endregion
 }

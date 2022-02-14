@@ -9993,13 +9993,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: SMG
   damage: 4
-  reloadTime: 0.35
-  rpm: 600
+  reloadSpeed: 1.35
   bAutomatic: 1
   bPressed: 0
   offsetPos: {x: 0, y: 2.5, z: 5.44}
   offsetRot: {x: 0, y: 0, z: 0}
+  scale: 1
   sound: {fileID: 7816734086275949251}
+  rpm: 600
   recoil: 0.4
   currentAmmo: 20
   clipSize: 20

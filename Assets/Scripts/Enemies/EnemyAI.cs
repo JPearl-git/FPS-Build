@@ -105,7 +105,7 @@ public class EnemyAI : BotStats
         {
             bReloading = true;
             gunScript.Reload();
-            Invoke("Reload", gunScript.reloadTime);
+            Invoke("Reload", gunScript.reloadSpeed);
         }
     }
 

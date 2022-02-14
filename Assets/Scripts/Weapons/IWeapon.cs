@@ -7,11 +7,12 @@ public class IWeapon : MonoBehaviour
     protected HitMarker hitMarker;
     protected GunHUD gunHUD;
     protected DetectionNotice detectionNotice;
+    protected WeaponAnimation weaponAnimation;
 
     [Header("Weapon Details")]
     public string Name;
     public int damage;
-    [Range(.1f,1f)]public float reloadTime = .1f;
+    [Range(.1f,10f)]public float reloadSpeed = 1;
     
     public bool bAutomatic;
 
@@ -26,7 +27,7 @@ public class IWeapon : MonoBehaviour
 
     [SerializeField] protected AudioSource sound;
 
-    public virtual void Initialize(GunHUD gHUD, DetectionNotice detectionNotice)
+    public virtual void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
     {
         bPressed = false;
         gunHUD = gHUD;
@@ -35,7 +36,19 @@ public class IWeapon : MonoBehaviour
         hitMarker = gHUD.GetComponent<HitMarker>();
 
         this.detectionNotice = detectionNotice;
+        this.weaponAnimation = weaponAnimation;
+        weaponAnimation.animator.ResetTrigger("Reset");
     }
 
+    public virtual void AIEquip(){}
+
     public virtual void Attack(){}
+
+    public virtual void Unequip()
+    {
+        if(weaponAnimation == null)
+            return;
+
+        weaponAnimation.animator.SetTrigger("Reset");
+    }
 }

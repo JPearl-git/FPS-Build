@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(WeaponAnimation))]
 public class GunSlot : MonoBehaviour
 {
     public const int MaxSlots = 4;
@@ -10,7 +11,9 @@ public class GunSlot : MonoBehaviour
     public GunHUD gunHUD;
     DetectionNotice detectionNotice;
 
-    public GameObject[] gunObjects = new GameObject[MaxSlots];
+    WeaponAnimation weaponAnimation;
+
+    public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
     [HideInInspector] public bool bCanAttack, bAttackAction;
     int currentEquippedGun;
@@ -19,9 +22,11 @@ public class GunSlot : MonoBehaviour
     {
         if(transform.childCount > 0)
         {
-            gunObjects[0] = Weapon.gameObject;
+            weaponObjects[0] = Weapon.gameObject;
             SetWeapon(0);
         }
+
+        weaponAnimation = GetComponent<WeaponAnimation>();
 
         var control = GameObject.Find("Level Control");
         if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
@@ -40,10 +45,10 @@ public class GunSlot : MonoBehaviour
         if(transform.GetChild(slot).TryGetComponent<IWeapon>(out IWeapon weapon))
         {
             this.Weapon = weapon;
-            weapon.Initialize(gunHUD, detectionNotice);
+            weapon.Equip(gunHUD, detectionNotice, weaponAnimation);
             bCanAttack = true;
 
-            gunObjects[slot] = weapon.gameObject;
+            weaponObjects[slot] = weapon.gameObject;
             currentEquippedGun = slot;
         }
         // If there is no gun, don't do anything
@@ -70,6 +75,10 @@ public class GunSlot : MonoBehaviour
     // Equip a new gun
     public void Equip(GameObject newWeapon)
     {
+        // Unequip current weapon
+        if(Weapon != null)
+            Weapon.Unequip();
+        
         // New gun takes up a free slot
         if(transform.childCount < MaxSlots)
         {
@@ -99,13 +108,12 @@ public class GunSlot : MonoBehaviour
     //Swap to a different weapon
     public void Switch(int slot)
     {
-        if(slot != currentEquippedGun && gunObjects[slot] != null)
+        if(slot != currentEquippedGun && weaponObjects[slot] != null)
         {
             bCanAttack = false;
-            if(Weapon.gameObject.TryGetComponent<Gun>(out Gun gun))
-                gun.CancelActions();
+            Weapon.Unequip();
 
-            gunObjects[slot].SetActive(true);
+            weaponObjects[slot].SetActive(true);
             SetWeapon(slot);
             bCanAttack = true;
         }
