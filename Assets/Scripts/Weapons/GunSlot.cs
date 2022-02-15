@@ -9,9 +9,9 @@ public class GunSlot : MonoBehaviour
     public const int MaxSlots = 4;
     public IWeapon Weapon;
     public GunHUD gunHUD;
+    public RecoilControl recoilControl;
     DetectionNotice detectionNotice;
-
-    WeaponAnimation weaponAnimation;
+    [HideInInspector] public WeaponAnimation weaponAnimation;
 
     public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
@@ -45,7 +45,7 @@ public class GunSlot : MonoBehaviour
         if(transform.GetChild(slot).TryGetComponent<IWeapon>(out IWeapon weapon))
         {
             this.Weapon = weapon;
-            weapon.Equip(gunHUD, detectionNotice, weaponAnimation);
+            weapon.Equip(gunHUD, detectionNotice, this);
             bCanAttack = true;
 
             weaponObjects[slot] = weapon.gameObject;

@@ -27,7 +27,7 @@ public class IWeapon : MonoBehaviour
 
     [SerializeField] protected AudioSource sound;
 
-    public virtual void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
+    public virtual void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
     {
         bPressed = false;
         gunHUD = gHUD;
@@ -36,7 +36,7 @@ public class IWeapon : MonoBehaviour
         hitMarker = gHUD.GetComponent<HitMarker>();
 
         this.detectionNotice = detectionNotice;
-        this.weaponAnimation = weaponAnimation;
+        this.weaponAnimation = gunSlot.weaponAnimation;
         weaponAnimation.animator.ResetTrigger("Reset");
     }
 

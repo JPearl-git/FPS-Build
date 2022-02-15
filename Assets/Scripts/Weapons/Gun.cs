@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gun : IWeapon
 {
+    RecoilControl recoilControl;
+
     [Header("Gun Details")]
     [Range(1,1000)]public int rpm = 100;
     [Range(0f,1f)] public float recoil;
@@ -23,14 +25,16 @@ public class Gun : IWeapon
     //}
 
     #region Core Functions
-    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
+    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
     {
-        base.Equip(gHUD, detectionNotice, weaponAnimation);
+        base.Equip(gHUD, detectionNotice, gunSlot);
         gunHUD.SetCount(currentAmmo, clipSize);
         gunHUD.SetReserve(ammoReserve);
 
         if(weaponAnimation != null)
             weaponAnimation.animator.SetFloat("reloadSpeed", reloadSpeed);
+
+        recoilControl = gunSlot.recoilControl;
     }
 
     public bool CanShoot()
@@ -114,8 +118,10 @@ public class Gun : IWeapon
     {
         yield return new WaitForSeconds(0.01f);
         delayTime = (float)60 / rpm;
-        currentRecoil = recoil * 60;
-        transform.parent.localRotation = Quaternion.Euler(-currentRecoil, 0, 0);
+        //currentRecoil = recoil * 60;
+        //transform.parent.localRotation = Quaternion.Euler(-currentRecoil, 0, 0);
+        if(recoilControl != null)
+            recoilControl.RecoilFire();
 
         if(delayTime > 0)
         {

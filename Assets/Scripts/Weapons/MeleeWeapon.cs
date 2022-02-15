@@ -9,9 +9,9 @@ public class MeleeWeapon : IWeapon
 
     protected WeaponAnimation wAnim;
 
-    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, WeaponAnimation weaponAnimation)
+    public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
     {
-        base.Equip(gHUD, detectionNotice, weaponAnimation);
+        base.Equip(gHUD, detectionNotice, gunSlot);
         gunHUD.SetCount(-1, -1);
         gunHUD.SetReserve(-1);
 
@@ -26,5 +26,12 @@ public class MeleeWeapon : IWeapon
        //meleeMovement.ChangePosition(5f);
        wAnim.AnimateAttack();
        attackTrail.Play();
+    }
+
+    public override void Unequip()
+    {
+        base.Unequip();
+        weaponAnimation.animator.SetBool("isSwinging", false);
+        attackTrail.Stop();
     }
 }
