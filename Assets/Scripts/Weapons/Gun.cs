@@ -11,9 +11,12 @@ public class Gun : IWeapon
     [Range(0f,1f)] public float recoil;
     public int currentAmmo, clipSize, ammoReserve;
     public ParticleSystem gunMuzzle;
-
-    float currentRecoil = 0;
     bool bReloading;
+
+    [Header("Recoil Details")]
+    public Vector3 recoilVector = new Vector3(-2,2,0.35f);
+    public float snapWeight = 10;
+    public float returnSpeed = 5;
 
     //void Start()
     //{
@@ -35,6 +38,7 @@ public class Gun : IWeapon
             weaponAnimation.animator.SetFloat("reloadSpeed", reloadSpeed);
 
         recoilControl = gunSlot.recoilControl;
+        recoilControl.SetRecoil(recoilVector, snapWeight, returnSpeed);
     }
 
     public bool CanShoot()
@@ -45,18 +49,6 @@ public class Gun : IWeapon
 
         return bPressed;
     }
-
-    void Update()
-    {
-        if(currentRecoil > 0)
-        {
-            currentRecoil -= Time.deltaTime * 200;
-            if(currentRecoil < 0)
-                currentRecoil = 0;
-
-            transform.parent.localRotation = Quaternion.Euler(-currentRecoil,0,0);
-        }
-    }
     #endregion
     
     #region Fire Gun Functions
@@ -65,12 +57,25 @@ public class Gun : IWeapon
         if(!CanShoot())
             return;
 
-        gunMuzzle.Play();
-        sound.Play();
         currentAmmo--;
+        sound.Play();
+        HitScan(gunMuzzle);
+
+        if(gunHUD != null)
+            gunHUD.SetCount(currentAmmo,clipSize);
+
+        StartCoroutine("Fire");
+
+        if(detectionNotice != null)
+            detectionNotice.CallDetectors(this.transform.position);
+    }
+
+    protected virtual void HitScan(ParticleSystem muzzle)
+    {
+        muzzle.Play();
 
         RaycastHit hit;
-        Ray ray = new Ray(gunMuzzle.transform.position, gunMuzzle.transform.forward);
+        Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
 
         if(Physics.Raycast(ray, out hit))
         {
@@ -104,14 +109,6 @@ public class Gun : IWeapon
                     hitMarker.HitTarget(cTarget.Hit());
             }
         }
-
-        if(gunHUD != null)
-            gunHUD.SetCount(currentAmmo,clipSize);
-
-        StartCoroutine("Fire");
-
-        if(detectionNotice != null)
-            detectionNotice.CallDetectors(this.transform.position);
     }
 
     IEnumerator Fire()

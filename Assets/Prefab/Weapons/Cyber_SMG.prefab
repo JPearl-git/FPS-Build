@@ -10006,6 +10006,9 @@ MonoBehaviour:
   clipSize: 20
   ammoReserve: 160
   gunMuzzle: {fileID: 8944067435906029385}
+  recoilVector: {x: -3, y: 2, z: 0.35}
+  snapWeight: 10
+  returnSpeed: 5
 --- !u!1 &3781850465979932065
 GameObject:
   m_ObjectHideFlags: 0

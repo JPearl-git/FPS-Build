@@ -16,6 +16,16 @@ public class RecoilControl : MonoBehaviour
         startPos = transform.localPosition;
     }
 
+    public void SetRecoil(Vector3 recoilVector, float snapWeight, float returnSpeed)
+    {
+        recoilX = recoilVector.x;
+        recoilY = recoilVector.y;
+        recoilZ = recoilVector.z;
+
+        this.snapWeight = snapWeight;
+        this.returnSpeed = returnSpeed;
+    }
+
     // Update is called once per frame
     void Update()
     {

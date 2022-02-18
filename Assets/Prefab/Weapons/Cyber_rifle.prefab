@@ -5223,18 +5223,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Rifle
   damage: 6
-  reloadTime: 0.5
-  rpm: 450
+  reloadSpeed: 1
   bAutomatic: 1
   bPressed: 0
   offsetPos: {x: 0, y: 2.5, z: 5.44}
   offsetRot: {x: 0, y: 0, z: 0}
+  scale: 1
   sound: {fileID: 706128178402011262}
+  rpm: 450
   recoil: 0.3
   currentAmmo: 30
   clipSize: 30
   ammoReserve: 250
   gunMuzzle: {fileID: 4676495878275946614}
+  recoilVector: {x: -2.3, y: 2, z: 0.35}
+  snapWeight: 10
+  returnSpeed: 5
 --- !u!1 &7866200462669540711
 GameObject:
   m_ObjectHideFlags: 0
