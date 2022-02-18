@@ -8,7 +8,6 @@ public class Gun : IWeapon
 
     [Header("Gun Details")]
     [Range(1,1000)]public int rpm = 100;
-    [Range(0f,1f)] public float recoil;
     public int currentAmmo, clipSize, ammoReserve;
     public ParticleSystem gunMuzzle;
     bool bReloading;
@@ -52,6 +51,8 @@ public class Gun : IWeapon
     #endregion
     
     #region Fire Gun Functions
+
+    // Override of IWeapon Attack()
     public override void Attack()
     {
         if(!CanShoot())
@@ -70,45 +71,49 @@ public class Gun : IWeapon
             detectionNotice.CallDetectors(this.transform.position);
     }
 
+    // Project hitscan ray from muzzle
     protected virtual void HitScan(ParticleSystem muzzle)
     {
         muzzle.Play();
 
-        RaycastHit hit;
         Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
 
-        if(Physics.Raycast(ray, out hit))
+        if(Physics.Raycast(ray, out RaycastHit hit))
+            HitTarget(hit);
+    }
+
+    // Determine if a potential target is hit and what to do
+    protected virtual void HitTarget(RaycastHit hit)
+    {
+        GameObject HitTarget = hit.transform.gameObject;
+        bool bCritHit = false;
+
+        if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
         {
-            GameObject HitTarget = hit.transform.gameObject;
-            bool bCritHit = false;
-
-            if(HitTarget.TryGetComponent<SubCollider>(out SubCollider sub))
-            {
-                HitTarget = sub.ParentObject;
-                bCritHit = sub.bCritical;
-                Debug.Log("Critical " + bCritHit);
-            }
-
-            // Damage Entity Types
-            if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
-            {
-                //Debug.Log("Hit " + hit.transform.gameObject.name);
-                if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
-                {
-                    if(dTarget.bCanHit)
-                        hitMarker.HitTarget(dTarget.GetHit(damage, hit));
-                }
-                else if(entity.bAlive)
-                    entity.TakeDamage(damage, hit.normal, bCritHit);
-            }
-
-            // Hit non-entity Targets
-            else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
-            {
-                if(!cTarget.bActive)
-                    hitMarker.HitTarget(cTarget.Hit());
-            }
+            HitTarget = sub.ParentObject;
+            bCritHit = sub.bCritical;
+            Debug.Log("Critical " + bCritHit);
         }
+
+        // Damage Entity Types
+        if(HitTarget.TryGetComponent<EntityStats>(out EntityStats entity))
+        {
+            //Debug.Log("Hit " + hit.transform.gameObject.name);
+            if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
+            {
+                if(dTarget.bCanHit)
+                    hitMarker.HitTarget(dTarget.GetHit(damage, hit));
+            }
+            else if(entity.bAlive)
+                entity.TakeDamage(damage, hit.normal, bCritHit);
+        }
+
+        // Hit non-entity Targets
+        else if(HitTarget.TryGetComponent<TargetControl>(out TargetControl cTarget))
+        {
+            if(!cTarget.bActive)
+                hitMarker.HitTarget(cTarget.Hit());
+        }       
     }
 
     IEnumerator Fire()

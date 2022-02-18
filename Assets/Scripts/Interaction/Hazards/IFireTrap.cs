@@ -29,7 +29,10 @@ public class IFireTrap : ISwitchable
 
     protected IEnumerator ApplyBurn(EntityStats entity)
     {
-        if(entities.Contains(entity) && entity.gameObject != null)
+        if(entity.gameObject == null)
+            yield return null;
+
+        if(entities.Contains(entity))
         {
             entity.InflictStatus(StatusEffect.BURN);
             yield return new WaitForSeconds(3f);

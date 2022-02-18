@@ -220,6 +220,9 @@ public class EnemyNavAgent : MonoBehaviour
 
     public void CheckForGrounded()
     {
+        if(rb == null)
+            return;
+            
         if(rb.velocity.magnitude > 0)
             return;
 

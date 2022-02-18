@@ -58,7 +58,10 @@ public class Explosion : MonoBehaviour
             }
             if(nearby.TryGetComponent<EntityStats>(out EntityStats entity))
             {
-                entity.TakeDamage(Mathf.CeilToInt(damage / distance));
+                int rangeDmg = Mathf.Max(Mathf.CeilToInt(Mathf.Exp((damage / distance)/2 - 1)), 1);
+                int expDamage = Mathf.Min(rangeDmg, damage);
+                Debug.Log(entity.name + " took " + expDamage + " explosive damage at " + distance + " distance");
+                entity.TakeDamage(expDamage);
 
                 if(effect != StatusEffect.NONE && entity.bCanTakeStatusEffect)
                 {
