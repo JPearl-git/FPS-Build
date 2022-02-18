@@ -8,6 +8,8 @@ public class RecoilControl : MonoBehaviour
 
     [SerializeField] float recoilX, recoilY, recoilZ;
     [SerializeField] float snapWeight, returnSpeed;
+
+    [SerializeField] PlayerLook playerLook;
     
     void Awake()
     {
@@ -21,10 +23,18 @@ public class RecoilControl : MonoBehaviour
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snapWeight * Time.fixedDeltaTime);
 
         transform.localRotation = Quaternion.Euler(currentRotation);
+
+        //Adjusted rotation for playerCam shake
+        if(playerLook != null)
+        {
+            Vector3 recoilRotation = currentRotation;
+            recoilRotation.y *= 1.2f;
+            playerLook.recoilRotation = currentRotation;
+        }
     }
 
     public void RecoilFire()
     {
-        targetRotation += new Vector3(recoilX, Random.RandomRange(-recoilY, recoilY), Random.RandomRange(-recoilZ, recoilZ));
+        targetRotation += new Vector3(recoilX, Random.Range(-recoilY, recoilY), Random.Range(-recoilZ, recoilZ));
     }
 }

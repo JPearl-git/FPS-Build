@@ -12,6 +12,8 @@ public class PlayerLook : MonoBehaviour
     [SerializeField] float xClamp = 85f;
     float xRot = 0f;
 
+    public Vector3 recoilRotation = Vector3.zero;
+
     //[SerializeField] Animator animator;
     //[SerializeField] Transform DefaultPoint;
     //[SerializeField] Transform MovePoint;
@@ -34,7 +36,7 @@ public class PlayerLook : MonoBehaviour
         xRot = Mathf.Clamp(xRot, -xClamp, xClamp);
         Vector3 targetRot = transform.eulerAngles;
         targetRot.x = xRot;
-        playerCam.eulerAngles = targetRot;
+        playerCam.eulerAngles = targetRot + recoilRotation;
     }
 
     public void Look(Vector2 input)
