@@ -163,36 +163,6 @@ public class Gun : IWeapon
             gunHUD.SetReserve(ammoReserve);
         }
     }
-
-    //public IEnumerator Reloading()
-    //{
-    //    bReloading = true;
-    //    
-    //    transform.parent.localRotation = Quaternion.Euler(0,0,0);
-    //    float endRotation = 360.0f;
-    //    float t = 0.0f;
-    //    while ( t  < reloadSpeed )
-    //    {
-    //        t += Time.deltaTime;
-    //        float xRotation = Mathf.Lerp(0, endRotation, t / reloadSpeed) % 360.0f;
-    //        transform.parent.localRotation = Quaternion.Euler(xRotation,0,0);
-    //        yield return null;
-    //    }
-//
-    //    int ammoAdd = clipSize - currentAmmo;
-    //    if(ammoAdd > ammoReserve)
-    //        ammoAdd = ammoReserve;
-    //    ammoReserve -= ammoAdd;
-    //    currentAmmo += ammoAdd;
-//
-    //    if(gunHUD != null)
-    //    {
-    //        gunHUD.SetCount(currentAmmo, clipSize);
-    //        gunHUD.SetReserve(ammoReserve);
-    //    }
-//
-    //    bReloading = false;
-    //}
     #endregion
 
     #region Unequip Gun Functions
