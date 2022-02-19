@@ -4,25 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class WeaponAnimation : MonoBehaviour
+public class Player_WeaponAnimation : IWeaponAnimation
 {
-    [HideInInspector] public Animator animator;
-
     GunSlot slot;
 
-    int targetPosition, currentPosition = -1;
-    float speed;
-    bool bCanChange = true;
-
-    void Awake()
-    {
+    protected new void Awake()
+    {   
+        base.Awake();
         TryGetComponent<GunSlot>(out slot);
-        animator = GetComponent<Animator>();
     }
 
-    public void EndReload()
+    public override void EndReload()
     {
-        animator.SetBool("isReloading", false);
+        base.EndReload();
 
         if(slot != null)
         {
@@ -32,17 +26,7 @@ public class WeaponAnimation : MonoBehaviour
         }
     }
 
-    public void Reset()
-    {
-        animator.SetBool("isSwinging", false);
-    }
-
-    public void AnimateAttack()
-    {
-        animator.SetBool("isSwinging", true);
-    }
-
-    void EndMeleeAttack()
+    protected override void EndMeleeAttack()
     {
         var melee = slot.Weapon as MeleeWeapon;
 

@@ -18,20 +18,25 @@ public class BotStats : Detection
     [Header("Attached Parts")]
     [SerializeField] protected Transform Head;
     [SerializeField] protected Transform WeaponHand;
+    protected AI_WeaponAnimation weaponAnimation;
     [SerializeField] protected Slider slider;
     #endregion
  
-    [Header("Optional")][SerializeField] GameObject GunPrefab;
+    [Header("Optional")]
+    [SerializeField] GameObject GunPrefab;
 
+    [HideInInspector] public bool bReloading;
     protected bool bCanHitPlayer, bCanFire;
     protected float hitDelay = 3f;
 
-#region Unity Basics
+    #region Unity Basics
     protected void Awake()
     {
         base.Awake();
         rb = gameObject.GetComponent<Rigidbody>();
         pStats = player.GetComponent<PlayerStats>();
+
+        WeaponHand.TryGetComponent<AI_WeaponAnimation>(out weaponAnimation);
     }
 
     protected void Start()
@@ -43,10 +48,10 @@ public class BotStats : Detection
         
         InstantiateGun(GunPrefab);
     }
-#endregion
+    #endregion
 
-#region Stat Methods
-public void InstantiateGun(GameObject prefab)
+    #region Stat Methods
+    public void InstantiateGun(GameObject prefab)
     {
         if(Gun != null)
             Destroy(Gun);
@@ -56,7 +61,21 @@ public void InstantiateGun(GameObject prefab)
         {
             gunScript.bPressed = true;
             gunScript.bAutomatic = false;
+
+            InstantiateAnimator();            
         }
+    }
+
+    void InstantiateAnimator()
+    {
+        if(weaponAnimation == null)
+                return;
+
+        gunScript.weaponAnimation = weaponAnimation;
+        weaponAnimation.gunScript = gunScript;
+        weaponAnimation.bot = this;
+
+        weaponAnimation.animator.SetFloat("reloadSpeed", gunScript.reloadSpeed);
     }
 
    public void UpdateHealth()
@@ -67,9 +86,9 @@ public void InstantiateGun(GameObject prefab)
             slider.value = percent;
         }
     }
-#endregion
+    #endregion
 
-#region AI Behavior
+    #region AI Behavior
     public override void TakeDamage(int damage, Vector3 hitDirection, bool bCritHit = false)
     {
         base.TakeDamage(damage, hitDirection, bCritHit);
@@ -139,11 +158,11 @@ public void InstantiateGun(GameObject prefab)
 
     protected virtual void Reload()
     {
-        Debug.Log("Reloading");
-        CancelInvoke("Fire");
+        //Debug.Log("Reloading");
+        //CancelInvoke("Fire");
 
         gunScript.Reload();
-        InvokeRepeating("Fire", gunScript.reloadSpeed, (float)60 / gunScript.rpm);
+        //InvokeRepeating("Fire", gunScript.reloadSpeed, (float)60 / gunScript.rpm);
     }
     
     protected override void Death()
@@ -162,9 +181,9 @@ public void InstantiateGun(GameObject prefab)
 
         Destroy(gameObject, 3f);
     }
-#endregion
+    #endregion
 
-#region Collision Detection
+    #region Collision Detection
     protected void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.Equals(player))
@@ -187,5 +206,5 @@ public void InstantiateGun(GameObject prefab)
         else
             CancelInvoke("HitPlayer");
     }
-#endregion
+    #endregion
 }

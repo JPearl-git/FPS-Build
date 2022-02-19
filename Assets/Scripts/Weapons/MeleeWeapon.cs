@@ -8,7 +8,7 @@ public class MeleeWeapon : IWeapon
     public ParticleSystem attackTrail;
     [HideInInspector] public bool bSwinging;
 
-    protected WeaponAnimation wAnim;
+    protected IWeaponAnimation wAnim;
     List<EntityStats> targetGroup = new List<EntityStats>();
 
     public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
@@ -17,7 +17,7 @@ public class MeleeWeapon : IWeapon
         gunHUD.SetCount(-1, -1);
         gunHUD.SetReserve(-1);
 
-        wAnim = GetComponentInParent<WeaponAnimation>();
+        wAnim = GetComponentInParent<IWeaponAnimation>();
     }
 
     public override void Attack()

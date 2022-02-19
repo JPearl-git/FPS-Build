@@ -7,7 +7,7 @@ public class IWeapon : MonoBehaviour
     protected HitMarker hitMarker;
     protected GunHUD gunHUD;
     protected DetectionNotice detectionNotice;
-    protected WeaponAnimation weaponAnimation;
+    [HideInInspector] public IWeaponAnimation weaponAnimation;
 
     [Header("Weapon Details")]
     public string Name;

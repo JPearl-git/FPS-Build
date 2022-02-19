@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(WeaponAnimation))]
+[RequireComponent(typeof(Player_WeaponAnimation))]
 public class GunSlot : MonoBehaviour
 {
     public const int MaxSlots = 4;
@@ -11,7 +11,7 @@ public class GunSlot : MonoBehaviour
     public GunHUD gunHUD;
     public RecoilControl recoilControl;
     DetectionNotice detectionNotice;
-    [HideInInspector] public WeaponAnimation weaponAnimation;
+    [HideInInspector] public Player_WeaponAnimation weaponAnimation;
 
     public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
@@ -26,7 +26,7 @@ public class GunSlot : MonoBehaviour
             SetWeapon(0);
         }
 
-        weaponAnimation = GetComponent<WeaponAnimation>();
+        weaponAnimation = GetComponent<Player_WeaponAnimation>();
 
         var control = GameObject.Find("Level Control");
         if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))

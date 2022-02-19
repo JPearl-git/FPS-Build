@@ -18,7 +18,7 @@ public class EnemyAI : BotStats
     [Header("AI Variables")]
     public float timeBtwnAttack;
     [Range(1f,90f)] public float shootAngle;
-    bool bHasAttacked, bReloading;
+    bool bHasAttacked;
     #endregion
 
     protected void Start()
@@ -105,7 +105,7 @@ public class EnemyAI : BotStats
         {
             bReloading = true;
             gunScript.Reload();
-            Invoke("Reload", gunScript.reloadSpeed);
+            //Invoke("Reload", gunScript.reloadSpeed);
         }
     }
 
@@ -133,10 +133,10 @@ public class EnemyAI : BotStats
         bHasAttacked = true;
     }
 
-    protected override void Reload()
-    {
-        bReloading = false;
-    }
+    //protected override void Reload()
+    //{
+    //    bReloading = false;
+    //}
 
     protected void ResetAttack()
     {
