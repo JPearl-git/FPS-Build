@@ -145,11 +145,11 @@ public class EnemyAI : BotStats
     #endregion
 
     #region Damage Methods
-    public override HitMarkerType GetHit(int damage, RaycastHit hit, bool bCritHit = false)
+    public override HitMarkerType GetHit(int damage, Vector3 hitDirection, Vector3 hitLocation, bool bCritHit = false)
     {
         if(!bCritHit)
-            bCritHit = CheckForCrit(hit.point);
-        return base.GetHit(damage, hit, bCritHit);
+            bCritHit = CheckForCrit(hitLocation);
+        return base.GetHit(damage, hitDirection, hitLocation, bCritHit);
     }
 
     protected bool CheckForCrit(Vector3 hitPoint)

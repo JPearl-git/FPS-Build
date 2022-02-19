@@ -102,7 +102,7 @@ public class Gun : IWeapon
             if(HitTarget.TryGetComponent<Destructible>(out Destructible dTarget))
             {
                 if(dTarget.bCanHit)
-                    hitMarker.HitTarget(dTarget.GetHit(damage, hit));
+                    hitMarker.HitTarget(dTarget.GetHit(damage, hit.normal, hit.point));
             }
             else if(entity.bAlive)
                 entity.TakeDamage(damage, hit.normal, bCritHit);

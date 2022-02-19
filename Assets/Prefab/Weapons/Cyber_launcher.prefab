@@ -119,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 3111416233091593359}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 7832205892836443727}
   m_RootOrder: 0
@@ -5042,7 +5042,7 @@ Transform:
   m_GameObject: {fileID: 5109879094810154868}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.9, z: 34.39}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4026339381581119305}
   m_Father: {fileID: 7110667746897159097}
@@ -5300,7 +5300,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.4
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -10036,9 +10036,9 @@ MonoBehaviour:
   clipSize: 1
   ammoReserve: 14
   gunMuzzle: {fileID: 5414179568266627206}
-  recoilVector: {x: -10, y: 2, z: 0.35}
+  recoilVector: {x: -30, y: 2, z: 0.35}
   snapWeight: 10
-  returnSpeed: 3
+  returnSpeed: 1
   explosionPrefab: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
   radius: 10
   force: 600

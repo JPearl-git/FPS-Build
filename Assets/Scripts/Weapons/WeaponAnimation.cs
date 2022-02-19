@@ -52,10 +52,13 @@ public class WeaponAnimation : MonoBehaviour
             return;
         }
 
+        melee.ResetTargets();
         if(slot.bAttackAction)
             return;
 
         animator.SetBool("isSwinging", false);
+        melee.bSwinging = false;
+
         if(melee != null)
             melee.attackTrail.Stop();
     }
