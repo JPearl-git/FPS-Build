@@ -2195,6 +2195,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!4 &173853197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 353060191541786747, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
+  m_PrefabInstance: {fileID: 353060191230836429}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &184387995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7636,7 +7641,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301cc96ae530fd249919a3ce33ae43e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 0
   bLocation: 0
   objectiveText: Go to Location
 --- !u!65 &1057650861
@@ -8171,7 +8175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301cc96ae530fd249919a3ce33ae43e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 0
   bLocation: 0
   objectiveText: Go to Location 2
 --- !u!65 &1166019767
@@ -18122,7 +18125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 301cc96ae530fd249919a3ce33ae43e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  status: 0
   bLocation: 0
   objectiveText: Go to Location 3
 --- !u!65 &2064156794
@@ -18555,6 +18557,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 432734316, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 173853197}
     - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
