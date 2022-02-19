@@ -19,6 +19,7 @@ public class BotStats : Detection
     [SerializeField] protected Transform Head;
     [SerializeField] protected Transform WeaponHand;
     protected AI_WeaponAnimation weaponAnimation;
+    [SerializeField] protected RecoilControl recoilControl;
     [SerializeField] protected Slider slider;
     #endregion
  
@@ -30,7 +31,7 @@ public class BotStats : Detection
     protected float hitDelay = 3f;
 
     #region Unity Basics
-    protected void Awake()
+    protected new void Awake()
     {
         base.Awake();
         rb = gameObject.GetComponent<Rigidbody>();
@@ -39,7 +40,7 @@ public class BotStats : Detection
         WeaponHand.TryGetComponent<AI_WeaponAnimation>(out weaponAnimation);
     }
 
-    protected void Start()
+    protected new void Start()
     {
         base.Start();
 
@@ -62,7 +63,13 @@ public class BotStats : Detection
             gunScript.bPressed = true;
             gunScript.bAutomatic = false;
 
-            InstantiateAnimator();            
+            InstantiateAnimator();
+
+            if(recoilControl != null)
+            {
+                gunScript.recoilControl = recoilControl;
+                recoilControl.SetRecoil(gunScript.recoilVector, gunScript.snapWeight, gunScript.returnSpeed);
+            }
         }
     }
 

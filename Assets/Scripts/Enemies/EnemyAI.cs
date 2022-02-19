@@ -21,7 +21,7 @@ public class EnemyAI : BotStats
     bool bHasAttacked;
     #endregion
 
-    protected void Start()
+    protected new void Start()
     {
         base.Start();
 

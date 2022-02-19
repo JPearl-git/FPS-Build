@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gun : IWeapon
 {
-    RecoilControl recoilControl;
+    [HideInInspector] public RecoilControl recoilControl;
 
     [Header("Gun Details")]
     [Range(1,1000)]public int rpm = 100;
