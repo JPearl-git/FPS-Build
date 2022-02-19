@@ -195,7 +195,8 @@ public class EnemyNavAgent : MonoBehaviour
     {
         aiState = AI_STATE.CHASE;
         agent.SetDestination(player.transform.position);
-        AI.LookAtTarget(transform.position + transform.forward, false);
+
+        AI.LookAtTarget(player.transform.position, false);
     }
 #endregion
 
@@ -205,7 +206,8 @@ public class EnemyNavAgent : MonoBehaviour
         aiState = AI_STATE.ATTACK;
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-        //AI.LookAtTarget(player.transform.position);
+        
+        AI.LookAtTarget(player.transform.position);
         AI.TryToAttack();
     }
 #endregion

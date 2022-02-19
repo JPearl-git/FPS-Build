@@ -47,7 +47,7 @@ public class EnemyAI : BotStats
     {
         var bodyTarget = target;
         bodyTarget.y = transform.position.y;
-        transform.rotation = SmoothRotation(bodyTarget, transform, 5);
+        transform.rotation = SmoothRotation(bodyTarget, transform, 3);
 
         if(Head != null && moveHead)
         {
@@ -55,13 +55,13 @@ public class EnemyAI : BotStats
             {
                 var headTarget = target;
                 headTarget.y += 0.8f;
-                Head.rotation = SmoothRotation(headTarget, Head, 5);
+                Head.rotation = SmoothRotation(headTarget, Head, 3);
             }
             else
             {
                 var headTarget = target;
                 headTarget.y = Head.position.y;
-                Head.rotation = SmoothRotation(headTarget, Head, 5);
+                Head.rotation = SmoothRotation(headTarget, Head, 3);
             }
             
         }
@@ -89,7 +89,7 @@ public class EnemyAI : BotStats
 
     public void TryToAttack()
     {
-        LookAtTarget(player.transform.position);
+        //LookAtTarget(player.transform.position);
 
         if(bHasAttacked || gunScript == null)
             return;

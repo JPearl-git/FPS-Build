@@ -25,7 +25,6 @@ public class MeleeWeapon : IWeapon
         if(wAnim == null)
             return;
 
-       //meleeMovement.ChangePosition(5f);
        wAnim.AnimateAttack();
        attackTrail.Play();
        bSwinging = true;

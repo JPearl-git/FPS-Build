@@ -29,7 +29,7 @@ public class IFireTrap : ISwitchable
 
     protected IEnumerator ApplyBurn(EntityStats entity)
     {
-        if(entity.gameObject == null)
+        if(entity == null)
             yield return null;
 
         if(entities.Contains(entity))

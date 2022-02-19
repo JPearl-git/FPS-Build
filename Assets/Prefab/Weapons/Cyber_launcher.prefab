@@ -10027,8 +10027,8 @@ MonoBehaviour:
   reloadSpeed: 0.3
   bAutomatic: 0
   bPressed: 0
-  offsetPos: {x: 5.22, y: 2.5, z: 5.44}
-  offsetRot: {x: 0, y: 0, z: 0}
+  offsetPos: {x: 5, y: 2, z: 5.44}
+  offsetRot: {x: 1, y: -1, z: 0}
   scale: 1
   sound: {fileID: 4546609398004569461}
   rpm: 100
@@ -10038,8 +10038,9 @@ MonoBehaviour:
   gunMuzzle: {fileID: 5414179568266627206}
   recoilVector: {x: -30, y: 2, z: 0.35}
   snapWeight: 10
-  returnSpeed: 1
+  returnSpeed: 3
   explosionPrefab: {fileID: 6025891111579102120, guid: 755960c73ef13bb468c709df2099f6ef, type: 3}
+  test: {fileID: 6636485283710589793, guid: cf65ca0d47cc7024481afcee77d84396, type: 3}
   radius: 10
   force: 600
   expSize: 1.5
