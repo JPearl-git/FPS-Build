@@ -82,11 +82,13 @@ public class Detection : Destructible
         SetIcon();
     }
 
-    protected virtual void Death()
+    protected override void Death()
     {
         var control = GameObject.Find("Level Control");
         if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
             notice.RemoveDetector(this);
+
+        base.Death();
     }
 
     #region Gizmos

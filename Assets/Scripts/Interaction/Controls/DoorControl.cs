@@ -6,7 +6,7 @@ public class DoorControl : ISwitchable
 {
     Transform pivot;
 
-    void Start()
+    new void Start()
     {
         pivot = transform.GetChild(0);
         base.Start();

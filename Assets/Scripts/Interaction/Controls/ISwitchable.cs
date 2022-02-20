@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
-public abstract class ISwitchable : MonoBehaviour, INotifyPropertyChanged
+public abstract class ISwitchable : MonoBehaviour
 {
-    public event PropertyChangedEventHandler PropertyChanged;
-    
     [SerializeField]
     private bool bStartState;
 

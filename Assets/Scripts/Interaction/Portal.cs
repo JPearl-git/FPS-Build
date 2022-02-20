@@ -10,7 +10,7 @@ public class Portal : ISwitchable
 
     [HideInInspector] public List<Rigidbody> active;
 
-    void Start()
+    new void Start()
     {
         ps = GetComponent<ParticleSystem>();
         base.Start();

@@ -6,7 +6,7 @@ public class SimpleEnemy : BotStats
 {
     public float speed = 5f;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         if(gunScript != null)

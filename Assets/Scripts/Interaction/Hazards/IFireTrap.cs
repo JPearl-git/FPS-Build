@@ -9,7 +9,7 @@ public class IFireTrap : ISwitchable
 
     protected List<EntityStats> entities = new List<EntityStats>();
 
-    void Start()
+    new void Start()
     {
         ps = GetComponent<ParticleSystem>();
         base.Start();
@@ -27,7 +27,7 @@ public class IFireTrap : ISwitchable
         ps.Stop();
     }
 
-    protected IEnumerator ApplyBurn(EntityStats entity)
+    protected virtual IEnumerator ApplyBurn(EntityStats entity)
     {
         if(entity == null)
             yield return null;

@@ -23,14 +23,14 @@ public class EnemyTurret : Detection
     [SerializeField] GameObject electricity;
     #endregion
 
-    void Awake()
+    new void Awake()
     {
         base.Awake();
         audioSource = GetComponent<AudioSource>();
         healthStatus = HealthStatus.FULL;
     }
     
-    void Start()
+    new void Start()
     {
         base.Start();
         InvokeRepeating("UpdateTarget", 0f, 0.5f);

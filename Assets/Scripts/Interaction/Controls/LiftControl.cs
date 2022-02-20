@@ -10,7 +10,7 @@ public class LiftControl : ISwitchable
     ParticleSystem ps;
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
         ps = GetComponent<ParticleSystem>();
         base.Start();

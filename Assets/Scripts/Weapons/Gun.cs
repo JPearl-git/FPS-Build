@@ -92,7 +92,7 @@ public class Gun : IWeapon
         {
             HitTarget = sub.ParentObject;
             bCritHit = sub.bCritical;
-            Debug.Log("Critical " + bCritHit);
+            //Debug.Log("Critical " + bCritHit);
         }
 
         // Damage Entity Types

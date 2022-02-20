@@ -47,7 +47,6 @@ public class Kill_Objective : IObjective
 
     void SetObjectiveText()
     {
-        Debug.Log("New Enemy Count " + lastCheckSize);
         objectiveText = "Eliminate Enemies\nEnemies Remaining: " + lastCheckSize + "/" + initialCount;
         objective_Control.UpdateObjectiveText(objectiveText);
     }

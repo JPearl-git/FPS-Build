@@ -10,7 +10,7 @@ public class FirePit : IFireTrap
 
     ParticleSystem parentPS;
 
-    void Start()
+    new void Start()
     {
         if(transform.parent != null)
         {
@@ -57,7 +57,7 @@ public class FirePit : IFireTrap
         parent.GetComponent<MeshRenderer>().materials = newMaterials;
     }
 
-    protected IEnumerator ApplyBurn(EntityStats entity)
+    protected override IEnumerator ApplyBurn(EntityStats entity)
     {
         Debug.Log("Apply Burn");
         if(entities.Contains(entity) && entity.gameObject != null)
