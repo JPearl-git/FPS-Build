@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum Objective_Status
 {
     NOT_ACTIVE, ACTIVE, CURRENT, COMPLETE
 }
+
 public class IObjective : MonoBehaviour
 {
     protected Objective_Control objective_Control;

@@ -26,6 +26,11 @@ public class Objective_Control : MonoBehaviour
             SetObjective(Objectives[0]);
     }
 
+    public void UpdateObjectiveText(string text)
+    {
+        hud.ObjectiveText.text = text;
+    }
+
     public void SetObjective(IObjective objective)
     {
         currentObjective = objective;
@@ -34,7 +39,7 @@ public class Objective_Control : MonoBehaviour
         if(hud == null)
             return;
 
-        hud.ObjectiveText.text = objective.objectiveText;
+        UpdateObjectiveText(currentObjective.objectiveText);
 
         if(objective.bLocation)
             hud.SetTarget(objective.transform.position);
@@ -48,7 +53,12 @@ public class Objective_Control : MonoBehaviour
 
         if(objective_number < Objectives.Count)
             SetObjective(Objectives[objective_number]);
-        else if(hud != null)
-            hud.RemoveTarget();
+        else 
+        {
+            if(hud != null)
+                hud.RemoveTarget();
+
+            UpdateObjectiveText("All Objectives Complete");
+        }
     }
 }
