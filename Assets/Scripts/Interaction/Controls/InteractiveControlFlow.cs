@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class InteractiveControlFlow : IControlManager
 {
+    [Tooltip("The Controls for providing power")]
     public List<ControlTrigger> controls = new List<ControlTrigger>();
+    [Tooltip("Each Toggle Target contains a ISwitchable and a reverse power option")]
     public List<ControllableSwitch> ToggleTargets = new List<ControllableSwitch>();
     bool bOperational, bActive;
 
