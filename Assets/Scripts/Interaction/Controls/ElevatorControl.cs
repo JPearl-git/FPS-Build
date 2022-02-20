@@ -24,6 +24,7 @@ public class ElevatorControl : IControlManager
         InteriorButton = gameObject.GetComponentInChildren<ControlTrigger>();
 
         InteriorButton.AssignParent(this, 0, true);
+        
         OrganizeFloors();
     }
 
@@ -86,7 +87,7 @@ public class ElevatorControl : IControlManager
             return;
 
         isGoingDown = CheckFloorStatus();
-        Debug.Log("isGoingDown = " + isGoingDown);
+
         if(isGoingDown)
             GoToFloor(FloorTriggers[currentIndex - 1]);
         else
@@ -96,23 +97,19 @@ public class ElevatorControl : IControlManager
     bool CheckFloorStatus()
     {
         if(isGoingDown)
-            return (currentFloor == FloorTriggers[0].FloorLevel);
+            return (currentFloor != FloorTriggers[0].FloorLevel);
 
         return (currentFloor == FloorTriggers[FloorTriggers.Count - 1].FloorLevel);
     }
 
     void GoToFloor(ElevatorCall floor)
     {
-        
         Vector3 newPos = transform.position;
         newPos.y = floor.FloorHeight;
-
-        //transform.position = newPos;
 
         currentFloor = floor.FloorLevel;
         currentIndex = FloorTriggers.IndexOf(floor);
 
-        Debug.Log("Go to floor " + floor.FloorLevel + ", index " + currentIndex);
         StartCoroutine(MoveElevator(transform.position, newPos));
     }
 
@@ -129,6 +126,9 @@ public class ElevatorControl : IControlManager
         
         transform.position = newPos;
         isMoving = false;
+
+        if(InteriorButton.TryGetComponent<ButtonControl>(out ButtonControl button))
+            button.Deactivate();
     }
 
     #region ElevatorCall Struct
