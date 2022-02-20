@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class InteractiveControlFlow : MonoBehaviour
+public class InteractiveControlFlow : IControlManager
 {
     public List<ControlTrigger> controls = new List<ControlTrigger>();
     public List<ControllableSwitch> ToggleTargets = new List<ControllableSwitch>();
@@ -17,12 +15,12 @@ public class InteractiveControlFlow : MonoBehaviour
 
         bOperational = true;
         for(int i = 0; i < controls.Count; i++)
-            controls[i].parent = this;
+            controls[i].AssignParent(this, 0);
 
         SetTargetStates();
     }
 
-    public void CheckStatus()
+    public override void CheckStatus(int num = 0)
     {
         if(!bOperational)
             return;
@@ -52,11 +50,15 @@ public class InteractiveControlFlow : MonoBehaviour
 
         return true;
     }
+
+    #region ControllableSwitch Struct
+    [Serializable]
+    public struct ControllableSwitch
+    {
+        public ISwitchable toggleTarget;
+        public bool ReverseActivation;
+    }
+    #endregion
 }
 
-[Serializable]
-public struct ControllableSwitch
-{
-    public ISwitchable toggleTarget;
-    public bool ReverseActivation;
-}
+
