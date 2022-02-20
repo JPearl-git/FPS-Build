@@ -47,7 +47,7 @@ public class HUD_Waypoint : MonoBehaviour
         }
 
         waypoint.transform.position = pos;
-        meterDistance.text = ((int)Vector3.Distance(target, player.position)).ToString() + "m";
+        meterDistance.text = Vector3.Distance(target, player.position).ToString("0") + "m";
     }
 
     public void SetTarget(Vector3 location)

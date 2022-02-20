@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Player_WeaponAnimation))]
 public class GunSlot : MonoBehaviour
 {
-    public const int MaxSlots = 4;
-    public IWeapon Weapon;
     public GunHUD gunHUD;
     public RecoilControl recoilControl;
     DetectionNotice detectionNotice;
+    public const int MaxSlots = 4;
+    [HideInInspector] public IWeapon Weapon;
     [HideInInspector] public Player_WeaponAnimation weaponAnimation;
 
-    public GameObject[] weaponObjects = new GameObject[MaxSlots];
+    [HideInInspector] public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
     [HideInInspector] public bool bCanAttack, bAttackAction;
     int currentEquippedGun;
@@ -33,13 +33,12 @@ public class GunSlot : MonoBehaviour
             detectionNotice = notice;
     }
 
+    #region Weapon Functions
     public void SetWeapon(int slot)
     {
-        // Check if there is currently a Gun Script in use
+        // Check if there is currently a Weapon Script in use
         if(this.Weapon != null)
             this.Weapon.bPressed = false;
-        else
-            Debug.Log("No gun");
 
         // Set up the Gun Data from the current slot
         if(transform.GetChild(slot).TryGetComponent<IWeapon>(out IWeapon weapon))
@@ -51,7 +50,7 @@ public class GunSlot : MonoBehaviour
             weaponObjects[slot] = weapon.gameObject;
             currentEquippedGun = slot;
         }
-        // If there is no gun, don't do anything
+        // If there is no weapon, don't do anything
         else
         {
             weapon = null;
@@ -59,7 +58,7 @@ public class GunSlot : MonoBehaviour
             Debug.Log("No Gun Equipped");
         }
 
-        // Deactivate all other guns
+        // Deactivate all other weapons
         if(transform.childCount > 1)
         {
             for(int i = 0; i < transform.childCount; i++)
@@ -118,7 +117,9 @@ public class GunSlot : MonoBehaviour
             bCanAttack = true;
         }
     }
+    #endregion
 
+    #region Input Functions
     public void Attack(InputAction.CallbackContext context)
     {
         if(Weapon == null || !bCanAttack)
@@ -167,4 +168,5 @@ public class GunSlot : MonoBehaviour
         if(context.performed)
             Switch(3);
     }
+    #endregion
 }

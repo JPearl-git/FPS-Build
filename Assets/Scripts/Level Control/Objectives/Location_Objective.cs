@@ -24,7 +24,6 @@ public class Location_Objective : IObjective
         if(!status.Equals(Objective_Status.CURRENT))
             return;
 
-        Debug.Log(other.tag);
         if(other.tag.Equals("Player"))
             Objective_Complete();
     }

@@ -105,6 +105,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""10ce31b6-f262-4c0e-a98d-8c000ef87cff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -393,6 +401,28 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Equip Gun 4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f168eec6-bc43-4e60-8da3-31e9e0260e56"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ebaca72-89a7-41e8-bd2c-733f833813b7"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -412,6 +442,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_EquipGun2 = m_Player.FindAction("Equip Gun 2", throwIfNotFound: true);
         m_Player_EquipGun3 = m_Player.FindAction("Equip Gun 3", throwIfNotFound: true);
         m_Player_EquipGun4 = m_Player.FindAction("Equip Gun 4", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -472,6 +503,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_EquipGun2;
     private readonly InputAction m_Player_EquipGun3;
     private readonly InputAction m_Player_EquipGun4;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -487,6 +519,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @EquipGun2 => m_Wrapper.m_Player_EquipGun2;
         public InputAction @EquipGun3 => m_Wrapper.m_Player_EquipGun3;
         public InputAction @EquipGun4 => m_Wrapper.m_Player_EquipGun4;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -529,6 +562,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @EquipGun4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
                 @EquipGun4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
                 @EquipGun4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -566,6 +602,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @EquipGun4.started += instance.OnEquipGun4;
                 @EquipGun4.performed += instance.OnEquipGun4;
                 @EquipGun4.canceled += instance.OnEquipGun4;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -583,5 +622,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnEquipGun2(InputAction.CallbackContext context);
         void OnEquipGun3(InputAction.CallbackContext context);
         void OnEquipGun4(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

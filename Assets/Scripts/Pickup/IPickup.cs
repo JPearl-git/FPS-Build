@@ -2,23 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class IPickup : MonoBehaviour
+public class IPickup : IButtonInteract
 {
     public float rotationSpeed = 25f;
+    public bool bRequiresInput;
+    Collider inputCollider;
 
-    // Update is called once per frame
+    protected virtual void Start()
+    {
+        bCanInteract = true;
+    }
+
     void Update()
     {
         transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("Player"))
+        if(bRequiresInput)
         {
-            Pickup(other);
+            inputCollider = other;
+            base.OnTriggerEnter(other);
         }
+        else if(other.tag.Equals("Player"))
+            Pickup(other);
+    }
+
+    public override void Interact()
+    {
+        base.Interact();
+        Pickup(inputCollider);
     }
 
     protected virtual void Pickup(Collider other){}

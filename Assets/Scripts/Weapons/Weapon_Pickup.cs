@@ -6,10 +6,14 @@ public class Weapon_Pickup : IPickup
 {
     public GameObject Weapon;
 
-    void Start()
+    new void Start()
     {
-        if(Weapon != null)
-            Initialize(Weapon);
+        if(Weapon == null)
+            return;
+
+        Initialize(Weapon);
+        bRequiresInput = true;
+        base.Start();
     }
 
     public void Initialize(GameObject weaponObj)
