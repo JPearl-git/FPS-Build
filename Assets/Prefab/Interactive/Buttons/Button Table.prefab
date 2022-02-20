@@ -13,9 +13,6 @@ GameObject:
   - component: {fileID: 4349337957307396353}
   - component: {fileID: 4349337957307396358}
   - component: {fileID: 4349337957307396359}
-  - component: {fileID: 4349337957307396365}
-  - component: {fileID: 4349337957307396354}
-  - component: {fileID: 4349337957307396355}
   m_Layer: 0
   m_Name: Button Base
   m_TagString: Untagged
@@ -617,49 +614,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!135 &4349337957307396365
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4349337957307396357}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0.000000014901161, y: 0.000000014901161, z: 0.000000014901161}
---- !u!114 &4349337957307396354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4349337957307396357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ca4565841d8054cb6beceff8b4a0f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bActive: 0
-  parent: {fileID: 0}
---- !u!114 &4349337957307396355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4349337957307396357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 913dac49da06c7645bf3e10c3f52751a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bCanInteract: 1
-  buttonObject: {fileID: 4349337958549047072}
-  activeMaterial: {fileID: 2100000, guid: dd0c9f5bad7799d47803ab237868cff2, type: 2}
-  localEndPoint: {x: 0, y: -0.04011917, z: -0.02984041}
 --- !u!1 &4349337958208124800
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +627,9 @@ GameObject:
   - component: {fileID: 4349337958208124813}
   - component: {fileID: 4349337958208124802}
   - component: {fileID: 4349337958208124803}
+  - component: {fileID: 1894860783}
+  - component: {fileID: 1894860785}
+  - component: {fileID: 1894860784}
   m_Layer: 0
   m_Name: Button Table
   m_TagString: Untagged
@@ -2474,6 +2431,53 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!135 &1894860783
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349337958208124800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 2.93, z: 0.15}
+--- !u!114 &1894860785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349337958208124800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ca4565841d8054cb6beceff8b4a0f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  bActive: 0
+  isSwitable: 0
+  position: 0
+--- !u!114 &1894860784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4349337958208124800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 913dac49da06c7645bf3e10c3f52751a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bCanInteract: 1
+  buttonObject: {fileID: 4349337958549047072}
+  activeMaterial: {fileID: 2100000, guid: dd0c9f5bad7799d47803ab237868cff2, type: 2}
+  localEndPoint: {x: 0, y: -0.04011917, z: -0.02984041}
+  inactiveMaterial: {fileID: 2100000, guid: 54acdb574753c214683527758e8af22c, type: 2}
+  autoDepress: 0
 --- !u!1 &4349337958549047072
 GameObject:
   m_ObjectHideFlags: 0

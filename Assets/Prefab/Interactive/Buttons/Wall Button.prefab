@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 2272895454245404251}
   - component: {fileID: 2452776057114085058}
   - component: {fileID: 6128931991160437936}
+  - component: {fileID: 2924842261008139996}
   - component: {fileID: 2002852732948197919}
   - component: {fileID: 6042894590667414250}
-  - component: {fileID: 2924842261008139996}
   m_Layer: 0
   m_Name: Wall Button
   m_TagString: Untagged
@@ -541,6 +541,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!65 &2924842261008139996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3474582100960934630}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2002852732948197919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,8 +566,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca4565841d8054cb6beceff8b4a0f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bActive: 0
   parent: {fileID: 0}
+  bActive: 0
+  isSwitable: 0
+  position: 0
 --- !u!114 &6042894590667414250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,19 +586,8 @@ MonoBehaviour:
   buttonObject: {fileID: 6066334940245946156}
   activeMaterial: {fileID: 2100000, guid: dd0c9f5bad7799d47803ab237868cff2, type: 2}
   localEndPoint: {x: 0, y: 0.007, z: 0}
---- !u!65 &2924842261008139996
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3474582100960934630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 1, z: 2}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  inactiveMaterial: {fileID: 2100000, guid: 54acdb574753c214683527758e8af22c, type: 2}
+  autoDepress: 1
 --- !u!1 &6066334940245946156
 GameObject:
   m_ObjectHideFlags: 0

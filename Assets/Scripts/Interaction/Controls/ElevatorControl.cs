@@ -9,8 +9,10 @@ public class ElevatorControl : IControlManager
     Transform LeftDoor, RightDoor;
     ControlTrigger InteriorButton;
 
-    int currentFloor = 0;
-    bool isGoingDown;
+    public int currentFloor = 0, currentIndex;
+    [Tooltip("Direction that elevator initailly goes")]
+    public bool isGoingDown;
+    bool isMoving;
 
     public List<ElevatorCall> FloorTriggers = new List<ElevatorCall>();
     
@@ -21,13 +23,16 @@ public class ElevatorControl : IControlManager
         RightDoor = transform.Find("Right Door");
         InteriorButton = gameObject.GetComponentInChildren<ControlTrigger>();
 
+        InteriorButton.AssignParent(this, 0, true);
         OrganizeFloors();
     }
 
     void OrganizeFloors()
     {
         // Added temporary floor for comparison
-        ElevatorCall temp = new ElevatorCall(){ FloorBase = transform };
+        ElevatorCall temp = new ElevatorCall()
+        { FloorBase = transform, FloorHeight = transform.position.y };
+
         FloorTriggers.Add(temp);
 
         // Organize floors by height
@@ -52,7 +57,8 @@ public class ElevatorControl : IControlManager
             FloorTriggers[i] = floor;
         }
 
-        FloorTriggers.Remove(temp);
+        //FloorTriggers.Remove(temp);
+        currentIndex = tempPos;
     }
     #endregion
 
@@ -70,25 +76,65 @@ public class ElevatorControl : IControlManager
             }
         }
 
-        if(bActive && currentFloor != floor.FloorLevel)
+        if(bActive && currentFloor != floor.FloorLevel && !isMoving)
             GoToFloor(floor);
+    }
+
+    public override void TurnSwitch(bool isActive)
+    {
+        if(!isActive || isMoving)
+            return;
+
+        isGoingDown = CheckFloorStatus();
+        Debug.Log("isGoingDown = " + isGoingDown);
+        if(isGoingDown)
+            GoToFloor(FloorTriggers[currentIndex - 1]);
+        else
+            GoToFloor(FloorTriggers[currentIndex + 1]);
+    }
+
+    bool CheckFloorStatus()
+    {
+        if(isGoingDown)
+            return (currentFloor == FloorTriggers[0].FloorLevel);
+
+        return (currentFloor == FloorTriggers[FloorTriggers.Count - 1].FloorLevel);
     }
 
     void GoToFloor(ElevatorCall floor)
     {
-        Debug.Log("Go to floor " + floor.FloorLevel);
+        
         Vector3 newPos = transform.position;
         newPos.y = floor.FloorHeight;
 
+        //transform.position = newPos;
+
+        currentFloor = floor.FloorLevel;
+        currentIndex = FloorTriggers.IndexOf(floor);
+
+        Debug.Log("Go to floor " + floor.FloorLevel + ", index " + currentIndex);
+        StartCoroutine(MoveElevator(transform.position, newPos));
+    }
+
+    IEnumerator MoveElevator(Vector3 currentPos, Vector3 newPos)
+    {
+        isMoving = true;
+        while(Mathf.Abs(currentPos.y - newPos.y) > 0.1f)
+        {
+            //currentPos = Vector3.MoveTowards(currentPos, newPos, 0.1f);
+            currentPos = Vector3.MoveTowards(currentPos, newPos, 0.03f);
+            transform.position = currentPos;
+            yield return new WaitForSeconds(0.01f);
+        }
+        
         transform.position = newPos;
+        isMoving = false;
     }
 
     #region ElevatorCall Struct
     [Serializable]
     public struct ElevatorCall
     {
-        //May not be what works. ControlTrigger relies on InteractiveControlFlow.
-        //Possible solution, make ElevatorControl a child of ISwitchable and change triggers to InteractiveControlFlows.
         [Tooltip("All triggers to call elevator to specific floor")]
         public List<ControlTrigger> triggers;
         [HideInInspector] public int FloorLevel;
@@ -96,6 +142,8 @@ public class ElevatorControl : IControlManager
 
         [Tooltip("Used to have a visible reference for the floor's height")]
         public Transform FloorBase;
+        [Tooltip("Do the triggers reset when the floor changes")]
+        public bool bResetOnFloorChange;
     }
     #endregion
 }

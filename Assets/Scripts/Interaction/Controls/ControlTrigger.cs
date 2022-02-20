@@ -4,17 +4,23 @@ public class ControlTrigger : MonoBehaviour
 {
     [HideInInspector] public IControlManager parent;
 
-    [HideInInspector] public bool bActive;
-    [HideInInspector] public int num = 0;
+    [HideInInspector] public bool bActive, isSwitable;
+    [HideInInspector] public int position = 0;
     public void NotifyParent()
     {
         if(parent != null)
-            parent.CheckStatus(num);
+        {
+            if(isSwitable)
+                parent.TurnSwitch(bActive);
+            else
+                parent.CheckStatus(position);
+        }
     }
 
-    public void AssignParent(IControlManager manager, int n)
+    public void AssignParent(IControlManager manager, int num, bool isSwitable = false)
     {
         parent = manager;
-        num = n;
+        position = num;
+        this.isSwitable = isSwitable;
     }
 }
