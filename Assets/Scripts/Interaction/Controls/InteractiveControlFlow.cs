@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,26 +6,39 @@ using UnityEngine;
 public class InteractiveControlFlow : MonoBehaviour
 {
     public List<ControlTrigger> controls = new List<ControlTrigger>();
-    public ISwitchable toggleTarget;
+    public List<ControllableSwitch> ToggleTargets = new List<ControllableSwitch>();
     bool bOperational, bActive;
 
     // Start is called before the first frame update
     void Start()
     {
-        if(controls.Count > 0 && toggleTarget != null)
-        {
-            bOperational = true;
-            for(int i = 0; i < controls.Count; i++)
-                controls[i].parent = this;
-        }
+        if(controls.Count < 1 || ToggleTargets.Count < 1)
+            return;
+
+        bOperational = true;
+        for(int i = 0; i < controls.Count; i++)
+            controls[i].parent = this;
+
+        SetTargetStates();
     }
 
     public void CheckStatus()
     {
-        if(bOperational)
+        if(!bOperational)
+            return;
+
+        bActive = CheckControls();
+
+        SetTargetStates();
+        //toggleTarget.bActive = bActive;
+    }
+
+    void SetTargetStates()
+    {
+        foreach(ControllableSwitch target in ToggleTargets)
         {
-            bActive = CheckControls();
-            toggleTarget.bActive = bActive;
+            if(target.toggleTarget != null)
+                target.toggleTarget.bActive = bActive ^ target.ReverseActivation;
         }
     }
 
@@ -38,4 +52,11 @@ public class InteractiveControlFlow : MonoBehaviour
 
         return true;
     }
+}
+
+[Serializable]
+public struct ControllableSwitch
+{
+    public ISwitchable toggleTarget;
+    public bool ReverseActivation;
 }

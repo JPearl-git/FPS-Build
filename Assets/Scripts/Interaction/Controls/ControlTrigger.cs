@@ -8,7 +8,7 @@ public class ControlTrigger : MonoBehaviour
 
     [HideInInspector] public InteractiveControlFlow parent;
 
-    protected void NotifyParent()
+    public void NotifyParent()
     {
         if(parent != null)
             parent.CheckStatus();

@@ -550,9 +550,17 @@ MonoBehaviour:
   assetGuid: 
   m_Mesh: {fileID: 0}
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 00000000
+  m_SelectedEdges:
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  - a: 0
+    b: 0
+  m_SelectedVertices: 00000000000000000000000000000000
 --- !u!23 &1107520730052738900
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5403,6 +5411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bStartState: 0
-  m_off: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
+  m_off: {fileID: 2100000, guid: 11757a56d70e1da4292e271429b46992, type: 2}
   m_on: {fileID: 2100000, guid: e4e72d32bccb011418ff67cb7c767c66, type: 2}
   lift: {fileID: 550756243}
