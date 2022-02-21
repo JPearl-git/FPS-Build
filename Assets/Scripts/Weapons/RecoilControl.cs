@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RecoilControl : MonoBehaviour
 {
-    Vector3 startPos, currentRotation, targetRotation;
+    Vector3 startPos, startRot;
+    Vector3 currentRotation, targetRotation;
 
     [SerializeField] float recoilX, recoilY, recoilZ;
     [SerializeField] float snapWeight, returnSpeed;
@@ -14,6 +15,7 @@ public class RecoilControl : MonoBehaviour
     void Awake()
     {
         startPos = transform.localPosition;
+        startRot = transform.localEulerAngles;
     }
 
     public void SetRecoil(Vector3 recoilVector, float snapWeight, float returnSpeed)
@@ -32,7 +34,7 @@ public class RecoilControl : MonoBehaviour
         targetRotation = Vector3.Lerp(targetRotation, Vector3.zero, returnSpeed * Time.deltaTime);
         currentRotation = Vector3.Slerp(currentRotation, targetRotation, snapWeight * Time.fixedDeltaTime);
 
-        transform.localRotation = Quaternion.Euler(currentRotation);
+        transform.localRotation = Quaternion.Euler(currentRotation + startRot);
 
         //Adjusted rotation for playerCam shake
         if(playerLook != null)
