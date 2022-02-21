@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(ControlTrigger))]
@@ -39,8 +38,6 @@ public class ButtonControl : IButtonInteract
             meshRenderer.material = activeMaterial;
 
         destination = localEndPoint;
-        Debug.Log("Distance " + (localStartPoint - localEndPoint).magnitude);
-        Debug.Log("Start " + buttonObject.transform.localPosition + " , End " + destination);
         InvokeRepeating("AnimateButton", 0f, 0.1f);
     }
 

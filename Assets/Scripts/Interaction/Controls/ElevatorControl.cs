@@ -12,6 +12,8 @@ public class ElevatorControl : IControlManager
     public int currentFloor = 0, currentIndex;
     [Tooltip("Direction that elevator initailly goes")]
     public bool isGoingDown;
+    [SerializeField] bool bOpenDoors;
+    public float doorOpenZ = 0.9f;
     bool isMoving;
 
     public List<ElevatorCall> FloorTriggers = new List<ElevatorCall>();
@@ -26,6 +28,8 @@ public class ElevatorControl : IControlManager
         InteriorButton.AssignParent(this, 0, true);
         
         OrganizeFloors();
+
+        StartCoroutine(MoveDoors(bOpenDoors));
     }
 
     void OrganizeFloors()
@@ -113,9 +117,14 @@ public class ElevatorControl : IControlManager
         StartCoroutine(MoveElevator(transform.position, newPos));
     }
 
+    #region Coroutines
     IEnumerator MoveElevator(Vector3 currentPos, Vector3 newPos)
     {
+        StartCoroutine(MoveDoors(false));
+
         isMoving = true;
+        yield return new WaitForSeconds(1f);
+
         while(Mathf.Abs(currentPos.y - newPos.y) > 0.1f)
         {
             //currentPos = Vector3.MoveTowards(currentPos, newPos, 0.1f);
@@ -129,7 +138,37 @@ public class ElevatorControl : IControlManager
 
         if(InteriorButton.TryGetComponent<ButtonControl>(out ButtonControl button))
             button.Deactivate();
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(MoveDoors(true));
     }
+
+    IEnumerator MoveDoors(bool state)
+    {
+        bOpenDoors = state;
+        float endZ = 0f;
+
+        if(bOpenDoors)
+            endZ = doorOpenZ;
+        
+        Vector3 newLeft = LeftDoor.localPosition;
+        Vector3 currentLeft = LeftDoor.localPosition;
+        newLeft.z = endZ;
+        
+        while(Mathf.Abs(LeftDoor.localPosition.z - endZ) > 0.1f)
+        {
+            currentLeft = Vector3.MoveTowards(LeftDoor.localPosition, newLeft, 0.03f);
+            LeftDoor.localPosition = currentLeft;
+
+            RightDoor.localPosition = new Vector3(RightDoor.localPosition.x, RightDoor.localPosition.y, -currentLeft.z);
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        LeftDoor.localPosition = newLeft;
+        newLeft.z *= -1;
+        RightDoor.localPosition = newLeft;
+    }
+    #endregion
 
     #region ElevatorCall Struct
     [Serializable]
