@@ -404,6 +404,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 4b91b542-fc24-40df-a102-a4c88b610ac8
     m_ActionName: Player/Quick Swap[/Keyboard/y]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: Drop_Weapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c626bbb4-22f1-4b02-810d-c8b59e5a1094
+    m_ActionName: Player/Drop Weapon[/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

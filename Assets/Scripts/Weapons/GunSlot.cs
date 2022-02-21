@@ -35,6 +35,9 @@ public class GunSlot : MonoBehaviour
     }
 
     #region Weapon Functions
+
+    ///<summary> Setup the Controls and Visuals for the Weapon in a specific slot of the Weapon Object Array</summary>
+    ///<param name="slot">Slot in the Weapon Object array</param>
     public void SetWeapon(int slot)
     {
         // Check if there is currently a Weapon Script in use
@@ -72,7 +75,8 @@ public class GunSlot : MonoBehaviour
         }
     }
 
-    // Equip a new gun
+    ///<summary>Equip weapon as a child of this GameObject</summary>
+    ///<param name="newWeapon">GameObject containing a IWeapon script</param>
     public void Equip(GameObject newWeapon)
     {
         // Unequip current weapon
@@ -105,7 +109,8 @@ public class GunSlot : MonoBehaviour
         bCanAttack = true;
     }
 
-    //Swap to a different weapon
+    ///<summary>Switch to another weapon</summary>
+    ///<param name="slot">Slot in the Weapon Object array</param>
     public void Switch(int slot)
     {
         if(slot != currentEquippedGun && weaponObjects[slot] != null)
@@ -117,6 +122,32 @@ public class GunSlot : MonoBehaviour
             SetWeapon(slot);
             bCanAttack = true;
         }
+    }
+
+    ///<summary>Remove current weapon</summary>
+    public void DiscardCurrentWeapon()
+    {
+        if(AvailableWeapons() < 1)
+            return;
+
+        int dropNum = currentEquippedGun;
+        if(dropNum == 0)
+        {
+            int availableWeapons = AvailableWeapons();
+            if(availableWeapons > 1)
+                Switch(availableWeapons - 1);
+            else
+                Destroy(transform.GetChild(0).gameObject);
+        }
+        else
+            Switch(dropNum - 1);
+
+        weaponObjects[dropNum] = null;
+    }
+    ///<summary>Return number of weapons in Weapon Object array</summary>
+    public int AvailableWeapons()
+    {
+        return weaponObjects.Count(x => x != null);
     }
     #endregion
 
@@ -172,14 +203,22 @@ public class GunSlot : MonoBehaviour
 
     public void Quick_Swap(InputAction.CallbackContext context)
     {
-        if(context.performed)
-        {
-            int next = currentEquippedGun + 1;
-            if(next == weaponObjects.Count(x => x != null))
-                next = 0;
+        if(!context.performed)
+            return;
 
-            Switch(next);
-        }
+        int next = currentEquippedGun + 1;
+        if(next == AvailableWeapons())
+            next = 0;
+
+        Switch(next);
+    }
+
+    public void Drop_Weapon(InputAction.CallbackContext context)
+    {
+        if(!context.performed)
+            return;
+
+        DiscardCurrentWeapon();
     }
     #endregion
 }

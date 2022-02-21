@@ -25427,14 +25427,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 173853197}
-    - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 988606331190723675, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_Name
       value: HUD

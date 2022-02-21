@@ -121,6 +121,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Drop Weapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""c626bbb4-22f1-4b02-810d-c8b59e5a1094"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -480,7 +488,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a802cfd6-269c-45d7-94c2-5f10da0be466"",
                     ""path"": ""<Gamepad>/buttonNorth"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Quick Swap"",
@@ -495,6 +503,28 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Quick Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcc6ab12-579a-4b7b-9b06-64840dc7d52f"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a3bad44-e2b9-43e5-b772-32b5f425e154"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -518,6 +548,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_EquipWeapon4 = m_Player.FindAction("Equip Weapon 4", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_QuickSwap = m_Player.FindAction("Quick Swap", throwIfNotFound: true);
+        m_Player_DropWeapon = m_Player.FindAction("Drop Weapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -580,6 +611,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_EquipWeapon4;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_QuickSwap;
+    private readonly InputAction m_Player_DropWeapon;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -597,6 +629,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @EquipWeapon4 => m_Wrapper.m_Player_EquipWeapon4;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @QuickSwap => m_Wrapper.m_Player_QuickSwap;
+        public InputAction @DropWeapon => m_Wrapper.m_Player_DropWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -645,6 +678,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @QuickSwap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
                 @QuickSwap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
                 @QuickSwap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
+                @DropWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
+                @DropWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
+                @DropWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -688,6 +724,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @QuickSwap.started += instance.OnQuickSwap;
                 @QuickSwap.performed += instance.OnQuickSwap;
                 @QuickSwap.canceled += instance.OnQuickSwap;
+                @DropWeapon.started += instance.OnDropWeapon;
+                @DropWeapon.performed += instance.OnDropWeapon;
+                @DropWeapon.canceled += instance.OnDropWeapon;
             }
         }
     }
@@ -707,5 +746,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnEquipWeapon4(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnQuickSwap(InputAction.CallbackContext context);
+        void OnDropWeapon(InputAction.CallbackContext context);
     }
 }
