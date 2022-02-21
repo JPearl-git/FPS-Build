@@ -25,7 +25,7 @@ public class Button_SendDialogue : IButtonInteract
         if(call_Dialogue != null)
         {
             bCanInteract = !call_Dialogue.Call();
-            if(call_Dialogue.numberOfMessages > 0)
+            if(call_Dialogue.HasMessages())
                 Invoke("ReActivate", reactivateTime);
         }
     }
