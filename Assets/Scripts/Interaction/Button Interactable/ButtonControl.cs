@@ -56,7 +56,6 @@ public class ButtonControl : IButtonInteract
 
     void AnimateButton()
     {
-        Debug.Log("Begin Animation");
         Vector3 currentLocal = buttonObject.transform.localPosition;
         if((currentLocal - destination).magnitude > 0.01f)
         {

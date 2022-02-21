@@ -8,14 +8,20 @@ public class ElevatorControl : IControlManager
 {
     Transform LeftDoor, RightDoor;
     ControlTrigger InteriorButton;
-
-    public int currentFloor = 0, currentIndex;
+    int currentFloor = 0, currentIndex;
     [Tooltip("Direction that elevator initailly goes")]
     public bool isGoingDown;
+
+    [Header("Elevator Door Variables")]
+    [Tooltip("Are the Elevator doors open")]
     [SerializeField] bool bOpenDoors;
-    public float doorOpenZ = 0.9f;
+    [Tooltip("Triggers to open Elevator doors")]
+    [SerializeField] List<ControlTrigger> DoorAccessTriggers = new List<ControlTrigger>();
+    
+    [SerializeField] float doorOpenZ = 0.9f;
     bool isMoving;
 
+    [Header("Other Floors")]
     public List<ElevatorCall> FloorTriggers = new List<ElevatorCall>();
     
     #region Awake Functions
@@ -64,27 +70,54 @@ public class ElevatorControl : IControlManager
 
         //FloorTriggers.Remove(temp);
         currentIndex = tempPos;
+
+        if(!bOpenDoors && DoorAccessTriggers.Count > 0)
+            AssignDoorAccess();
+    }
+
+    void AssignDoorAccess()
+    {
+        foreach(var trigger in DoorAccessTriggers)
+            trigger.AssignParent(this, 0);
     }
     #endregion
 
+    #region Trigger Status Functions
     public override void CheckStatus(int num = 0)
     {
-        ElevatorCall floor = FloorTriggers.Where(x => x.FloorLevel == num).FirstOrDefault();
-        
-        bool bActive = true;
-        for (int i = 0; i < floor.triggers.Count; i++)
+        // Open Elevator doors
+        if(num == 0)
         {
-            if(!floor.triggers[i].bActive)
+            bool bActive = GetTriggerStatus(DoorAccessTriggers);
+            if(bActive)
+                StartCoroutine(MoveDoors(true));
+        }
+        // Move Elevator to Specific floor
+        else
+        {
+            ElevatorCall floor = FloorTriggers.Where(x => x.FloorLevel == num).FirstOrDefault();
+            bool bActive = GetTriggerStatus(floor.triggers);
+
+            if(bActive && currentFloor != floor.FloorLevel && !isMoving)
+                GoToFloor(floor);
+        }
+    }
+
+    bool GetTriggerStatus(List<ControlTrigger> triggers)
+    {
+        for (int i = 0; i < triggers.Count; i++)
+        {
+            if(!triggers[i].bActive)
             {
-                bActive = false;
-                break;
+                return false;
             }
         }
 
-        if(bActive && currentFloor != floor.FloorLevel && !isMoving)
-            GoToFloor(floor);
+        return true;
     }
+    #endregion
 
+    #region Interior Button Functions
     public override void TurnSwitch(bool isActive)
     {
         if(!isActive || isMoving)
@@ -105,6 +138,7 @@ public class ElevatorControl : IControlManager
 
         return (currentFloor == FloorTriggers[FloorTriggers.Count - 1].FloorLevel);
     }
+    #endregion
 
     void GoToFloor(ElevatorCall floor)
     {
@@ -114,6 +148,7 @@ public class ElevatorControl : IControlManager
         currentFloor = floor.FloorLevel;
         currentIndex = FloorTriggers.IndexOf(floor);
 
+        StopAllCoroutines();
         StartCoroutine(MoveElevator(transform.position, newPos));
     }
 
@@ -154,7 +189,7 @@ public class ElevatorControl : IControlManager
         Vector3 newLeft = LeftDoor.localPosition;
         Vector3 currentLeft = LeftDoor.localPosition;
         newLeft.z = endZ;
-        
+
         while(Mathf.Abs(LeftDoor.localPosition.z - endZ) > 0.1f)
         {
             currentLeft = Vector3.MoveTowards(LeftDoor.localPosition, newLeft, 0.03f);
@@ -174,7 +209,7 @@ public class ElevatorControl : IControlManager
     [Serializable]
     public struct ElevatorCall
     {
-        [Tooltip("All triggers to call elevator to specific floor")]
+        [Tooltip("Optional: All triggers to call elevator to specific floor")]
         public List<ControlTrigger> triggers;
         [HideInInspector] public int FloorLevel;
         [HideInInspector] public float FloorHeight;
