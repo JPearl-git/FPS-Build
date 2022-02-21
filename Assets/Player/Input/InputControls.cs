@@ -75,7 +75,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Equip Gun 1"",
+                    ""name"": ""Equip Weapon 1"",
                     ""type"": ""Button"",
                     ""id"": ""a1a236c2-71c5-423b-9646-59be83269c69"",
                     ""expectedControlType"": ""Button"",
@@ -83,7 +83,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Equip Gun 2"",
+                    ""name"": ""Equip Weapon 2"",
                     ""type"": ""Button"",
                     ""id"": ""81e1227b-0426-4682-b43b-4e226ddac5f6"",
                     ""expectedControlType"": ""Button"",
@@ -91,7 +91,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Equip Gun 3"",
+                    ""name"": ""Equip Weapon 3"",
                     ""type"": ""Button"",
                     ""id"": ""17b0a4ce-4d35-4a5b-9666-174ea04b4d37"",
                     ""expectedControlType"": ""Button"",
@@ -99,7 +99,7 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Equip Gun 4"",
+                    ""name"": ""Equip Weapon 4"",
                     ""type"": ""Button"",
                     ""id"": ""f34cfe45-30dc-4c2f-a3c7-f48237de393d"",
                     ""expectedControlType"": ""Button"",
@@ -110,6 +110,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""10ce31b6-f262-4c0e-a98d-8c000ef87cff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Quick Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""4b91b542-fc24-40df-a102-a4c88b610ac8"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -365,7 +373,18 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Equip Gun 1"",
+                    ""action"": ""Equip Weapon 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b98ff580-06e2-4bdd-b1f0-d8088cbb1003"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equip Weapon 1"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -376,7 +395,18 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Equip Gun 2"",
+                    ""action"": ""Equip Weapon 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f37619a-b4a9-4604-ac11-feab14018e93"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equip Weapon 2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -387,7 +417,18 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Equip Gun 3"",
+                    ""action"": ""Equip Weapon 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2abe1738-5f28-4815-b647-9e41f68f0d1c"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equip Weapon 3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -398,7 +439,18 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Equip Gun 4"",
+                    ""action"": ""Equip Weapon 4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d27602b8-c01b-42a4-8654-8963ebf881e1"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Equip Weapon 4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -423,6 +475,28 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a802cfd6-269c-45d7-94c2-5f10da0be466"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quick Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab05dba6-4794-45d5-a7fc-42f25659c1c4"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quick Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -438,11 +512,12 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_LookHorizontal = m_Player.FindAction("LookHorizontal", throwIfNotFound: true);
         m_Player_LookVertical = m_Player.FindAction("LookVertical", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
-        m_Player_EquipGun1 = m_Player.FindAction("Equip Gun 1", throwIfNotFound: true);
-        m_Player_EquipGun2 = m_Player.FindAction("Equip Gun 2", throwIfNotFound: true);
-        m_Player_EquipGun3 = m_Player.FindAction("Equip Gun 3", throwIfNotFound: true);
-        m_Player_EquipGun4 = m_Player.FindAction("Equip Gun 4", throwIfNotFound: true);
+        m_Player_EquipWeapon1 = m_Player.FindAction("Equip Weapon 1", throwIfNotFound: true);
+        m_Player_EquipWeapon2 = m_Player.FindAction("Equip Weapon 2", throwIfNotFound: true);
+        m_Player_EquipWeapon3 = m_Player.FindAction("Equip Weapon 3", throwIfNotFound: true);
+        m_Player_EquipWeapon4 = m_Player.FindAction("Equip Weapon 4", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_QuickSwap = m_Player.FindAction("Quick Swap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -499,11 +574,12 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_LookHorizontal;
     private readonly InputAction m_Player_LookVertical;
     private readonly InputAction m_Player_Reload;
-    private readonly InputAction m_Player_EquipGun1;
-    private readonly InputAction m_Player_EquipGun2;
-    private readonly InputAction m_Player_EquipGun3;
-    private readonly InputAction m_Player_EquipGun4;
+    private readonly InputAction m_Player_EquipWeapon1;
+    private readonly InputAction m_Player_EquipWeapon2;
+    private readonly InputAction m_Player_EquipWeapon3;
+    private readonly InputAction m_Player_EquipWeapon4;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_QuickSwap;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -515,11 +591,12 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @LookHorizontal => m_Wrapper.m_Player_LookHorizontal;
         public InputAction @LookVertical => m_Wrapper.m_Player_LookVertical;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
-        public InputAction @EquipGun1 => m_Wrapper.m_Player_EquipGun1;
-        public InputAction @EquipGun2 => m_Wrapper.m_Player_EquipGun2;
-        public InputAction @EquipGun3 => m_Wrapper.m_Player_EquipGun3;
-        public InputAction @EquipGun4 => m_Wrapper.m_Player_EquipGun4;
+        public InputAction @EquipWeapon1 => m_Wrapper.m_Player_EquipWeapon1;
+        public InputAction @EquipWeapon2 => m_Wrapper.m_Player_EquipWeapon2;
+        public InputAction @EquipWeapon3 => m_Wrapper.m_Player_EquipWeapon3;
+        public InputAction @EquipWeapon4 => m_Wrapper.m_Player_EquipWeapon4;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @QuickSwap => m_Wrapper.m_Player_QuickSwap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -550,21 +627,24 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
-                @EquipGun1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun1;
-                @EquipGun1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun1;
-                @EquipGun1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun1;
-                @EquipGun2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun2;
-                @EquipGun2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun2;
-                @EquipGun2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun2;
-                @EquipGun3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun3;
-                @EquipGun3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun3;
-                @EquipGun3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun3;
-                @EquipGun4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
-                @EquipGun4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
-                @EquipGun4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipGun4;
+                @EquipWeapon1.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon1;
+                @EquipWeapon1.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon1;
+                @EquipWeapon1.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon1;
+                @EquipWeapon2.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon2;
+                @EquipWeapon2.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon2;
+                @EquipWeapon2.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon2;
+                @EquipWeapon3.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon3;
+                @EquipWeapon3.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon3;
+                @EquipWeapon3.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon3;
+                @EquipWeapon4.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon4;
+                @EquipWeapon4.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon4;
+                @EquipWeapon4.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEquipWeapon4;
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @QuickSwap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
+                @QuickSwap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
+                @QuickSwap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnQuickSwap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -590,21 +670,24 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @EquipGun1.started += instance.OnEquipGun1;
-                @EquipGun1.performed += instance.OnEquipGun1;
-                @EquipGun1.canceled += instance.OnEquipGun1;
-                @EquipGun2.started += instance.OnEquipGun2;
-                @EquipGun2.performed += instance.OnEquipGun2;
-                @EquipGun2.canceled += instance.OnEquipGun2;
-                @EquipGun3.started += instance.OnEquipGun3;
-                @EquipGun3.performed += instance.OnEquipGun3;
-                @EquipGun3.canceled += instance.OnEquipGun3;
-                @EquipGun4.started += instance.OnEquipGun4;
-                @EquipGun4.performed += instance.OnEquipGun4;
-                @EquipGun4.canceled += instance.OnEquipGun4;
+                @EquipWeapon1.started += instance.OnEquipWeapon1;
+                @EquipWeapon1.performed += instance.OnEquipWeapon1;
+                @EquipWeapon1.canceled += instance.OnEquipWeapon1;
+                @EquipWeapon2.started += instance.OnEquipWeapon2;
+                @EquipWeapon2.performed += instance.OnEquipWeapon2;
+                @EquipWeapon2.canceled += instance.OnEquipWeapon2;
+                @EquipWeapon3.started += instance.OnEquipWeapon3;
+                @EquipWeapon3.performed += instance.OnEquipWeapon3;
+                @EquipWeapon3.canceled += instance.OnEquipWeapon3;
+                @EquipWeapon4.started += instance.OnEquipWeapon4;
+                @EquipWeapon4.performed += instance.OnEquipWeapon4;
+                @EquipWeapon4.canceled += instance.OnEquipWeapon4;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @QuickSwap.started += instance.OnQuickSwap;
+                @QuickSwap.performed += instance.OnQuickSwap;
+                @QuickSwap.canceled += instance.OnQuickSwap;
             }
         }
     }
@@ -618,10 +701,11 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnLookHorizontal(InputAction.CallbackContext context);
         void OnLookVertical(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnEquipGun1(InputAction.CallbackContext context);
-        void OnEquipGun2(InputAction.CallbackContext context);
-        void OnEquipGun3(InputAction.CallbackContext context);
-        void OnEquipGun4(InputAction.CallbackContext context);
+        void OnEquipWeapon1(InputAction.CallbackContext context);
+        void OnEquipWeapon2(InputAction.CallbackContext context);
+        void OnEquipWeapon3(InputAction.CallbackContext context);
+        void OnEquipWeapon4(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnQuickSwap(InputAction.CallbackContext context);
     }
 }

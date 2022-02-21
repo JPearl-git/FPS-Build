@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -148,25 +149,37 @@ public class GunSlot : MonoBehaviour
         //     Debug.Log("Cant Reload");
     }
 
-    public void EquipGun1(InputAction.CallbackContext context)
+    public void Equip_Weapon_1(InputAction.CallbackContext context)
     {
         if(context.performed)
             Switch(0);
     }
-    public void EquipGun2(InputAction.CallbackContext context)
+    public void Equip_Weapon_2(InputAction.CallbackContext context)
     {
         if(context.performed)
             Switch(1);
     }
-    public void EquipGun3(InputAction.CallbackContext context)
+    public void Equip_Weapon_3(InputAction.CallbackContext context)
     {
         if(context.performed)
             Switch(2);
     }
-    public void EquipGun4(InputAction.CallbackContext context)
+    public void Equip_Weapon_4(InputAction.CallbackContext context)
     {
         if(context.performed)
             Switch(3);
+    }
+
+    public void Quick_Swap(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            int next = currentEquippedGun + 1;
+            if(next == weaponObjects.Count(x => x != null))
+                next = 0;
+
+            Switch(next);
+        }
     }
     #endregion
 }

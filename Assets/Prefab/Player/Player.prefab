@@ -312,7 +312,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 353060192565148696}
         m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
-        m_MethodName: EquipGun1
+        m_MethodName: Equip_Weapon_1
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -328,7 +328,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 353060192565148696}
         m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
-        m_MethodName: EquipGun2
+        m_MethodName: Equip_Weapon_2
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -344,7 +344,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 353060192565148696}
         m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
-        m_MethodName: EquipGun3
+        m_MethodName: Equip_Weapon_3
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -360,7 +360,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 353060192565148696}
         m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
-        m_MethodName: EquipGun4
+        m_MethodName: Equip_Weapon_4
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -372,6 +372,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f34cfe45-30dc-4c2f-a3c7-f48237de393d
     m_ActionName: Player/Equip Gun 4[/Keyboard/4]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060191541786740}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 10ce31b6-f262-4c0e-a98d-8c000ef87cff
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 353060192565148696}
+        m_TargetAssemblyTypeName: GunSlot, Assembly-CSharp
+        m_MethodName: Quick_Swap
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4b91b542-fc24-40df-a102-a4c88b610ac8
+    m_ActionName: Player/Quick Swap[/Keyboard/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
