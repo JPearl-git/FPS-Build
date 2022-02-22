@@ -621,8 +621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e14643ea27c234592d1649c7aba7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunHUD: {fileID: 0}
-  recoilControl: {fileID: 261422031}
   Weapon: {fileID: 0}
   weaponAnimation: {fileID: 0}
   weaponObjects:
@@ -632,6 +630,8 @@ MonoBehaviour:
   - {fileID: 0}
   bCanAttack: 0
   bAttackAction: 0
+  gunHUD: {fileID: 0}
+  recoilControl: {fileID: 261422031}
 --- !u!95 &378660748
 Animator:
   serializedVersion: 3

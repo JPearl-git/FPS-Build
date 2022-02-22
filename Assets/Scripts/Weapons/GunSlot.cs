@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ public class GunSlot : MonoBehaviour
     DetectionNotice detectionNotice;
     Object_Launcher launcher;
 
-    [HideInInspector] public GameObject[] weaponObjects = new GameObject[MaxSlots];
+    /*[HideInInspector]*/ public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
     [HideInInspector] public bool bCanAttack, bAttackAction;
     #endregion
@@ -113,6 +114,21 @@ public class GunSlot : MonoBehaviour
         bCanAttack = true;
     }
 
+    void ReorderSlots(int slot, int removedWeapon)
+    {
+        Switch(slot);
+        RemoveWeapon(removedWeapon);
+
+        var temp = weaponObjects.Where(w => w != null).ToList();
+        var newArray = new GameObject[MaxSlots];
+
+        for (int i = 0; i < temp.Count; i++)
+            newArray[i] = temp[i];
+
+        weaponObjects = newArray;
+        currentEquippedGun = Array.IndexOf(weaponObjects, Weapon.gameObject);
+    }
+
     ///<summary>Switch to another weapon</summary>
     ///<param name="slot">Slot in the Weapon Object array</param>
     public void Switch(int slot)
@@ -139,18 +155,27 @@ public class GunSlot : MonoBehaviour
         {
             int availableWeapons = AvailableWeapons();
             if(availableWeapons > 1)
-                Switch(availableWeapons - 1);
+                ReorderSlots(availableWeapons - 1, dropNum);
             else
+            {
                 Destroy(transform.GetChild(0).gameObject);
+                gunHUD.SetNull();
+                RemoveWeapon(dropNum);
+            }
         }
         else
-            Switch(dropNum - 1);
-
-        if(launcher != null)
-            launcher.LaunchObject(transform.localScale, weaponObjects[dropNum], true);
-
-        weaponObjects[dropNum] = null;
+            ReorderSlots(dropNum - 1, dropNum);
     }
+
+    void RemoveWeapon(int slot)
+    {
+        if(launcher != null)
+            launcher.LaunchObject(transform.localScale, weaponObjects[slot], true);
+
+        weaponObjects[slot] = null;
+        Destroy(transform.GetChild(slot).gameObject);
+    }
+
     ///<summary>Return number of weapons in Weapon Object array</summary>
     public int AvailableWeapons()
     {

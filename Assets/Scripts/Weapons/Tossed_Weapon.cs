@@ -34,7 +34,8 @@ public class Tossed_Weapon : MonoBehaviour
 
     void RemoveComponents(GameObject obj)
     {
-        DestroyImmediate(obj.GetComponent("Rigidbody"));
-        DestroyImmediate(obj.GetComponent("MeshCollider"));
+        DestroyImmediate(obj.GetComponent<Rigidbody>());
+        DestroyImmediate(obj.GetComponent<MeshCollider>());
+        DestroyImmediate(obj.GetComponentInChildren<MeshCollider>());
     }
 }

@@ -6,6 +6,11 @@ using UnityEngine.UI;
 public class GunHUD : MonoBehaviour
 {
     public Text gName, gAmmoCount, gReserves;
+
+    void Awake()
+    {
+        SetNull();
+    }
     public void SetName(string name)
     {
         gName.text = name;
@@ -14,7 +19,7 @@ public class GunHUD : MonoBehaviour
     public void SetCount(int current, int clip)
     {
         if(clip < 0)
-            gAmmoCount.text = "---/---";
+            gAmmoCount.text = "";
         else
             gAmmoCount.text = current + "/" + clip;
     }
@@ -22,8 +27,15 @@ public class GunHUD : MonoBehaviour
     public void SetReserve(int reserve)
     {
         if(reserve < 0)
-            gReserves.text = "---";
+            gReserves.text = "";
         else
             gReserves.text = reserve.ToString();
+    }
+
+    public void SetNull()
+    {
+        gName.text = "";
+        gAmmoCount.text = "";
+        gReserves.text = "";
     }
 }

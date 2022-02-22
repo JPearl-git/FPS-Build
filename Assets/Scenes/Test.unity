@@ -25341,14 +25341,6 @@ PrefabInstance:
       propertyPath: gunHUD
       value: 
       objectReference: {fileID: 479275318}
-    - target: {fileID: 2521247633350084317, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
-      propertyPath: launchPrefab
-      value: 
-      objectReference: {fileID: 2678170631480700080, guid: e7c5b67fea0aa8e438b9a44b846e613c, type: 3}
-    - target: {fileID: 2521247633350084317, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
-      propertyPath: forceMultiplier
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72766f42ab270f645936dcca3fa23546, type: 3}
 --- !u!1001 &642201837958158503
@@ -25435,14 +25427,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 173853197}
-    - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 988606331190723675, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_Name
       value: HUD

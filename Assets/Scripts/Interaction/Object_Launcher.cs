@@ -16,10 +16,11 @@ public class Object_Launcher : MonoBehaviour
 
         if(obj != null)
         {
-            var child = Instantiate(obj, newObj.transform).transform;
-            child.localPosition = Vector3.zero;
+            var child = Instantiate(obj, newObj.transform);
+            child.SetActive(true);
+            child.transform.localPosition = Vector3.zero;
 
-            AttachRigidBody(child.gameObject, needMeshCollider);
+            AttachRigidBody(child, needMeshCollider);
         }
         else
             AttachRigidBody(newObj, needMeshCollider);
