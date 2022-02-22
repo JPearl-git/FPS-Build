@@ -51,4 +51,18 @@ public class IWeapon : MonoBehaviour
 
         weaponAnimation.animator.SetTrigger("Reset");
     }
+
+    // This is for thrown weapons
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.TryGetComponent<Destructible>(out Destructible target))
+        {
+            if(TryGetComponent<Rigidbody>(out Rigidbody rb))
+            {
+                int dmg = Mathf.CeilToInt(rb.velocity.magnitude * 1.5f);
+                target.GetHit(dmg, -rb.velocity, rb.position, false);
+                Debug.Log("Hit Enemy for " + dmg + " health");
+            }
+        }
+    }
 }
