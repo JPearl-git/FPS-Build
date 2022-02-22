@@ -36,7 +36,9 @@ public class Player_WeaponAnimation : IWeaponAnimation
             return;
         }
 
-        melee.ResetTargets();
+        if(melee != null)
+            melee.ResetTargets();
+            
         if(slot.bAttackAction)
             return;
 

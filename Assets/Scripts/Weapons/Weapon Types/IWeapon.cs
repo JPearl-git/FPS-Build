@@ -2,30 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IWeapon : MonoBehaviour
+public abstract class IWeapon : MonoBehaviour
 {
+    #region Hidden Components
     protected HitMarker hitMarker;
     protected GunHUD gunHUD;
     protected DetectionNotice detectionNotice;
     [HideInInspector] public IWeaponAnimation weaponAnimation;
+    #endregion
 
+    #region Weapon Details
     [Header("Weapon Details")]
     public string Name;
     public int damage;
-    [Range(.1f,10f)]public float reloadSpeed = 1;
-    
-    public bool bAutomatic;
-
     [HideInInspector] public bool bPressed;
+    #endregion
 
-    [Header("Dimensions")]
+    #region  Transform Variables
+    [Header("Transform Variables")]
     public Vector3 offsetPos;
     public Vector3 offsetRot;
     public float scale = 1f;
+    #endregion
 
+    [Header("Attack Delay")]
     protected float delayTime;
 
     [SerializeField] protected AudioSource sound;
+
 
     public virtual void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
     {
@@ -40,9 +44,9 @@ public class IWeapon : MonoBehaviour
         weaponAnimation.animator.ResetTrigger("Reset");
     }
 
-    public virtual void AIEquip(){}
+    public abstract void AIEquip();
 
-    public virtual void Attack(){}
+    public abstract void Attack();
 
     public virtual void Unequip()
     {

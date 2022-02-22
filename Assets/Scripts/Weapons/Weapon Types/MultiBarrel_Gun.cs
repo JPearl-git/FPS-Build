@@ -8,8 +8,6 @@ public class MultiBarrel_Gun : Gun
 
     protected override void HitScan(ParticleSystem baseMuzzle)
     {
-        Debug.Log("Multibarrel Gun fired!");
-
         foreach(Transform child in muzzleGroup)
         {
             if(child.gameObject.TryGetComponent<ParticleSystem>(out ParticleSystem ps))

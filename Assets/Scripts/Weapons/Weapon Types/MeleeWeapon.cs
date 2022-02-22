@@ -18,6 +18,7 @@ public class MeleeWeapon : IWeapon
         gunHUD.SetReserve(-1);
 
         wAnim = GetComponentInParent<IWeaponAnimation>();
+        ResetTargets();
     }
 
     public override void Attack()
@@ -70,4 +71,7 @@ public class MeleeWeapon : IWeapon
         if(other.TryGetComponent<EntityStats>(out EntityStats entity))
             DealHit(entity);
     }
+
+    // Not yet Implemented
+    public override void AIEquip(){}
 }

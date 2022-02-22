@@ -9,6 +9,9 @@ public class Gun : IWeapon
     [Header("Gun Details")]
     [Range(1,1000)]public int rpm = 100;
     public int currentAmmo, clipSize, ammoReserve;
+    [Range(.1f,10f)]public float reloadSpeed = 1;
+    
+    public bool bAutomatic;
     public ParticleSystem gunMuzzle;
     bool bReloading;
 
@@ -16,15 +19,6 @@ public class Gun : IWeapon
     public Vector3 recoilVector = new Vector3(-2,2,0.35f);
     public float snapWeight = 10;
     public float returnSpeed = 5;
-
-    //void Start()
-    //{
-    //    hitMarker = GameObject.Find("HUD").GetComponent<HitMarker>();
-    //
-    //    var control = GameObject.Find("Level Control");
-    //    if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
-    //        detectionNotice = notice;
-    //}
 
     #region Core Functions
     public override void Equip(GunHUD gHUD, DetectionNotice detectionNotice, GunSlot gunSlot)
@@ -177,13 +171,9 @@ public class Gun : IWeapon
         bReloading = false;
         delayTime = 0f;
     }
-
-    //public void CancelActions()
-    //{
-    //    StopAllCoroutines();
-    //    bReloading = false;
-    //    transform.parent.localRotation = Quaternion.Euler(0,0,0);
-    //    delayTime = 0f;
-    //}
     #endregion
+
+    // Not yet Implemented
+    public override void AIEquip(){}
+    
 }
