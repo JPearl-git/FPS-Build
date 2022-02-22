@@ -5033,9 +5033,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d343b6dddc1fbd34d83d212978e4cea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponAnimation: {fileID: 0}
   Name: Sword
   damage: 10
-  reloadTime: 0.3
+  reloadSpeed: 1
   bAutomatic: 1
   bPressed: 0
   offsetPos: {x: 5, y: -4, z: 5}
@@ -5043,6 +5044,7 @@ MonoBehaviour:
   scale: 1
   sound: {fileID: 0}
   attackTrail: {fileID: 1754573242832427084}
+  bSwinging: 0
 --- !u!65 &8047376940410046829
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5067,7 +5069,7 @@ GameObject:
   - component: {fileID: 392191206021377505}
   - component: {fileID: 2244947938232334966}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

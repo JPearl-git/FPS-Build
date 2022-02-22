@@ -5,6 +5,7 @@ using UnityEngine;
 public class Weapon_Pickup : IPickup
 {
     public GameObject Weapon;
+    bool hasWeapon;
 
     new void Start()
     {
@@ -18,6 +19,9 @@ public class Weapon_Pickup : IPickup
 
     public void Initialize(GameObject weaponObj)
     {
+        if(hasWeapon)
+            return;
+
         if(weaponObj.TryGetComponent<IWeapon>(out IWeapon iWeapon))
         {
             Quaternion rotation = transform.rotation;
@@ -28,11 +32,16 @@ public class Weapon_Pickup : IPickup
 
             float scale = iWeapon.scale;
             Weapon.transform.localScale = new Vector3(scale, scale, scale);
+
+            hasWeapon = true;
         }
     }
 
     protected override void Pickup(Collider other)
     {
+        if(!hasWeapon)
+            return;
+
         GunSlot slot = other.GetComponentInChildren<GunSlot>();
         if(slot != null && this.Weapon.GetComponent<IWeapon>())
         {

@@ -4,19 +4,23 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Player_WeaponAnimation))]
+[RequireComponent(typeof(Player_WeaponAnimation)), RequireComponent(typeof(Object_Launcher))]
 public class GunSlot : MonoBehaviour
 {
-    public GunHUD gunHUD;
-    public RecoilControl recoilControl;
-    DetectionNotice detectionNotice;
-    public const int MaxSlots = 4;
+    #region Hidden Components
     [HideInInspector] public IWeapon Weapon;
     [HideInInspector] public Player_WeaponAnimation weaponAnimation;
+    DetectionNotice detectionNotice;
+    Object_Launcher launcher;
 
     [HideInInspector] public GameObject[] weaponObjects = new GameObject[MaxSlots];
 
     [HideInInspector] public bool bCanAttack, bAttackAction;
+    #endregion
+
+    public GunHUD gunHUD;
+    public RecoilControl recoilControl;
+    public const int MaxSlots = 4;
     int currentEquippedGun;
 
     void Start()
@@ -27,11 +31,11 @@ public class GunSlot : MonoBehaviour
             SetWeapon(0);
         }
 
-        weaponAnimation = GetComponent<Player_WeaponAnimation>();
+        TryGetComponent<Player_WeaponAnimation>(out weaponAnimation);
+        TryGetComponent<Object_Launcher>(out launcher);
 
         var control = GameObject.Find("Level Control");
-        if(control.TryGetComponent<DetectionNotice>(out DetectionNotice notice))
-            detectionNotice = notice;
+        control.TryGetComponent<DetectionNotice>(out detectionNotice);
     }
 
     #region Weapon Functions
@@ -141,6 +145,9 @@ public class GunSlot : MonoBehaviour
         }
         else
             Switch(dropNum - 1);
+
+        if(launcher != null)
+            launcher.LaunchObject(transform.localScale, weaponObjects[dropNum], true);
 
         weaponObjects[dropNum] = null;
     }

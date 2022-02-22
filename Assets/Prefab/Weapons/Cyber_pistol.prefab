@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b904ec41d9b7834187c6997c47f93b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponAnimation: {fileID: 0}
   Name: Pistol
   damage: 7
   reloadSpeed: 1
@@ -214,8 +215,8 @@ MonoBehaviour:
   offsetRot: {x: 0, y: 0, z: 0}
   scale: 1
   sound: {fileID: 3264908160555583908}
+  recoilControl: {fileID: 0}
   rpm: 300
-  recoil: 1
   currentAmmo: 10
   clipSize: 10
   ammoReserve: 120
@@ -10270,7 +10271,7 @@ GameObject:
   - component: {fileID: 3037960432920302804}
   - component: {fileID: 7746211871808738404}
   m_Layer: 0
-  m_Name: Base
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
