@@ -37,7 +37,10 @@ public class InputManager : MonoBehaviour
 
         playerControl.Movement.performed += ctx => movement = ctx.ReadValue<Vector2>();
         if(bPhysics)
+        {
             playerControl.Jump.performed += _ => pMovementScript.OnJumpPressed();
+            playerControl.Dash.performed += _ => pMovementScript.Dash();
+        }
         else
             playerControl.Jump.performed += _ => movementScript.OnJumpPressed();
 

@@ -129,6 +129,14 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""105d1b17-7abe-4c1a-ac5c-4a0a2a26f95b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -527,6 +535,17 @@ public class @InputControls : IInputActionCollection, IDisposable
                     ""action"": ""Drop Weapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60177eb9-a7ac-4f2e-96d5-940b0bd4a85f"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -549,6 +568,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_QuickSwap = m_Player.FindAction("Quick Swap", throwIfNotFound: true);
         m_Player_DropWeapon = m_Player.FindAction("Drop Weapon", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -612,6 +632,7 @@ public class @InputControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_QuickSwap;
     private readonly InputAction m_Player_DropWeapon;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @InputControls m_Wrapper;
@@ -630,6 +651,7 @@ public class @InputControls : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @QuickSwap => m_Wrapper.m_Player_QuickSwap;
         public InputAction @DropWeapon => m_Wrapper.m_Player_DropWeapon;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -681,6 +703,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @DropWeapon.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
                 @DropWeapon.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
                 @DropWeapon.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDropWeapon;
+                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -727,6 +752,9 @@ public class @InputControls : IInputActionCollection, IDisposable
                 @DropWeapon.started += instance.OnDropWeapon;
                 @DropWeapon.performed += instance.OnDropWeapon;
                 @DropWeapon.canceled += instance.OnDropWeapon;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -747,5 +775,6 @@ public class @InputControls : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnQuickSwap(InputAction.CallbackContext context);
         void OnDropWeapon(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
