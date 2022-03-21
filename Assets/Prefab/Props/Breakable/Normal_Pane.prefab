@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3556082571058956707}
   - component: {fileID: 8261272495959966297}
   - component: {fileID: 1150181525754386899}
-  - component: {fileID: 2481869849307529129}
   m_Layer: 5
   m_Name: Normal_Pane
   m_TagString: Untagged
@@ -97,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brokenObject: {fileID: 1194326598848552344, guid: 49b462f35ed9a784d9fd629b538d92f5, type: 3}
-  impactMagnitude: 2
+  impactMagnitude: 10
   overlapRadius: 4
   power: 10
   upwardPower: 0
@@ -113,17 +112,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.004, y: 0.08000002, z: 0.16000004}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!65 &2481869849307529129
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3051543004251875446}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.006, y: 0.08000002, z: 0.16000004}
   m_Center: {x: 0, y: 0, z: 0}
