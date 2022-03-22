@@ -93,8 +93,8 @@ public class PhysicsMovement : MonoBehaviour
         if(HitWall())
             return Vector3.zero;
 
-        if(!isGrounded)
-            return moveVector *= 0.5f;
+        if(!isGrounded && !isDashing)
+            return moveVector * 0.5f;
 
         var floor = GetFloor();
         if(floor.transform == null || floor.normal.Equals(Vector3.up))
@@ -145,23 +145,24 @@ public class PhysicsMovement : MonoBehaviour
         if(moveVector.magnitude == 0)
             dashDirection = transform.forward * speed;
 
-        if(DashParticles != null && !isDashing)
-        {
-            rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
-            DashParticles.transform.LookAt(transform.position + DashPos(dashDirection));
-            DashParticles.Play();
+        if(DashParticles == null || isDashing)
+            return;
 
-            rb.drag = 2;
-            dashPercent = 0f;
-            isDashing = true;
-            canDash = false;
-            canChargeDash = false;
+        Debug.Log("Dash distance is " + (dashDirection * dashForce).magnitude);
+        rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
+        DashParticles.transform.LookAt(transform.position + DashPos(dashDirection));
+        DashParticles.Play();
 
-            if(ui != null)
-                ui.SetSprint(0);
+        rb.drag = 2;
+        dashPercent = 0f;
+        isDashing = true;
+        canDash = false;
+        canChargeDash = false;
 
-            Invoke("EndDash", .5f);
-        }
+        if(ui != null)
+            ui.SetSprint(0);
+
+        Invoke("EndDash", .5f);
     }
 
     Vector3 DashPos(Vector3 dashDirection)
