@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HUD_UI : MonoBehaviour
 {
-    public Slider HealthBar;
+    public Slider HealthBar, SprintBar;
     public GameObject DeathFade;
     [Header("Interactive Elements")]
     public GameObject InteractPanel;
@@ -14,6 +14,11 @@ public class HUD_UI : MonoBehaviour
     public void SetHealth(float value)
     {
         HealthBar.value = value;
+    }
+
+    public void SetSprint(float value)
+    {
+        SprintBar.value = value;
     }
 
     public void PlayDeathFade()

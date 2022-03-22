@@ -6,11 +6,29 @@ using UnityEngine;
 public class PhysicsMovement : MonoBehaviour
 {
     Rigidbody rb;
+    HUD_UI ui;
     Vector2 movement;
-    [SerializeField] float speed = 25f, jumpForce = 3.5f, slopeForce = 0f;
-    [SerializeField] Transform Feet;
-    bool jump, isGrounded, isJumping, isDashing;
+
+    public float speed = 25f, slopeForce = 0f;
     float playerHeight;
+    [SerializeField] Transform Feet;
+    bool isGrounded;
+
+    #region Jump Variables
+    [Header("Jump Variables")]
+    public float jumpForce = 3.5f;
+
+    bool jump, isJumping;
+    #endregion;
+
+    #region Dash Variables
+    [Header("Dash Variables")]
+    public float dashForce = 5f;
+    public float dashDelay = 2f;
+    float dashPercent = 1f;
+    
+    bool isDashing, canDash, canChargeDash;
+    #endregion
 
     Vector3 moveVector, slopeMoveDir;
     RaycastHit slopeHit;
@@ -19,21 +37,38 @@ public class PhysicsMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        ui = GameObject.Find("HUD").GetComponent<HUD_UI>();
         playerHeight = GetComponent<CapsuleCollider>().height * 2;
     }
 
     void FixedUpdate()
     {
+        // Check if Player is grounded
         isGrounded = Physics.Raycast(Feet.position + Vector3.up, Vector3.down, 1.3f);
         if(isGrounded && isJumping && rb.velocity.y < 0)
             isJumping = false;
 
+        // If grounded check player's slope
         if(isGrounded)
         {
             RaycastHit floor = GetFloor();
             if(floor.transform != null && floor.normal != Vector3.up)
                 rb.AddForce(Vector3.down * slopeForce, ForceMode.Force);
+        }
 
+        // Check if player can dash
+        if(!canDash)
+        {
+            if(dashPercent == 1f)
+                canDash = true;
+            else if(canChargeDash)
+            {
+                dashPercent += Time.fixedDeltaTime;
+                if(dashPercent > 1)
+                    dashPercent = 1;
+                if(ui != null)
+                    ui.SetSprint(dashPercent);
+            }
         }
     }
 
@@ -103,23 +138,33 @@ public class PhysicsMovement : MonoBehaviour
     #region Dash Functions
     public void Dash()
     {
+        if(!canDash)
+            return;
+        
         Vector3 dashDirection = moveVector;
         if(moveVector.magnitude == 0)
             dashDirection = transform.forward * speed;
 
         if(DashParticles != null && !isDashing)
         {
-            rb.AddForce(dashDirection * 5, ForceMode.Impulse);
+            rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
             DashParticles.transform.LookAt(transform.position + DashPos(dashDirection));
             DashParticles.Play();
 
             rb.drag = 2;
+            dashPercent = 0f;
             isDashing = true;
-            Invoke("EndDash", .7f);
+            canDash = false;
+            canChargeDash = false;
+
+            if(ui != null)
+                ui.SetSprint(0);
+
+            Invoke("EndDash", .5f);
         }
     }
 
-    private Vector3 DashPos(Vector3 dashDirection)
+    Vector3 DashPos(Vector3 dashDirection)
     {
         float angle = Vector3.SignedAngle(transform.forward, dashDirection, Vector3.up);
 
@@ -135,11 +180,19 @@ public class PhysicsMovement : MonoBehaviour
         return dashDirection;
     }
 
-    private void EndDash()
+    void EndDash()
     {
         DashParticles.Stop();
+
         rb.drag = 0;
         isDashing = false;
+
+        Invoke("ChargeDash", dashDelay);
+    }
+
+    void ChargeDash()
+    {
+        canChargeDash = true;
     }
     #endregion
 }

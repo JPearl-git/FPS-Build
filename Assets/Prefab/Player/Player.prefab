@@ -5264,9 +5264,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpForce: 20
   slopeForce: 10
   Feet: {fileID: 126199787}
+  jumpForce: 20
+  dashForce: 5
+  dashDelay: 1.2
   DashParticles: {fileID: 294563734}
 --- !u!1 &353060192537196944
 GameObject:
