@@ -13,6 +13,7 @@ public class Gun : IWeapon
     
     public bool bAutomatic;
     public ParticleSystem gunMuzzle;
+    [SerializeField] GameObject BulletLine;
     bool bReloading;
 
     [Header("Recoil Details")]
@@ -70,10 +71,34 @@ public class Gun : IWeapon
     {
         muzzle.Play();
 
-        Ray ray = new Ray(muzzle.transform.position, muzzle.transform.forward);
+        HitScan(muzzle.transform);
+    }
+
+    protected virtual void HitScan(Transform muzzle)
+    {
+        Ray ray = new Ray(muzzle.position, muzzle.forward);
 
         if(Physics.Raycast(ray, out RaycastHit hit))
+        {
             HitTarget(hit);
+
+            DrawLine(muzzle.position + muzzle.forward, hit.point);
+        }
+        else
+            DrawLine(muzzle.position + muzzle.forward, muzzle.position + muzzle.forward * 15);
+    }
+
+    void DrawLine(Vector3 start, Vector3 end)
+    {
+        if(BulletLine != null)
+        {
+            GameObject line = Instantiate(BulletLine);
+            if(line.TryGetComponent<LineRenderer>(out LineRenderer lr))
+            {
+                lr.SetPosition(0, start);
+                lr.SetPosition(1, end);
+            }
+        }
     }
 
     // Determine if a potential target is hit and what to do

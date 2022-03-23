@@ -2570,7 +2570,7 @@ PrefabInstance:
     - target: {fileID: 3142285399502364934, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: Weapon
       value: 
-      objectReference: {fileID: 465241380050056568, guid: ec2a5d91b80ec024b80db72c4a884189, type: 3}
+      objectReference: {fileID: 2293260762465132507, guid: d5391b0e0f5c71247a5b07096ddafd57, type: 3}
     - target: {fileID: 3142285399502364935, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: m_RootOrder
       value: 6
