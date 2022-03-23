@@ -36,8 +36,8 @@ public class Shatter_Impact : MonoBehaviour
         if(other.relativeVelocity.magnitude > impactMagnitude)
         {
             Destroy(gameObject);
+
             Instantiate(brokenObject, transform.position, transform.rotation);
-            //brokenObject.localScale = transform.localScale
 
             Collider[] colliders = Physics.OverlapSphere(transform.position, overlapRadius);
             foreach (var hit in colliders)
