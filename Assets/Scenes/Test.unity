@@ -2570,7 +2570,7 @@ PrefabInstance:
     - target: {fileID: 3142285399502364934, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: Weapon
       value: 
-      objectReference: {fileID: 2293260762465132507, guid: d5391b0e0f5c71247a5b07096ddafd57, type: 3}
+      objectReference: {fileID: 7630780059322792195, guid: b47775c15051fa44eb88a6b8895b2461, type: 3}
     - target: {fileID: 3142285399502364935, guid: e1018c634f4063a47b45adcd14e784bc, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -25839,6 +25839,22 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 173853197}
+    - target: {fileID: 995293623, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 995293623, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_Colors.m_NormalColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 995293623, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1045363881, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_Color.a
+      value: 0.29803923
+      objectReference: {fileID: 0}
     - target: {fileID: 1459281653, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -25846,6 +25862,14 @@ PrefabInstance:
     - target: {fileID: 1459281653, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459281654, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_Color.a
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1459281654, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.446
       objectReference: {fileID: 0}
     - target: {fileID: 988606329691856306, guid: 58fa9caf6b05e0c4f9c378f53c02b108, type: 3}
       propertyPath: m_AnchorMax.x
