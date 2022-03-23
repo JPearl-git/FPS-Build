@@ -53,7 +53,10 @@ public class PhysicsMovement : MonoBehaviour
         {
             RaycastHit floor = GetFloor();
             if(floor.transform != null && floor.normal != Vector3.up)
+            {
                 rb.AddForce(Vector3.down * slopeForce, ForceMode.Force);
+                Debug.Log("Floor detected " + floor.normal);
+            }
         }
 
         // Check if player can dash
@@ -93,8 +96,16 @@ public class PhysicsMovement : MonoBehaviour
         if(HitWall())
             return Vector3.zero;
 
-        if(!isGrounded && !isDashing)
+        if(!isGrounded)
+        {
+            if(rb.SweepTest(moveVector, out RaycastHit hit, rb.velocity.magnitude * Time.fixedDeltaTime))
+            {
+                if(hit.point.y > Feet.position.y)
+                    return new Vector3(0, moveVector.y, 0);
+            }
+
             return moveVector * 0.5f;
+        }
 
         var floor = GetFloor();
         if(floor.transform == null || floor.normal.Equals(Vector3.up))
@@ -148,12 +159,10 @@ public class PhysicsMovement : MonoBehaviour
         if(DashParticles == null || isDashing)
             return;
 
-        Debug.Log("Dash distance is " + (dashDirection * dashForce).magnitude);
         rb.AddForce(dashDirection * dashForce, ForceMode.Impulse);
         DashParticles.transform.LookAt(transform.position + DashPos(dashDirection));
         DashParticles.Play();
 
-        rb.drag = 2;
         dashPercent = 0f;
         isDashing = true;
         canDash = false;
@@ -185,8 +194,8 @@ public class PhysicsMovement : MonoBehaviour
     {
         DashParticles.Stop();
 
-        rb.drag = 0;
         isDashing = false;
+        rb.velocity = Vector3.zero;
 
         Invoke("ChargeDash", dashDelay);
     }
