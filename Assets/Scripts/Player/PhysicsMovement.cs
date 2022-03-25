@@ -86,7 +86,28 @@ public class PhysicsMovement : MonoBehaviour
     // Solves Collision issues with rb.MovePosition()
     bool HitWall()
     {
-        return Physics.Raycast(transform.position, moveVector.normalized * 0.6f, 1f);
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, moveVector, out hit, 0.5f))
+        {
+            Debug.Log("Ray center, " + (hit.rigidbody == null));
+            if(hit.rigidbody == null)
+                return true;
+        }
+        if(Physics.Raycast(transform.position, moveVector + new Vector3(1f,0,-1f), out hit, 0.65f))
+        {
+            Debug.Log("Ray left, " + (hit.rigidbody == null));
+            if(hit.rigidbody == null)
+                return true;
+        }
+        if(Physics.Raycast(transform.position, moveVector + new Vector3(-1f,0,-1f), out hit, 0.65f))
+        {
+            Debug.Log("Ray right, " + (hit.rigidbody == null));
+            if(hit.rigidbody == null)
+                return true;
+        }
+
+        return false;
     }
 
     Vector3 GetMoveDirection(Vector2 input)
