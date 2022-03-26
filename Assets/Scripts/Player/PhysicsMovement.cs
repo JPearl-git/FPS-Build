@@ -27,7 +27,8 @@ public class PhysicsMovement : MonoBehaviour
     public float dashDelay = 2f;
     float dashPercent = 1f;
     
-    bool isDashing, canDash, canChargeDash;
+    [HideInInspector] public bool isDashing;
+    bool canDash, canChargeDash;
     #endregion
 
     Vector3 moveVector, slopeMoveDir;
@@ -90,19 +91,16 @@ public class PhysicsMovement : MonoBehaviour
 
         if(Physics.Raycast(transform.position, moveVector, out hit, 0.5f))
         {
-            Debug.Log("Ray center, " + (hit.rigidbody == null));
             if(hit.rigidbody == null)
                 return true;
         }
         if(Physics.Raycast(transform.position, moveVector + new Vector3(1f,0,-1f), out hit, 0.65f))
         {
-            Debug.Log("Ray left, " + (hit.rigidbody == null));
             if(hit.rigidbody == null)
                 return true;
         }
         if(Physics.Raycast(transform.position, moveVector + new Vector3(-1f,0,-1f), out hit, 0.65f))
         {
-            Debug.Log("Ray right, " + (hit.rigidbody == null));
             if(hit.rigidbody == null)
                 return true;
         }
