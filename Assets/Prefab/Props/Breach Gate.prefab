@@ -141,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1255982633427224767, guid: ed3b96c74c6c31f42b19cd680944688e, type: 3}
+  - {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -231,6 +231,8 @@ MonoBehaviour:
   BackLights: {fileID: 1312021180}
   m_On: {fileID: 2100000, guid: dd0c9f5bad7799d47803ab237868cff2, type: 2}
   m_Off: {fileID: 2100000, guid: 54acdb574753c214683527758e8af22c, type: 2}
+  FrontTriggers: []
+  BackTriggers: []
   isFrontActive: 0
   isBackActive: 0
   angle: 90
@@ -378,7 +380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2382012188054065201, guid: ed3b96c74c6c31f42b19cd680944688e, type: 3}
+  - {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -527,7 +529,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -2382012188054065201, guid: ed3b96c74c6c31f42b19cd680944688e, type: 3}
+  - {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

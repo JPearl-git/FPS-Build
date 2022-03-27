@@ -3,7 +3,32 @@ guid: ed3b96c74c6c31f42b19cd680944688e
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back Buttons
+    second: {fileID: 2100000, guid: 54acdb574753c214683527758e8af22c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front Buttons
+    second: {fileID: 2100000, guid: 54acdb574753c214683527758e8af22c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Gate
+    second: {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Outer button
+    second: {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall
+    second: {fileID: 2100000, guid: 64c64f9af1182f64583b17547003a95c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -103,6 +103,7 @@ public class ElevatorControl : IControlManager
         }
     }
 
+    /*
     bool GetTriggerStatus(List<ControlTrigger> triggers)
     {
         for (int i = 0; i < triggers.Count; i++)
@@ -115,6 +116,7 @@ public class ElevatorControl : IControlManager
 
         return true;
     }
+    */
     #endregion
 
     #region Interior Button Functions

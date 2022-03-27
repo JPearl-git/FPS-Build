@@ -5,40 +5,55 @@ using UnityEngine;
 
 public class Breach_Gate : IControlManager
 {
-    public HingeJoint LeftGate, RightGate;
+    #region Components
+    [Header("Componenets")]
+    public HingeJoint LeftGate;
+    public HingeJoint RightGate;
     public MeshRenderer FrontLights, BackLights;
     public Material m_On, m_Off;
     Collider controlCollider;
+    #endregion
 
+    #region Triggers
+    [Header("Triggers")]
+    public List<ControlTrigger> FrontTriggers = new List<ControlTrigger>();
+    public List<ControlTrigger> BackTriggers = new List<ControlTrigger>();
     public bool isFrontActive, isBackActive;
+    #endregion
     public float angle = 90f;
 
     void Awake()
     {
-        //SetGate(LeftGate, 1);
-        //SetGate(RightGate, -1);
         controlCollider = GetComponent<Collider>();
         Physics.IgnoreCollision(controlCollider, LeftGate.GetComponent<Collider>(), true);
         Physics.IgnoreCollision(controlCollider, RightGate.GetComponent<Collider>(), true);
+
+        SetGates();
     }
 
-    void Update()
+    void SetGates()
     {
+        foreach(var trigger in FrontTriggers)
+            trigger.AssignParent(this, 0);
 
-    }
-
-    void SetGate(GameObject gate, int zAxis)
-    {
-        if(gate == null)
-            return;
-
-        ControlTrigger ct = gate.AddComponent<ControlTrigger>();
-        ct.parent = this;
+        foreach(var trigger in BackTriggers)
+            trigger.AssignParent(this, 1);
     }
 
     public override void CheckStatus(int num = 0)
     {
-        throw new NotImplementedException();
+        //0 is front, 1 is back
+
+        if(num == 0)
+        {
+            isFrontActive = GetTriggerStatus(FrontTriggers);
+            ToggleFront(isFrontActive);
+        }
+        else
+        {
+            isBackActive = GetTriggerStatus(BackTriggers);
+            ToggleBack(isBackActive);
+        }
     }
 
     void OnCollisionEnter(Collision other)
