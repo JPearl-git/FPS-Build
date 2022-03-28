@@ -11,7 +11,7 @@ public class LaserControl : ISwitchable
     ParticleSystem.MainModule mod;
     ParticleSystem.TrailModule trail;
 
-    public float length = 3f, trailLength = 3f;
+    public float length = 3f, trailLength = 3f, maxBeamDistance = 50f;
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -45,19 +45,39 @@ public class LaserControl : ISwitchable
         GetComponent<ParticleSystemRenderer>().trailMaterial = material;
     }
 
+    void CheckBeamDistance()
+    {
+        if(Physics.Raycast(transform.position + transform.forward, transform.forward, out RaycastHit hit, maxBeamDistance))
+        {
+            float temp = Vector3.Distance(transform.position, hit.point);
+            if(temp != length)
+            {
+                length = temp;
+                DrawLine(transform.position, hit.point);
+            }
+        }
+        else
+        {
+            length = maxBeamDistance;
+            DrawLine(transform.position, transform.position + transform.forward * length);
+        }
+    }
+
     void OnValidate()
     {
-        if(emitter != null)
+        if(emitter != null && bActive)
             DrawLine(transform.position, transform.position + transform.forward * length);
     }
 
     public override void Activate()
     {
-        DrawLine(transform.position, transform.position + transform.forward * length);
+        //DrawLine(transform.position, transform.position + transform.forward * length);
+        InvokeRepeating("CheckBeamDistance", 0f, 0.05f);
     }
 
     public override void Deactivate()
     {
+        CancelInvoke("CheckBeamDistance");
         lineRenderer.enabled = false;
         emitter.Stop();
     }
