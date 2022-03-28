@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserControl : MonoBehaviour
+public class LaserControl : ISwitchable
 {
+    public Material material;
     LineRenderer lineRenderer;
     ParticleSystem emitter;
 
@@ -15,15 +16,17 @@ public class LaserControl : MonoBehaviour
     {
         lineRenderer = GetComponent<LineRenderer>();
         emitter = GetComponent<ParticleSystem>();
+        SetMaterial();
 
         mod = emitter.main;
         trail = emitter.trails;
         
-        DrawLine(transform.position, transform.position + transform.forward * length);
+        lineRenderer.enabled = false;
     }
 
     void DrawLine(Vector3 start, Vector3 end)
     {
+        lineRenderer.enabled = true;
         emitter.Stop();
 
         lineRenderer.SetPosition(0, start);
@@ -36,9 +39,26 @@ public class LaserControl : MonoBehaviour
         emitter.Play();
     }
 
+    void SetMaterial()
+    {
+        lineRenderer.material = material;
+        GetComponent<ParticleSystemRenderer>().trailMaterial = material;
+    }
+
     void OnValidate()
     {
         if(emitter != null)
             DrawLine(transform.position, transform.position + transform.forward * length);
+    }
+
+    public override void Activate()
+    {
+        DrawLine(transform.position, transform.position + transform.forward * length);
+    }
+
+    public override void Deactivate()
+    {
+        lineRenderer.enabled = false;
+        emitter.Stop();
     }
 }
