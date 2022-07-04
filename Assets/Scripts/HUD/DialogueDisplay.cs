@@ -7,9 +7,10 @@ public class DialogueDisplay : MonoBehaviour
     [SerializeField] GameObject DialoguePanel;
     [SerializeField] Text DialogueText;
     public float textSpeed, textLifeSpan;
+    [HideInInspector] public Command_Manager commandManager;
 
     Queue<string> TextQueue = new Queue<string>();
-    string currentText;
+    string currentText, writableText;
     [HideInInspector] public bool isTyping;
     int textcount = 0;
 
@@ -51,6 +52,12 @@ public class DialogueDisplay : MonoBehaviour
     {
         isTyping = true;
         currentText = TextQueue.Dequeue();
+
+        if(commandManager)
+            writableText = commandManager.RemoveCommands(currentText);
+        else
+            writableText = currentText;
+
         DialogueText.text = "";
         textcount = 0;
 
@@ -75,7 +82,15 @@ public class DialogueDisplay : MonoBehaviour
     void TextTyping()
     {
         string visibleText = DialogueText.text;
-        if(visibleText.Equals(currentText))
+
+        // Check if command needs to be executed
+        if(commandManager && currentText.Length > textcount + 1)
+        {
+            if(currentText[textcount] == '{')
+                textcount += commandManager.RunCommand(currentText, textcount);
+        }
+
+        if(visibleText.Equals(writableText))
         {
             CancelInvoke("TextTyping");
             CheckQueue();
@@ -83,7 +98,8 @@ public class DialogueDisplay : MonoBehaviour
         }
 
         visibleText += currentText[textcount];
-        textcount ++;
         DialogueText.text = visibleText;
+
+        textcount ++;
     }
 }

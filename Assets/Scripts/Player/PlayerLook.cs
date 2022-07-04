@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    [SerializeField] float sensitivityX = 8f;
-    [SerializeField] float sensitivityY = 0.5f;
+    [SerializeField] float sensitivityX = 20f;
+    [SerializeField] float sensitivityY = 20f;
     float lookX, lookY;
 
     [SerializeField] Transform playerCam;
@@ -32,7 +32,7 @@ public class PlayerLook : MonoBehaviour
         transform.Rotate(Vector3.up, lookX * Time.deltaTime);
 
         //Temporary, want the head to rotate
-        xRot -= lookY;
+        xRot -= lookY * Time.deltaTime;
         xRot = Mathf.Clamp(xRot, -xClamp, xClamp);
         Vector3 targetRot = transform.eulerAngles;
         targetRot.x = xRot;
@@ -41,8 +41,8 @@ public class PlayerLook : MonoBehaviour
 
     public void Look(Vector2 input)
     {
-        lookX = input.x * sensitivityX;
-        lookY = input.y * sensitivityY;
+        lookX = input.x * sensitivityX * 10;
+        lookY = input.y * sensitivityY * 10;
     }
 
     private void SetCamSpot()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Call_Dialogue : MonoBehaviour
+public class Call_Dialogue : Command_Manager
 {
     [HideInInspector] public DialogueDisplay display;
     int numberOfMessages;
@@ -37,6 +37,8 @@ public class Call_Dialogue : MonoBehaviour
         // Check if display is currently typing
         if(display.isTyping)
             return false;
+
+        display.commandManager = this;
 
         // If there are still outgoing messages available, use them first
         if(OutgoingMessages.Count > 0)
