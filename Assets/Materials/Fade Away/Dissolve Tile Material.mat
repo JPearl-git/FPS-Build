@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tile Material
-  m_Shader: {fileID: -6465566751694194690, guid: 0714484142dcf734eaa92e77fa5397c8, type: 3}
+  m_Name: Dissolve Tile Material
+  m_Shader: {fileID: -6465566751694194690, guid: e6567e8ce4b8b2b4c845d8b7db5dc5a6, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,16 +19,16 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_0813f70764114f088ffc498c186c97b9:
+    - Texture2D_1e9853c688ef4219aa83dd460efbe7aa:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_1c6fc384dfaf4c11bff064a03b63098f:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_79bdf58c9ffe481999ea65a2bf188a7c_Texture_1:
+    - Texture2D_6edb2fe2439a40ae8e09fc6e51194516:
         m_Texture: {fileID: 2800000, guid: bc10308619684dd4c8dce113d4a73c7d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_7f1c92f47f674273bcc4bafe4564970b:
+        m_Texture: {fileID: 2800000, guid: e319e62c1b36a1e48b4a431c5f465646, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -44,12 +44,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2bfc8f7646024f31b54e61ad2f8beef4: 0
-    - Vector1_3575187539bd45eeb2d7bc694f785d08: 4.11
-    - Vector1_6d21ed8d0b56415da75ccd9f1b71377c: 0.06
-    - Vector1_7332bc57656d41d58f1ea33e2e987aec: 0.35
-    - Vector1_772d4a87b11d4006b9f1ea4b0ddfe4db: 0
-    - Vector1_fa3c484dd0c146ce81d1ba41c7484720: 0
+    - Vector1_10ff922b15c242d5b9aabe673dfc4d30: 0
+    - Vector1_39cf70df22b2437fbfac6ea4ec5d9d76: 0
+    - Vector1_509fc89587384404b2636f85e3788281: 0
+    - Vector1_a83f124fabb54c1a9ae71f9641601dad: 30
+    - Vector1_a93c579fdaa847a68a48a2172f02b7ec: 0
+    - Vector1_c7f12750e62745ccb8f6d30b629f8ed0: 0
+    - Vector1_d70330fb3c4846f798d39fd052db072d: 0.06
     m_Colors:
-    - Color_c6b781711fcd4c82ad5a162f31e34ddf: {r: 8.433211e+14, g: 0, b: 0, a: 0}
+    - Color_1c6f69cd608546eca8f89b3278cb5504: {r: 766.9961, g: 0, b: 0, a: 0}
+    - Color_a98891ba6f544f4783e0cf8fab4d2a69: {r: 1, g: 1, b: 1, a: 0}
   m_BuildTextureStacks: []
